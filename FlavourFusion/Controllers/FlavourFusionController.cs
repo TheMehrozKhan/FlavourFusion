@@ -10,7 +10,7 @@ namespace FlavourFusion.Controllers
 {
     public class FlavourFusionController : Controller
     {
-        RecipeEntities db = new RecipeEntities();
+        RecipeEntities1 db = new RecipeEntities1();
         // GET: FlavourFusion
         public ActionResult Index()
         {

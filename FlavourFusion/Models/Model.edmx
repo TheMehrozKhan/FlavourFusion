@@ -54,7 +54,7 @@
           <Property Name="us_phone" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="mem_id_fk" Type="int" />
         </EntityType>
-        <Association Name="FK__Tbl_Categ__ad_id__267ABA7A">
+        <Association Name="FK__Tbl_Categ__ad_id__5165187F">
           <End Role="Tbl_Admin" Type="Self.Tbl_Admin" Multiplicity="0..1" />
           <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="*" />
           <ReferentialConstraint>
@@ -66,7 +66,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tbl_Membe__ad_id__2C3393D0">
+        <Association Name="FK__Tbl_Membe__ad_id__52593CB8">
           <End Role="Tbl_Admin" Type="Self.Tbl_Admin" Multiplicity="0..1" />
           <End Role="Tbl_Membership" Type="Self.Tbl_Membership" Multiplicity="*" />
           <ReferentialConstraint>
@@ -78,7 +78,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tbl_Recip__cat_i__29572725">
+        <Association Name="FK__Tbl_Recip__cat_i__534D60F1">
           <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="0..1" />
           <End Role="Tbl_Recipe" Type="Self.Tbl_Recipe" Multiplicity="*" />
           <ReferentialConstraint>
@@ -90,7 +90,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tbl_User__mem_id__2F10007B">
+        <Association Name="FK__Tbl_User__mem_id__5441852A">
           <End Role="Tbl_Membership" Type="Self.Tbl_Membership" Multiplicity="0..1" />
           <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -108,19 +108,19 @@
           <EntitySet Name="Tbl_Membership" EntityType="Self.Tbl_Membership" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Recipe" EntityType="Self.Tbl_Recipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_User" EntityType="Self.Tbl_User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Tbl_Categ__ad_id__267ABA7A" Association="Self.FK__Tbl_Categ__ad_id__267ABA7A">
+          <AssociationSet Name="FK__Tbl_Categ__ad_id__5165187F" Association="Self.FK__Tbl_Categ__ad_id__5165187F">
             <End Role="Tbl_Admin" EntitySet="Tbl_Admin" />
             <End Role="Tbl_Category" EntitySet="Tbl_Category" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Membe__ad_id__2C3393D0" Association="Self.FK__Tbl_Membe__ad_id__2C3393D0">
+          <AssociationSet Name="FK__Tbl_Membe__ad_id__52593CB8" Association="Self.FK__Tbl_Membe__ad_id__52593CB8">
             <End Role="Tbl_Admin" EntitySet="Tbl_Admin" />
             <End Role="Tbl_Membership" EntitySet="Tbl_Membership" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Recip__cat_i__29572725" Association="Self.FK__Tbl_Recip__cat_i__29572725">
+          <AssociationSet Name="FK__Tbl_Recip__cat_i__534D60F1" Association="Self.FK__Tbl_Recip__cat_i__534D60F1">
             <End Role="Tbl_Category" EntitySet="Tbl_Category" />
             <End Role="Tbl_Recipe" EntitySet="Tbl_Recipe" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tbl_User__mem_id__2F10007B" Association="Self.FK__Tbl_User__mem_id__2F10007B">
+          <AssociationSet Name="FK__Tbl_User__mem_id__5441852A" Association="Self.FK__Tbl_User__mem_id__5441852A">
             <End Role="Tbl_Membership" EntitySet="Tbl_Membership" />
             <End Role="Tbl_User" EntitySet="Tbl_User" />
           </AssociationSet>
@@ -138,8 +138,8 @@
           <Property Name="ad_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ad_email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ad_password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Tbl_Category" Relationship="Self.FK__Tbl_Categ__ad_id__267ABA7A" FromRole="Tbl_Admin" ToRole="Tbl_Category" />
-          <NavigationProperty Name="Tbl_Membership" Relationship="Self.FK__Tbl_Membe__ad_id__2C3393D0" FromRole="Tbl_Admin" ToRole="Tbl_Membership" />
+          <NavigationProperty Name="Tbl_Category" Relationship="Self.FK__Tbl_Categ__ad_id__5165187F" FromRole="Tbl_Admin" ToRole="Tbl_Category" />
+          <NavigationProperty Name="Tbl_Membership" Relationship="Self.FK__Tbl_Membe__ad_id__52593CB8" FromRole="Tbl_Admin" ToRole="Tbl_Membership" />
         </EntityType>
         <EntityType Name="Tbl_Category">
           <Key>
@@ -149,8 +149,8 @@
           <Property Name="cat_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ad_id_fk" Type="Int32" />
           <Property Name="cat_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Tbl_Admin" Relationship="Self.FK__Tbl_Categ__ad_id__267ABA7A" FromRole="Tbl_Category" ToRole="Tbl_Admin" />
-          <NavigationProperty Name="Tbl_Recipe" Relationship="Self.FK__Tbl_Recip__cat_i__29572725" FromRole="Tbl_Category" ToRole="Tbl_Recipe" />
+          <NavigationProperty Name="Tbl_Admin" Relationship="Self.FK__Tbl_Categ__ad_id__5165187F" FromRole="Tbl_Category" ToRole="Tbl_Admin" />
+          <NavigationProperty Name="Tbl_Recipe" Relationship="Self.FK__Tbl_Recip__cat_i__534D60F1" FromRole="Tbl_Category" ToRole="Tbl_Recipe" />
         </EntityType>
         <EntityType Name="Tbl_Membership">
           <Key>
@@ -160,8 +160,8 @@
           <Property Name="mem_plan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="mem_price" Type="Int32" Nullable="false" />
           <Property Name="ad_id_fk" Type="Int32" />
-          <NavigationProperty Name="Tbl_Admin" Relationship="Self.FK__Tbl_Membe__ad_id__2C3393D0" FromRole="Tbl_Membership" ToRole="Tbl_Admin" />
-          <NavigationProperty Name="Tbl_User" Relationship="Self.FK__Tbl_User__mem_id__2F10007B" FromRole="Tbl_Membership" ToRole="Tbl_User" />
+          <NavigationProperty Name="Tbl_Admin" Relationship="Self.FK__Tbl_Membe__ad_id__52593CB8" FromRole="Tbl_Membership" ToRole="Tbl_Admin" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK__Tbl_User__mem_id__5441852A" FromRole="Tbl_Membership" ToRole="Tbl_User" />
         </EntityType>
         <EntityType Name="Tbl_Recipe">
           <Key>
@@ -172,7 +172,7 @@
           <Property Name="rec_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="rec_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="cat_id_fk" Type="Int32" />
-          <NavigationProperty Name="Tbl_Category" Relationship="Self.FK__Tbl_Recip__cat_i__29572725" FromRole="Tbl_Recipe" ToRole="Tbl_Category" />
+          <NavigationProperty Name="Tbl_Category" Relationship="Self.FK__Tbl_Recip__cat_i__534D60F1" FromRole="Tbl_Recipe" ToRole="Tbl_Category" />
         </EntityType>
         <EntityType Name="Tbl_User">
           <Key>
@@ -185,9 +185,9 @@
           <Property Name="us_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="us_phone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="mem_id_fk" Type="Int32" />
-          <NavigationProperty Name="Tbl_Membership" Relationship="Self.FK__Tbl_User__mem_id__2F10007B" FromRole="Tbl_User" ToRole="Tbl_Membership" />
+          <NavigationProperty Name="Tbl_Membership" Relationship="Self.FK__Tbl_User__mem_id__5441852A" FromRole="Tbl_User" ToRole="Tbl_Membership" />
         </EntityType>
-        <Association Name="FK__Tbl_Categ__ad_id__267ABA7A">
+        <Association Name="FK__Tbl_Categ__ad_id__5165187F">
           <End Role="Tbl_Admin" Type="Self.Tbl_Admin" Multiplicity="0..1" />
           <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="*" />
           <ReferentialConstraint>
@@ -199,7 +199,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tbl_Membe__ad_id__2C3393D0">
+        <Association Name="FK__Tbl_Membe__ad_id__52593CB8">
           <End Role="Tbl_Admin" Type="Self.Tbl_Admin" Multiplicity="0..1" />
           <End Role="Tbl_Membership" Type="Self.Tbl_Membership" Multiplicity="*" />
           <ReferentialConstraint>
@@ -211,7 +211,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tbl_Recip__cat_i__29572725">
+        <Association Name="FK__Tbl_Recip__cat_i__534D60F1">
           <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="0..1" />
           <End Role="Tbl_Recipe" Type="Self.Tbl_Recipe" Multiplicity="*" />
           <ReferentialConstraint>
@@ -223,7 +223,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tbl_User__mem_id__2F10007B">
+        <Association Name="FK__Tbl_User__mem_id__5441852A">
           <End Role="Tbl_Membership" Type="Self.Tbl_Membership" Multiplicity="0..1" />
           <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -235,25 +235,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="RecipeEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="RecipeEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Tbl_Admin" EntityType="Self.Tbl_Admin" />
           <EntitySet Name="Tbl_Category" EntityType="Self.Tbl_Category" />
           <EntitySet Name="Tbl_Membership" EntityType="Self.Tbl_Membership" />
           <EntitySet Name="Tbl_Recipe" EntityType="Self.Tbl_Recipe" />
           <EntitySet Name="Tbl_User" EntityType="Self.Tbl_User" />
-          <AssociationSet Name="FK__Tbl_Categ__ad_id__267ABA7A" Association="Self.FK__Tbl_Categ__ad_id__267ABA7A">
+          <AssociationSet Name="FK__Tbl_Categ__ad_id__5165187F" Association="Self.FK__Tbl_Categ__ad_id__5165187F">
             <End Role="Tbl_Admin" EntitySet="Tbl_Admin" />
             <End Role="Tbl_Category" EntitySet="Tbl_Category" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Membe__ad_id__2C3393D0" Association="Self.FK__Tbl_Membe__ad_id__2C3393D0">
+          <AssociationSet Name="FK__Tbl_Membe__ad_id__52593CB8" Association="Self.FK__Tbl_Membe__ad_id__52593CB8">
             <End Role="Tbl_Admin" EntitySet="Tbl_Admin" />
             <End Role="Tbl_Membership" EntitySet="Tbl_Membership" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Recip__cat_i__29572725" Association="Self.FK__Tbl_Recip__cat_i__29572725">
+          <AssociationSet Name="FK__Tbl_Recip__cat_i__534D60F1" Association="Self.FK__Tbl_Recip__cat_i__534D60F1">
             <End Role="Tbl_Category" EntitySet="Tbl_Category" />
             <End Role="Tbl_Recipe" EntitySet="Tbl_Recipe" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tbl_User__mem_id__2F10007B" Association="Self.FK__Tbl_User__mem_id__2F10007B">
+          <AssociationSet Name="FK__Tbl_User__mem_id__5441852A" Association="Self.FK__Tbl_User__mem_id__5441852A">
             <End Role="Tbl_Membership" EntitySet="Tbl_Membership" />
             <End Role="Tbl_User" EntitySet="Tbl_User" />
           </AssociationSet>
@@ -263,7 +263,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="RecipeModelStoreContainer" CdmEntityContainer="RecipeEntities">
+        <EntityContainerMapping StorageEntityContainer="RecipeModelStoreContainer" CdmEntityContainer="RecipeEntities1">
           <EntitySetMapping Name="Tbl_Admin">
             <EntityTypeMapping TypeName="RecipeModel.Tbl_Admin">
               <MappingFragment StoreEntitySet="Tbl_Admin">

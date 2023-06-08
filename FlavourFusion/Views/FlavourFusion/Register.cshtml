@@ -22,40 +22,37 @@
                 <div class="user-all-form">
                     <div class="contact-form">
                         <h3>Create an Account!</h3>
-                        @using (Html.BeginForm("Register", "User", FormMethod.Post, new { enctype = "multipart/form-data", @class = "theform" }))
-                        {
-                            <form id="contactForm">
-                                <div class="row">
-                                    <div class="col-lg-12 ">
-                                        <div class="form-group">
-                                            <input type="text" name="name" id="name" class="form-control" required data-error="Please enter your Username" placeholder="Username">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 ">
-                                        <div class="form-group">
-                                            <input type="email" name="name" id="name" class="form-control" required data-error="Please enter your Email" placeholder="Email">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <input class="form-control" type="password" name="password" placeholder="Password">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 text-center">
-                                        <button type="submit" class="default-btn">
-                                            Register Now
-                                        </button>
-                                    </div>
-                                    <div class="col-12 text-center">
-                                        <p class="account-desc">
-                                            Already have an account?
-                                            <a href="login.html">Log In</a>
-                                        </p>
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-lg-12 ">
+                                    <div class="form-group">
+                                        <input type="text" name="name" id="name" class="form-control" required data-error="Please enter your Username" placeholder="Username" style="background-color:white">
                                     </div>
                                 </div>
-                            </form>
-                        }
-                        </div>
+                                <div class="col-lg-12 ">
+                                    <div class="form-group">
+                                        <input type="email" name="name" id="name" class="form-control" required data-error="Please enter your Email" placeholder="Email" style="background-color:white">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <input class="form-control" type="password" name="password" placeholder="Password" style="background-color:white">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 text-center">
+                                    <button type="submit" class="default-btn">
+                                        Register Now
+                                    </button>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <p class="account-desc">
+                                        Already have an account?
+                                        <a href="@Url.Action("Login","FlavourFusion")">Log In</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
