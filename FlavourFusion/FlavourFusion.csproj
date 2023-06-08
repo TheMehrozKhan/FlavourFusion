@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FlavourFusion</RootNamespace>
     <AssemblyName>FlavourFusion</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,19 +46,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -102,6 +109,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -120,24 +128,63 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\FlavourFusionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_Admin.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_Category.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_Membership.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_Recipe.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_User.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Models\Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -148,6 +195,190 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Template\assets\css\animate.min.css" />
+    <Content Include="Template\assets\css\bootstrap.min.css" />
+    <Content Include="Template\assets\css\boxicons.min.css" />
+    <Content Include="Template\assets\css\jquery-ui.min.css" />
+    <Content Include="Template\assets\css\magnific-popup.min.css" />
+    <Content Include="Template\assets\css\meanmenu.min.css" />
+    <Content Include="Template\assets\css\odometer.min.css" />
+    <Content Include="Template\assets\css\owl.carousel.min.css" />
+    <Content Include="Template\assets\css\owl.theme.default.min.css" />
+    <Content Include="Template\assets\css\owl.video.play.html" />
+    <Content Include="Template\assets\css\responsive.css" />
+    <Content Include="Template\assets\css\style.css" />
+    <Content Include="Template\assets\css\theme-dark.css" />
+    <Content Include="Template\assets\fonts\boxiconsd41d.svg" />
+    <Content Include="Template\assets\fonts\flaticon.css" />
+    <Content Include="Template\assets\fonts\flaticonff2b.svg" />
+    <Content Include="Template\assets\images\about\about-bg-shape.png" />
+    <Content Include="Template\assets\images\about\about-bg.png" />
+    <Content Include="Template\assets\images\about\about-img1.png" />
+    <Content Include="Template\assets\images\appointment-bg.jpg" />
+    <Content Include="Template\assets\images\blog\blog-details.jpg" />
+    <Content Include="Template\assets\images\blog\blog-img1.jpg" />
+    <Content Include="Template\assets\images\blog\blog-img2.jpg" />
+    <Content Include="Template\assets\images\blog\blog-img3.jpg" />
+    <Content Include="Template\assets\images\blog\blog-img4.jpg" />
+    <Content Include="Template\assets\images\blog\blog-img5.jpg" />
+    <Content Include="Template\assets\images\blog\blog-img6.jpg" />
+    <Content Include="Template\assets\images\blog\blog-img7.jpg" />
+    <Content Include="Template\assets\images\blog\blog-img8.jpg" />
+    <Content Include="Template\assets\images\blog\blog-img9.jpg" />
+    <Content Include="Template\assets\images\blog\blog-sub-img1.jpg" />
+    <Content Include="Template\assets\images\blog\blog-sub-img2.jpg" />
+    <Content Include="Template\assets\images\blog\blog-sub-img3.jpg" />
+    <Content Include="Template\assets\images\blog\blog-user.jpg" />
+    <Content Include="Template\assets\images\blog\blog-user2.jpg" />
+    <Content Include="Template\assets\images\blog\blog-user3.jpg" />
+    <Content Include="Template\assets\images\calculate-bg.png" />
+    <Content Include="Template\assets\images\china.png" />
+    <Content Include="Template\assets\images\choose-bg.jpg" />
+    <Content Include="Template\assets\images\choose\choose-img1.png" />
+    <Content Include="Template\assets\images\choose\choose-img2.png" />
+    <Content Include="Template\assets\images\choose\choose-img3.png" />
+    <Content Include="Template\assets\images\choose\choose-img4.png" />
+    <Content Include="Template\assets\images\diet-plan\diet-plan1.jpg" />
+    <Content Include="Template\assets\images\diet-plan\diet-plan2.jpg" />
+    <Content Include="Template\assets\images\diet-plan\diet-plan3.jpg" />
+    <Content Include="Template\assets\images\diet-plan\diet-plan4.jpg" />
+    <Content Include="Template\assets\images\event\event-bg.png" />
+    <Content Include="Template\assets\images\event\event-img.jpg" />
+    <Content Include="Template\assets\images\event\event-sub-img.png" />
+    <Content Include="Template\assets\images\favicon.png" />
+    <Content Include="Template\assets\images\footer-logo.png" />
+    <Content Include="Template\assets\images\gallery\gallery-img1.jpg" />
+    <Content Include="Template\assets\images\gallery\gallery-img2.jpg" />
+    <Content Include="Template\assets\images\gallery\gallery-img3.jpg" />
+    <Content Include="Template\assets\images\gallery\gallery-img4.jpg" />
+    <Content Include="Template\assets\images\gallery\gallery-img5.jpg" />
+    <Content Include="Template\assets\images\gallery\gallery-img6.jpg" />
+    <Content Include="Template\assets\images\home-one-bg.jpg" />
+    <Content Include="Template\assets\images\home-three-bg.jpg" />
+    <Content Include="Template\assets\images\home-two\home-two-img1.jpg" />
+    <Content Include="Template\assets\images\home-two\home-two-img2.jpg" />
+    <Content Include="Template\assets\images\home-two\home-two-img3.jpg" />
+    <Content Include="Template\assets\images\inner-banner\inner-banner1.jpg" />
+    <Content Include="Template\assets\images\inner-banner\inner-banner10.jpg" />
+    <Content Include="Template\assets\images\inner-banner\inner-banner11.jpg" />
+    <Content Include="Template\assets\images\inner-banner\inner-banner12.jpg" />
+    <Content Include="Template\assets\images\inner-banner\inner-banner13.jpg" />
+    <Content Include="Template\assets\images\inner-banner\inner-banner2.jpg" />
+    <Content Include="Template\assets\images\inner-banner\inner-banner3.jpg" />
+    <Content Include="Template\assets\images\inner-banner\inner-banner4.jpg" />
+    <Content Include="Template\assets\images\inner-banner\inner-banner5.jpg" />
+    <Content Include="Template\assets\images\inner-banner\inner-banner6.jpg" />
+    <Content Include="Template\assets\images\inner-banner\inner-banner7.jpg" />
+    <Content Include="Template\assets\images\inner-banner\inner-banner8.jpg" />
+    <Content Include="Template\assets\images\inner-banner\inner-banner9.jpg" />
+    <Content Include="Template\assets\images\logo-white.png" />
+    <Content Include="Template\assets\images\logo.png" />
+    <Content Include="Template\assets\images\night.png" />
+    <Content Include="Template\assets\images\portfolio\portfolio-img1.jpg" />
+    <Content Include="Template\assets\images\portfolio\portfolio-img2.jpg" />
+    <Content Include="Template\assets\images\portfolio\portfolio-img3.jpg" />
+    <Content Include="Template\assets\images\portfolio\portfolio-img4.jpg" />
+    <Content Include="Template\assets\images\portfolio\portfolio-img5.jpg" />
+    <Content Include="Template\assets\images\portfolio\portfolio-img6.jpg" />
+    <Content Include="Template\assets\images\portfolio\portfolio-img7.jpg" />
+    <Content Include="Template\assets\images\portfolio\portfolio-img8.jpg" />
+    <Content Include="Template\assets\images\portfolio\portfolio-img9.jpg" />
+    <Content Include="Template\assets\images\product-img\product-details.png" />
+    <Content Include="Template\assets\images\product-img\product-img1.png" />
+    <Content Include="Template\assets\images\product-img\product-img2.png" />
+    <Content Include="Template\assets\images\product-img\product-img3.png" />
+    <Content Include="Template\assets\images\product-img\product-img4.png" />
+    <Content Include="Template\assets\images\product-img\product-img5.png" />
+    <Content Include="Template\assets\images\product-img\product-img6.png" />
+    <Content Include="Template\assets\images\product-img\product-user.jpg" />
+    <Content Include="Template\assets\images\product-img\product-user2.jpg" />
+    <Content Include="Template\assets\images\product-img\product-user3.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-another-img1.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-another-img2.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-another-img3.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-another-img4.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-another-img5.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-another-img6.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-details.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-img1.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-img2.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-img3.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-img4.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-img5.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-img6.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-img7.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-img8.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-side-img1.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-side-img2.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-side-img3.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-side-img4.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-side-img5.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-side-img6.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-side-img7.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-side-img8.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-style1.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-user1.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-user2.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-user3.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-user4.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-user5.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-user6.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-user7.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-user8.jpg" />
+    <Content Include="Template\assets\images\recipe-img\recipe-user9.jpg" />
+    <Content Include="Template\assets\images\services\service-details-img1.jpg" />
+    <Content Include="Template\assets\images\services\service-details-img2.jpg" />
+    <Content Include="Template\assets\images\services\service-details-img3.jpg" />
+    <Content Include="Template\assets\images\services\service-details-img4.jpg" />
+    <Content Include="Template\assets\images\services\services-img1.jpg" />
+    <Content Include="Template\assets\images\services\services-img2.jpg" />
+    <Content Include="Template\assets\images\services\services-img3.jpg" />
+    <Content Include="Template\assets\images\services\services-img4.jpg" />
+    <Content Include="Template\assets\images\services\services-img5.jpg" />
+    <Content Include="Template\assets\images\services\services-img6.jpg" />
+    <Content Include="Template\assets\images\services\services-img7.jpg" />
+    <Content Include="Template\assets\images\shape\bg-shape.png" />
+    <Content Include="Template\assets\images\shape\shape-bg.png" />
+    <Content Include="Template\assets\images\shape\shape1.png" />
+    <Content Include="Template\assets\images\shape\shape2.png" />
+    <Content Include="Template\assets\images\shape\shape3.png" />
+    <Content Include="Template\assets\images\shape\shape4.png" />
+    <Content Include="Template\assets\images\shape\shape5.png" />
+    <Content Include="Template\assets\images\shape\shape6.png" />
+    <Content Include="Template\assets\images\shape\shape7.png" />
+    <Content Include="Template\assets\images\sunny.png" />
+    <Content Include="Template\assets\images\team\team-img1.jpg" />
+    <Content Include="Template\assets\images\team\team-img10.jpg" />
+    <Content Include="Template\assets\images\team\team-img2.jpg" />
+    <Content Include="Template\assets\images\team\team-img3.jpg" />
+    <Content Include="Template\assets\images\team\team-img4.jpg" />
+    <Content Include="Template\assets\images\team\team-img5.jpg" />
+    <Content Include="Template\assets\images\team\team-img6.jpg" />
+    <Content Include="Template\assets\images\team\team-img7.jpg" />
+    <Content Include="Template\assets\images\team\team-img8.jpg" />
+    <Content Include="Template\assets\images\team\team-img9.jpg" />
+    <Content Include="Template\assets\images\testimonials\testimonial-profile1.jpg" />
+    <Content Include="Template\assets\images\testimonials\testimonial-profile2.jpg" />
+    <Content Include="Template\assets\images\testimonials\testimonial-profile3.jpg" />
+    <Content Include="Template\assets\images\testimonials\testimonials-bg.png" />
+    <Content Include="Template\assets\images\uae.png" />
+    <Content Include="Template\assets\images\uk.png" />
+    <Content Include="Template\assets\images\video-bg.jpg" />
+    <Content Include="Template\assets\images\work-img\work-img1.jpg" />
+    <Content Include="Template\assets\images\work-img\work-img2.jpg" />
+    <Content Include="Template\assets\images\work-img\work-img3.jpg" />
+    <Content Include="Template\assets\images\work-img\work-img4.jpg" />
+    <Content Include="Template\assets\js\ajaxchimp.min.js" />
+    <Content Include="Template\assets\js\appear.min.js" />
+    <Content Include="Template\assets\js\bootstrap.bundle.min.js" />
+    <Content Include="Template\assets\js\custom.js" />
+    <Content Include="Template\assets\js\form-validator.min.js" />
+    <Content Include="Template\assets\js\jquery-ui.min.js" />
+    <Content Include="Template\assets\js\jquery.min.js" />
+    <Content Include="Template\assets\js\meanmenu.min.js" />
+    <Content Include="Template\assets\js\odometer.min.js" />
+    <Content Include="Template\assets\js\owl.carousel.min.js" />
+    <Content Include="Template\assets\js\wow.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -159,26 +390,28 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\FlavourFusion\Register.cshtml" />
+    <Content Include="Views\FlavourFusion\Index.cshtml" />
+    <Content Include="Template\assets\fonts\boxicons.eot" />
+    <Content Include="Template\assets\fonts\boxicons.ttf" />
+    <Content Include="Template\assets\fonts\boxicons.woff" />
+    <Content Include="Template\assets\fonts\boxicons.woff2" />
+    <Content Include="Template\assets\fonts\flaticonff2b.eot" />
+    <Content Include="Template\assets\fonts\flaticonff2b.ttf" />
+    <Content Include="Template\assets\fonts\flaticonff2b.woff" />
+    <Content Include="Template\assets\fonts\flaticonff2b.woff2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Content\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
