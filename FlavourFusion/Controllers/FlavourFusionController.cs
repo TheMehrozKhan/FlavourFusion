@@ -17,6 +17,25 @@ namespace FlavourFusion.Controllers
             return View();
         }
 
+        public ActionResult AboutUs()
+        {
+            return View();
+        }
+
+        public ActionResult Recipies()
+        {
+            return View();
+        }
+        public ActionResult Pricing()
+        {
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult Login()
         {

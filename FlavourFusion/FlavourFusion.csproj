@@ -400,6 +400,10 @@
     <Content Include="Template\assets\fonts\flaticonff2b.ttf" />
     <Content Include="Template\assets\fonts\flaticonff2b.woff" />
     <Content Include="Template\assets\fonts\flaticonff2b.woff2" />
+    <Content Include="Views\FlavourFusion\AboutUs.cshtml" />
+    <Content Include="Views\FlavourFusion\Recipies.cshtml" />
+    <Content Include="Views\FlavourFusion\Pricing.cshtml" />
+    <Content Include="Views\FlavourFusion\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
