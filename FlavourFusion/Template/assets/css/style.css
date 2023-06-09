@@ -6814,37 +6814,7 @@ Map Area End
 /*=================================
 Buy Now Btn
 ====================================*/
-.buy-now-btn {
-    right: 20px;
-    z-index: 99;
-    top: 50%;
-    position: fixed;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    border-radius: 30px;
-    display: inline-block;
-    color: var(--whiteColor);
-    background-color: orange;
-    padding: 10px 20px 10px 42px;
-    -webkit-box-shadow: 0 1px 20px 1px orange;
-    box-shadow: 0 1px 20px 1px orange;
-    font-size: 13px;
-    font-weight: 600;
-}
 
-    .buy-now-btn img {
-        top: 50%;
-        left: 20px;
-        width: 15px;
-        position: absolute;
-        -webkit-transform: translateY(-50%);
-        transform: translateY(-50%);
-    }
-
-    .buy-now-btn:hover {
-        color: var(--whiteColor);
-        background-color: orange;
-    }
 
 /*=================================
 404 Error Area
