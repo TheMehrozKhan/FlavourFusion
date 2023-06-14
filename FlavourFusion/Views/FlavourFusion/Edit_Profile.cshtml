@@ -1,0 +1,99 @@
+﻿@model FlavourFusion.Models.Tbl_Users
+<style>
+    form {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 100px;
+        padding-right: 100px;
+        box-shadow: rgba(17, 12, 46, 0.08) 0px 48px 100px 0px;
+        border-radius: 25px;
+        margin-top: 150px;
+        margin-bottom: 80px;
+    }
+
+    #thebutton {
+        border: none;
+        width: 100%;
+        font-size: 19px;
+        height: 40px;
+    }
+
+        #thebutton:hover {
+            box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+        }
+
+    input {
+        border: 1px solid black;
+        border-radius: 4.5px;
+        padding: 150px;
+        width: 250px;
+        box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+    }
+
+    h4 {
+        text-align: center;
+    }
+
+    select.form-control {
+        margin-bottom: 20px;
+    }
+
+    .theform input:focus,
+    .theform textarea:focus,
+    .theform select:focus {
+        outline: none;
+        box-shadow: none;
+        border-color: #F76B6A;
+    }
+
+    #thebtn {
+        border: 1px solid #F76B6A;
+        transition: 0.2s;
+        color: black;
+        font-size: 16px;
+        background-color: white;
+    }
+
+        #thebtn:hover {
+            background-color: #F76B6A;
+            color: white;
+            text-decoration: none;
+        }
+
+    #thesecondbtn:hover {
+        color: white;
+    }
+</style>
+<div class="d-flex justify-content-center align-items-center vh-100" style="margin-bottom:180px;margin-top:80px;">
+    @using (Html.BeginForm("Save_Edit", "FlavourFusion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model => model.user_id)
+        <form method="post">
+            <h4 class="mb-4 text-center" style="position:relative;top:19px;font-size:27px;">Edit Your Profile</h4> <br />
+            <div class="form-group" style="margin-bottom:18px;">
+                <label>Your Profile Name: </label>
+                @Html.TextBoxFor(model => model.user_name, new { @class = "form-control" })
+            </div>
+            <div class="form-group" style="margin-bottom:18px;">
+                <label>Your Profile Image: </label>
+                <input type="file" name="imgfile" id="imgfile" class="form-control" />
+            </div>
+            <div class="form-group" style="margin-bottom:18px;">
+                <label>Your Password: </label>
+                @Html.TextBoxFor(model => model.user_password, new { @class = "form-control" })
+            </div>
+            <div class="form-group" style="margin-bottom:18px;">
+                <label>Your Email: </label>
+                @Html.TextBoxFor(model => model.user_email, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" id="thebutton" style="background-color: rgb(255, 132, 0); outline: none; border: none; margin-top: 10px;">
+                    Save
+                </button>
+            </div>
+            <div class="buy-it-now-btn mt-2" id="thebtn" style="text-align: center; border-radius: 6px; border-color: rgb(255, 132, 0);">
+                <a href="@Url.Action("UserProfile")" class="btn" id="thesecondbtn">Cancel</a>
+            </div>
+        </form>
+    }
+</div>

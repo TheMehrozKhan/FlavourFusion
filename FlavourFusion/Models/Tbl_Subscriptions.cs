@@ -12,14 +12,15 @@ namespace FlavourFusion.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Recipe
+    public partial class Tbl_Subscriptions
     {
-        public int rec_id { get; set; }
-        public string rec_name { get; set; }
-        public string rec_desc { get; set; }
-        public string rec_img { get; set; }
-        public Nullable<int> cat_id_fk { get; set; }
+        public int subscription_id { get; set; }
+        public Nullable<int> user_id { get; set; }
+        public Nullable<int> plan_id { get; set; }
+        public Nullable<System.DateTime> start_date { get; set; }
+        public Nullable<System.DateTime> end_date { get; set; }
     
-        public virtual Tbl_Category Tbl_Category { get; set; }
+        public virtual Tbl_Membership_Plans Tbl_Membership_Plans { get; set; }
+        public virtual Tbl_Users Tbl_Users { get; set; }
     }
 }

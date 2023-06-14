@@ -1,19 +1,30 @@
-﻿﻿@model FlavourFusion.Models.Tbl_User
+﻿@model FlavourFusion.Models.RegisterViewModel
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.6/dist/inputmask.min.js"></script>
+    <style>
+        .thecontainer {
+            margin-top: 40px;
+            background-color: white;
+            box-shadow: rgba(17, 12, 46, 0.04) 0px 48px 100px 0px;
+            height: 60px;
+            margin-bottom: 50px;
+            border-radius: 8px;
+            border: 0.1px solid rgb(255, 132, 0);
+        }
+
+        .formcontainer {
+            box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+        }
+    </style>
+</head>
 
 <div class="inner-banner inner-bg9">
     <div class="container">
         <div class="inner-title text-center">
             <h3>Register</h3>
-            <ul>
-                <li>
-                    <a href="index.html">Home</a>
-                </li>
-                <li>Register</li>
-            </ul>
         </div>
     </div>
 </div>
-
 
 <div class="user-area pt-100 pb-70">
     <div class="container">
@@ -21,23 +32,58 @@
             <div class="col-lg-12">
                 <div class="user-all-form">
                     <div class="contact-form">
-                        <h3>Create an Account!</h3>
-                        <form id="contactForm">
-                            <div class="row">
-                                <div class="col-lg-12 ">
-                                    <div class="form-group">
-                                        <input type="text" name="name" id="name" class="form-control" required data-error="Please enter your Username" placeholder="Username" style="background-color:white">
+                        <h3 class="text-center">Create Your Account!</h3>
+                        <div class="container thecontainer">
+                            <div class="text-center" style="margin-top: 15px;">
+                                <div class="row">
+                                    <div class="col thecol">
+                                        <p>Your Plan: <span style="color: rgb(255, 132, 0);">@Model.PlanName</span></p>
+                                    </div>
+                                    <div class="col thecol">
+                                        <p>Price: $@Model.PlanPrice/Month</p>
+                                    </div>
+                                    <div class="col thecol">
+                                        <p>Duration: @Model.PlanDuration Month</p>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 ">
+                            </div>
+                        </div>
+                        @using (Html.BeginForm("Register", "FlavourFusion", FormMethod.Post, new { enctype = "multipart/form-data", id = "signupform" }))
+                        {
+                            @Html.HiddenFor(model => model.PlanId)
+                            <div class="row">
+                                <div class="col-lg-12">
                                     <div class="form-group">
-                                        <input type="email" name="name" id="name" class="form-control" required data-error="Please enter your Email" placeholder="Email" style="background-color:white">
+                                        <label>Username</label>
+                                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholder = "Enter Your Username", required = "required", data_error = "Please enter your Username", @style = "background-color: #FCFBFB " })
+                                        @Html.ValidationMessageFor(model => model.UserName)
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        @Html.TextBoxFor(model => model.UserEmail, new { @class = "form-control", placeholder = "Enter Your Email", required = "required", data_error = "Enter Your Email", @style = "background-color: #FCFBFB " })
+                                        @Html.ValidationMessageFor(model => model.UserEmail)
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <input class="form-control" type="password" name="password" placeholder="Password" style="background-color:white">
+                                        <label>Password</label>
+                                        @Html.PasswordFor(model => model.UserPassword, new { @class = "form-control", @type = "password", placeholder = "Enter Password", @style = "background-color: #FCFBFB " })
+                                        @Html.ValidationMessageFor(model => model.UserPassword)
                                     </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Credit Card Number</label>
+                                        @Html.TextBoxFor(model => model.CreditCardNumber, new { @class = "form-control", placeholder = "Enter Your Payment Detail", @data_inputmask = "'mask': '9999 9999 9999 9999'", @style = "background-color: #FCFBFB " })
+                                        @Html.ValidationMessageFor(model => model.CreditCardNumber)
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label>Profile Image:</label>
+                                    <input type="file" name="imgfile" id="imgfile" class="form-control-file" required style="margin-top:10px;margin-bottom:25px;" />
+                                    @Html.ValidationMessage("imgfile")
                                 </div>
                                 <div class="col-lg-12 col-md-12 text-center">
                                     <button type="submit" class="default-btn">
@@ -51,10 +97,28 @@
                                     </p>
                                 </div>
                             </div>
-                        </form>
+                        }
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+        document.getElementById('signupform').addEventListener('submit', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'success',
+                title: 'Congrats!',
+                text: 'Your Registered Successfully!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("Index", "FlavourFusion")';
+                    this.submit();
+                }
+            });
+        });
+
+        Inputmask().mask(document.querySelectorAll('[data-inputmask]'));
+</script>

@@ -12,21 +12,20 @@ namespace FlavourFusion.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Category
+    public partial class Tbl_Membership_Plans
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_Category()
+        public Tbl_Membership_Plans()
         {
-            this.Tbl_Recipe = new HashSet<Tbl_Recipe>();
+            this.Tbl_Subscriptions = new HashSet<Tbl_Subscriptions>();
         }
     
-        public int cat_id { get; set; }
-        public string cat_name { get; set; }
-        public Nullable<int> ad_id_fk { get; set; }
-        public string cat_img { get; set; }
+        public int plan_id { get; set; }
+        public string plan_name { get; set; }
+        public Nullable<int> price { get; set; }
+        public Nullable<int> duration { get; set; }
     
-        public virtual Tbl_Admin Tbl_Admin { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Recipe> Tbl_Recipe { get; set; }
+        public virtual ICollection<Tbl_Subscriptions> Tbl_Subscriptions { get; set; }
     }
 }

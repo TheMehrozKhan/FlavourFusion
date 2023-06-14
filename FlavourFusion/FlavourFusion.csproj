@@ -147,24 +147,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\Tbl_Admin.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Tbl_Category.cs">
+    <Compile Include="Models\Tbl_Membership_Plans.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Tbl_Membership.cs">
+    <Compile Include="Models\Tbl_Subscriptions.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Tbl_Recipe.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Tbl_User.cs">
+    <Compile Include="Models\Tbl_Users.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\img\greentick-icon.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="Models\Model.edmx">
@@ -404,10 +403,14 @@
     <Content Include="Views\FlavourFusion\Recipies.cshtml" />
     <Content Include="Views\FlavourFusion\Pricing.cshtml" />
     <Content Include="Views\FlavourFusion\Contact.cshtml" />
+    <Content Include="Views\FlavourFusion\Login.cshtml" />
+    <Content Include="Views\FlavourFusion\UserProfile.cshtml" />
+    <Content Include="Views\FlavourFusion\ProfileNotFound.cshtml" />
+    <Content Include="Views\FlavourFusion\Edit_Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\" />
+    <Folder Include="Content\upload\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

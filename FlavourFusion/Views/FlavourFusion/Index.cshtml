@@ -1,15 +1,56 @@
-﻿<div class="banner-slider-area">
+﻿<head>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    <style>
+        .toast {
+            background-color: white;
+            position: fixed;
+            right: 20px;
+            z-index: 1;
+            margin-bottom: 120px;
+            box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+        }
+    </style>
+</head>
+@if (TempData["ToastMessage"] != null)
+{
+    <div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false" style="position: fixed; top: 50px; right: 10px; z-index: 9999;">
+        <div class="toast-header">
+            <img src="~/Content/img/greentick-icon.png" height="23" width="23" class="rounded mr-2" alt="...">
+            <small>@DateTime.Now</small>
+            <button type="button" class="btn-close btn-close-dark end-0" id="thebutton" onclick="$(this).closest('.toast').toast('hide')" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            <p class="card-text">@TempData["ToastMessage"]</p>
+        </div>
+    </div>
+    <script>
+    $(document).ready(function () {
+        @if (TempData["ToastMessage"] != null)
+        {
+            @: $('.toast').toast('show');
+        }
+    });
+    </script>
+}
+
+<div class="banner-slider-area">
     <div class="banner-slider owl-carousel owl-theme">
         <div class="banner-item">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                         <div class="banner-item-content">
-                            <h1>Good Nutrition Prevent Your Disease</h1>
-                            <p>A healthy diet rich in fruits, vegetables, whole grains and low-fat dairy can help to reduce your risk of heart disease by maintaining blood pressure.</p>
+                            <h1>Explore Global Delights</h1>
+                            <p>
+                                Embark on a culinary adventure as we take you on a tantalizing journey across continents, showcasing the rich and diverse flavors of global cuisines.
+                            </p>
                             <div class="banner-btn">
-                                <a href="about.html" class="default-btn">Learn More</a>
-                                <a href="contact.html" class="default-btn two">Contact Us</a>
+                                <a href="@Url.Action("AboutUs","FlavourFusion")" class="default-btn">Learn More</a>
+                                <a href="@Url.Action("Contact","FlavourFusion")" class="default-btn two">Contact Us</a>
                             </div>
                         </div>
                     </div>
@@ -26,11 +67,13 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                         <div class="banner-item-content">
-                            <h1>Healthy & Delicious Backed Pasta</h1>
-                            <p>Baked pasta is the quintessential comfort food. It's warm, carbalicious, and often (but not always) topped with melted cheese—everything a person could want on a dreary, rainy, or otherwise cruddy day. The problem is, however, a heavy sauce plus lots of carbs doesn't really make you feel better.</p>
+                            <h1>Master Chef Secrets</h1>
+                            <p>
+                                Unlock the culinary secrets of renowned master chefs as they share their expert tips, techniques, and signature recipes to help you elevate your cooking skills to new heights.
+                            </p>
                             <div class="banner-btn">
-                                <a href="about.html" class="default-btn">Learn More</a>
-                                <a href="contact.html" class="default-btn two">Contact Us</a>
+                                <a href="@Url.Action("AboutUs","FlavourFusion")" class="default-btn">Learn More</a>
+                                <a href="@Url.Action("Contact","FlavourFusion")" class="default-btn two">Contact Us</a>
                             </div>
                         </div>
                     </div>
@@ -47,12 +90,13 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                         <div class="banner-item-content">
-                            <h1>Nourishing with Healthy Food Choices</h1>
-                            <p> Foods that naturally are nutrient-rich include fruits and vegetables. Lean meats, fish, whole grains, dairy, legumes, nuts, and seeds also are high in nutrients.
+                            <h1>Seasonal Sensations</h1>
+                            <p>
+                                Celebrate the beauty of each season with our collection of seasonal recipes, using the freshest ingredients to create mouthwatering dishes that capture the essence of nature's bounty.
                             </p>
                             <div class="banner-btn">
-                                <a href="about.html" class="default-btn">Learn More</a>
-                                <a href="contact.html" class="default-btn two">Contact Us</a>
+                                <a href="@Url.Action("AboutUs","FlavourFusion")" class="default-btn">Learn More</a>
+                                <a href="@Url.Action("Contact","FlavourFusion")" class="default-btn two">Contact Us</a>
                             </div>
                         </div>
                     </div>
@@ -70,31 +114,38 @@
         <img src="/Template/assets/images/shape/shape2.png" alt="Banner Images">
     </div>
 </div>
+
 <div class="banner-bottom-area pt-100 pb-70">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-4 col-sm-6">
                 <div class="banner-bottom-card">
                     <i class="flaticon-calendar-1"></i>
-                    <h3>Daily Exercise</h3>
-                    <p>As a general goal, aim for at least 30 minutes of moderate physical activity every day. If you want to lose weight, maintain weight loss or meet specific fitness goals, you may need to exercise more.  </p>
-                    <a href="about.html" class="learn-btn">Learn More</a>
+                    <h3>Quick and Easy Recipes</h3>
+                    <p>
+                        Discover a collection of hassle-free recipes that are perfect for busy days. From 30-minute meals to one-pot wonders, these quick and easy recipes will satisfy your cravings without compromising on flavor. Whether you're a novice cook or a seasoned chef.
+                    </p>
+                    <a href="@Url.Action("AboutUs","FlavourFusion")" class="learn-btn">Learn More</a>
                 </div>
             </div>
             <div class="col-lg-4 col-sm-6">
                 <div class="banner-bottom-card">
                     <i class="flaticon-diet"></i>
-                    <h3>Natural Foods</h3>
-                    <p>Fresh, raw fruits and vegetables are also full the “life-force” of nature, which along with vital vitamins, minerals and phyto-nutrients lead to a positive, natural state of physical and mental health and vibrancy. </p>
-                    <a href="about.html" class="learn-btn">Learn More</a>
+                    <h3>Healthy and Nourishing Dishes</h3>
+                    <p>
+                        Nourish your body with our selection of wholesome and nutritious dishes. Explore a range of recipes that prioritize fresh ingredients, balanced flavors, and mindful cooking techniques, helping you maintain a healthy lifestyle.
+                    </p>
+                    <a href="@Url.Action("AboutUs","FlavourFusion")" class="learn-btn">Learn More</a>
                 </div>
             </div>
             <div class="col-lg-4 col-sm-6">
                 <div class="banner-bottom-card">
                     <i class="flaticon-plan"></i>
-                    <h3>Nutrition Plans</h3>
-                    <p>A clean eating meal plan includes tons of fresh fruits and veggies, high-fiber whole grains and legumes, healthy fats and lean proteins (like fish and chicken). It skips added sugars and keeps fats that can damage our heart when we eat too much to a minimum (think saturated fats.</p>
-                    <a href="about.html" class="learn-btn">Learn More</a>
+                    <h3>Indulgent Desserts and Treats</h3>
+                    <p>
+                        Satisfy your sweet tooth with our indulgent desserts and treats. From decadent chocolate creations to fruity delights, we have a wide array of dessert recipes that will delight your taste buds and impress your guests.
+                    </p>
+                    <a href="@Url.Action("AboutUs","FlavourFusion")" class="learn-btn">Learn More</a>
                 </div>
             </div>
         </div>
@@ -108,30 +159,32 @@
                 <div class="about-content-two">
                     <div class="section-title">
                         <span>About Us</span>
-                        <h2>Change Your Life in the next 90 Days of Practice</h2>
+                        <h2>Our Culinary Journey</h2>
                         <p>
-                           The 21/90 rule states that it takes 21 days to make a habit and 90 days to make it a permanent lifestyle change. Is there a new lifestyle change you would like to make? Commit to your goal for 21 days and it will become a habit. Commit to your goal for 90 days and it will become a part of your lifestyle.
+                            At FlavourFusion, we are passionate about the art of cooking and the joy it brings to our lives. Our culinary journey began with a simple desire to share our love for food and flavors with the world. Through our carefully curated recipes, expert tips, and informative articles, we aim to inspire and empower home cooks of all levels to explore their creativity in the kitchen. Join us on this delicious adventure as we celebrate the magic of cooking and the incredible connections it creates.
                         </p>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="about-content-item">
                                 <i class="flaticon-diet"></i>
-                                <h3>Personalized Nutrition Plan</h3>
+                                <h3>Chef-Approved Recipes</h3>
                                 <p>
-                               A good example is an allergen-free diet devised to remove immunological triggers. Such diets may need to be peanut-free, gluten-free, tree-nut-free, low FODMAP (fermentable carbohydrates), and casein or dairy-free.
+                                    Our collection of chef approved recipes sets us apart. We collaborate with talented culinary experts to bring you tried and tested recipes that guarantee exceptional results.crafted, ensuring that every bite is a delightful culinary experience.
                                 </p>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="about-content-item">
                                 <i class="flaticon-exercise"></i>
-                                <h3>Personalized Exercises Plan</h3>
-                                <p>A customized exercise plan will take your schedule and your requirements into account and work around those issues. Sometimes the plan may incorporate your daily schedule in a new and unexpected way. </p>
+                                <h3>Food Education and Inspiration</h3>
+                                <p>
+                                    We go beyond recipes to provide comprehensive food education and inspiration. Our platform offers informative articles, cooking tips, and techniques that empower you to expand your culinary knowledge.
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <a href="about.html" class="default-btn">Read More</a>
+                    <a href="@Url.Action("AboutUs","FlavourFusion")" class="default-btn">Read More</a>
                 </div>
             </div>
             <div class="col-lg-6 pe-0">
@@ -147,7 +200,7 @@
     <div class="container">
         <div class="section-title text-center">
             <span>Our Popular Nutritionist</span>
-            <h2>Our Specialist Nutritionist</h2>
+            <h2>Our Technical Team</h2>
         </div>
         <div class="row pt-45 justify-content-center">
             <div class="col-lg-3 col-sm-6">
@@ -158,8 +211,8 @@
                         </a>
                     </div>
                     <div class="content">
-                        <h3><a href="team.html">Dr. Aruna Malis</a></h3>
-                        <span>Nutritionist</span>
+                        <h3><a href="team.html">Mehroz Khan</a></h3>
+                        <span>Full Stack Developer</span>
                         <ul class="team-social">
                             <li>
                                 <a href="https://www.facebook.com/" target="_blank">
@@ -185,42 +238,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="team-card active">
-                    <div class="team-img">
-                        <a href="team.html">
-                            <img src="/Template/assets/images/team/team-img2.jpg" alt="Team Images">
-                        </a>
-                    </div>
-                    <div class="content">
-                        <h3><a href="team.html">Dr. Pritula Juli</a></h3>
-                        <span>Head Of Department</span>
-                        <ul class="team-social">
-                            <li>
-                                <a href="https://www.facebook.com/" target="_blank">
-                                    <i class='bx bxl-facebook'></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" target="_blank">
-                                    <i class='bx bxl-instagram'></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/" target="_blank">
-                                    <i class='bx bxl-twitter'></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/" target="_blank">
-                                    <i class='bx bxl-youtube'></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
+
+            <!-- Add more team members here -->
+
+            <div class="col-lg-3 col-sm-2">
                 <div class="team-card active">
                     <div class="team-img">
                         <a href="team.html">
@@ -228,8 +249,8 @@
                         </a>
                     </div>
                     <div class="content">
-                        <h3><a href="team.html">Dr. Melona Jack</a></h3>
-                        <span>Senior Nutritionist</span>
+                        <h3><a href="team.html">Ahsan Ashraf</a></h3>
+                        <span>Web Developer</span>
                         <ul class="team-social">
                             <li>
                                 <a href="https://www.facebook.com/" target="_blank">
@@ -255,6 +276,43 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-3 col-sm-2">
+                <div class="team-card active">
+                    <div class="team-img">
+                        <a href="team.html">
+                            <img src="/Template/assets/images/team/team-img4.jpg" alt="Team Images">
+                        </a>
+                    </div>
+                    <div class="content">
+                        <h3><a href="team.html">Abdul Sami</a></h3>
+                        <span>Web Developer</span>
+                        <ul class="team-social">
+                            <li>
+                                <a href="https://www.facebook.com/" target="_blank">
+                                    <i class='bx bxl-facebook'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/" target="_blank">
+                                    <i class='bx bxl-instagram'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/" target="_blank">
+                                    <i class='bx bxl-twitter'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/" target="_blank">
+                                    <i class='bx bxl-youtube'></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-lg-3 col-sm-6">
                 <div class="team-card active">
                     <div class="team-img">
@@ -263,8 +321,80 @@
                         </a>
                     </div>
                     <div class="content">
-                        <h3><a href="team.html">Dr. Aila Faris</a></h3>
-                        <span>Assistant Of Department</span>
+                        <h3><a href="team.html">Saad Arif</a></h3>
+                        <span>Full Stack Web Developer</span>
+                        <ul class="team-social">
+                            <li>
+                                <a href="https://www.facebook.com/" target="_blank">
+                                    <i class='bx bxl-facebook'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/" target="_blank">
+                                    <i class='bx bxl-instagram'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/" target="_blank">
+                                    <i class='bx bxl-twitter'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/" target="_blank">
+                                    <i class='bx bxl-youtube'></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6">
+                <div class="team-card active">
+                    <div class="team-img">
+                        <a href="team.html">
+                            <img src="/Template/assets/images/team/team-img2.jpg" alt="Team Images">
+                        </a>
+                    </div>
+                    <div class="content">
+                        <h3><a href="team.html">Taha Kashif</a></h3>
+                        <span>Data Analysis & Database Management </span>
+                        <ul class="team-social">
+                            <li>
+                                <a href="https://www.facebook.com/" target="_blank">
+                                    <i class='bx bxl-facebook'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/" target="_blank">
+                                    <i class='bx bxl-instagram'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/" target="_blank">
+                                    <i class='bx bxl-twitter'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/" target="_blank">
+                                    <i class='bx bxl-youtube'></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6">
+                <div class="team-card active">
+                    <div class="team-img">
+                        <a href="team.html">
+                            <img src="/Template/assets/images/team/team-img3.jpg" alt="Team Images">
+                        </a>
+                    </div>
+                    <div class="content">
+                        <h3><a href="team.html">Ameen Ansari</a></h3>
+                        <span>Web Developer</span>
                         <ul class="team-social">
                             <li>
                                 <a href="https://www.facebook.com/" target="_blank">
@@ -294,11 +424,69 @@
     </div>
 </div>
 
+<div class="work-area pt-100 pb-70">
+    <div class="container">
+        <div class="section-title text-center">
+            <span>How It Works</span>
+            <h2>4 Simple Steps to Discover Amazing Recipes</h2>
+        </div>
+        <div class="row pt-45 justify-content-center">
+            <div class="col-lg-3 col-sm-6">
+                <div class="work-card work-bg1">
+                    <div class="content">
+                        <i class="flaticon-contact-book"></i>
+                        <h3>Contact Us</h3>
+                        <p>
+                            Feel free to reach out to us if you have any questions, suggestions, or want to share your favorite recipes. Our team is here to assist you or guide you step by step.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="work-card work-bg2">
+                    <div class="content">
+                        <i class="flaticon-calendar-1"></i>
+                        <h3>Explore Recipes</h3>
+                        <p>
+                            Discover a wide range of recipes created by our experienced chefs. Start your culinary journey today and try new flavors and also share them in your social media!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="work-card work-bg3">
+                    <div class="content">
+                        <i class="flaticon-research"></i>
+                        <h3>Experiment</h3>
+                        <p>
+                            Put your own twist or magic in our recipes! Feel free to experiment with different ingredients and make unique cooking techniques to create amazing unique dishes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="work-card work-bg4">
+                    <div class="content">
+                        <i class="flaticon-happiness"></i>
+                        <h3>Enjoy the Delights</h3>
+                        <p>
+                            Indulge in the pleasure of cooking and savoring delicious meals. Share your culinary creations with loved ones and experience the joy that comes with good food.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 <div class="services-area pt-100 pb-70">
     <div class="container">
         <div class="section-title text-center">
             <span>What We Offer</span>
-            <h2>Diet & Nutritionist Services</h2>
+            <h2>Our Services</h2>
         </div>
         <div class="row pt-45 justify-content-center">
             <div class="col-lg-4 col-md-6">
@@ -308,12 +496,12 @@
                     </a>
                     <div class="content">
                         <h3>
-                            <a href="service-details.html">Weight Loss Program</a>
+                            <a href="service-details.html">Recipe Collection</a>
                         </h3>
                         <p>
-                            the Mediterranean diet, WW (Weight Watchers), the MIND diet, the DASH diet, intermittent fasting, plant-based diets, low carb diets, the Mayo Clinic Diet, and the Volumetrics diet.
+                            Explore our extensive collection of delicious recipes to inspire your culinary creations. From quick and easy meals to gourmet delights, our recipe collection has something for everyone. Discover new flavors and techniques to elevate your cooking skills and impress your family and friends.
                         </p>
-                        <a href="service-details.html" class="learn-btn">Learn More</a>
+                        <a href="@Url.Action("Recipies","FlavourFusion")" class="learn-btn">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -324,12 +512,12 @@
                     </a>
                     <div class="content">
                         <h3>
-                            <a href="service-details.html">Nutrition Response Testing</a>
+                            <a href="service-details.html">Kitchen Tips and Tricks</a>
                         </h3>
                         <p>
-                            Nutrition Response Testing® is a non-invasive system of analyzing the body to determine the underlying causes of illness and non-optimum health. Our clinically proven system may be quite different from any other healing practice you have experienced.
+                            Master your cooking skills with our expert kitchen tips and tricks. Learn time-saving techniques, ingredient substitutions, cooking hacks, and more great tips. Our tips will help you become a confident and efficient cook, making your time in the kitchen enjoyable and rewarding so make your amazing dish now.
                         </p>
-                        <a href="service-details.html" class="learn-btn">Learn More</a>
+                        <a href="@Url.Action("Recipies","FlavourFusion")" class="learn-btn">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -340,134 +528,96 @@
                     </a>
                     <div class="content">
                         <h3>
-                            <a href="service-details.html">Clinical Nutrition</a>
+                            <a href="service-details.html">Meal Planning</a>
                         </h3>
-                        <p>A Bachelor of Health Science (Clinical Nutrition) covers the impact of nutritional, dietary and lifestyle factors on health, and how therapeutic nutritional intervention can achieve wellbeing.
-                        </p>
-                        <a href="service-details.html" class="learn-btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="work-area pt-100 pb-70">
-    <div class="container">
-        <div class="section-title text-center">
-            <span>How IT Works</span>
-            <h2>4 Easy Steps For Happy Life</h2>
-        </div>
-        <div class="row pt-45 justify-content-center">
-            <div class="col-lg-3 col-sm-6">
-                <div class="work-card work-bg1">
-                    <div class="content">
-                        <i class="flaticon-contact-book"></i>
-                        <h3>Contact Us</h3>
                         <p>
-                          Eproject@gmail.com</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="work-card work-bg2">
-                    <div class="content">
-                        <i class="flaticon-calendar-1"></i>
-                        <h3>Appointment</h3>
-                        <p>  </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="work-card work-bg3">
-                    <div class="content">
-                        <i class="flaticon-research"></i>
-                        <h3>Analysis</h3>
-                        <p>Food analysis' is generally understood to refer to chemical or physical tests, assays or measurements, and could include a wide variety of analysest </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="work-card work-bg4">
-                    <div class="content">
-                        <i class="flaticon-happiness"></i>
-                        <h3>Happy Life</h3>
-                        <p>Happiness is more than a good feeling or a yellow smiley face. It's the feeling of truly enjoying your life, and the desire to make the very best of it.</p>
+                            Simplify your life with our meal planning service. Let us take the guesswork out of your daily meals by providing you with nutritious and delicious meal plans. Whether you're looking for quick weekday dinners or special weekend menus, our meal plans will help you save time, reduce stress, and eat well-balanced meals.
+                        </p>
+                        <a href="@Url.Action("Recipies","FlavourFusion")" class="learn-btn">Learn More</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <div class="pricing-area pt-100 pb-70">
     <div class="container">
         <div class="section-title text-center">
-            <span>Pricing Plan</span>
-            <h2>Choose Your Best Plan</h2>
+            <span>Pricing Plans</span>
+            <h2>Choose Your Subscription</h2>
         </div>
         <div class="row pt-45 justify-content-center">
             <div class="col-lg-4 col-md-6">
                 <div class="pricing-card">
                     <div class="pricing-title">
-                        <h3>$25</h3>
-                        <span>Starter</span>
+                        <h3>$20/month</h3>
+                        <h5>Basic</h5>
                     </div>
                     <ul>
-                        <li><i class='bx bx-check'></i> 20 Workouts</li>
-                        <li><i class='bx bx-check'></i> Meal Plans & Analysis</li>
-                        <li><i class='bx bx-check'></i> Weight Assessment</li>
-                        <li><i class='bx bx-check'></i> Physical Activities</li>
-                        <li><i class='bx bx-check'></i> Client Monitoring</li>
+                        <li><i class='bx bx-check'></i> Access to Recipe Collection</li>
+                        <li><i class='bx bx-check'></i> Weekly Meal Plans</li>
+                        <li><i class='bx bx-check'></i> Cooking Tips & Tricks</li>
+                        <li><i class='bx bx-check'></i> Community Forum Access</li>
+                        <li><i class='bx bx-check'></i> Personalized Shopping List</li>
+                        <li><i class='bx bx-check'></i> Nutrition Information</li>
+                        <li><i class='bx bx-check'></i> Member Discounts</li>
                         <li><i class='bx bx-check'></i> 24/7 Support</li>
                     </ul>
                     <div class="price-btn-area text-center">
-                        <a href="pricing.html" class="default-btn">Book Now</a>
+                        <a href="subscription.html" class="default-btn">Buy Now</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="pricing-card">
                     <div class="pricing-title">
-                        <h3>$45</h3>
-                        <span>Advance</span>
+                        <h3>$35/month</h3>
+                        <h5>Premium</h5>
                     </div>
                     <ul>
-                        <li><i class='bx bx-check'></i> 24 Workouts</li>
-                        <li><i class='bx bx-check'></i> Meal Plans & Analysis</li>
-                        <li><i class='bx bx-check'></i> Weight Assessment</li>
-                        <li><i class='bx bx-check'></i> Physical Activities</li>
-                        <li><i class='bx bx-check'></i> Client Monitoring</li>
+                        <li><i class='bx bx-check'></i> Access to Recipe Collection</li>
+                        <li><i class='bx bx-check'></i> Weekly Meal Plans</li>
+                        <li><i class='bx bx-check'></i> Cooking Tips & Tricks</li>
+                        <li><i class='bx bx-check'></i> Personalized Shopping List</li>
+                        <li><i class='bx bx-check'></i> Monthly Cooking Webinars</li>
+                        <li><i class='bx bx-check'></i> Member Discounts</li>
+                        <li><i class='bx bx-check'></i> Exclusive Recipes</li>
                         <li><i class='bx bx-check'></i> 24/7 Support</li>
                     </ul>
                     <div class="price-btn-area text-center">
-                        <a href="pricing.html" class="default-btn">Book Now</a>
+                        <a href="subscription.html" class="default-btn">Buy Now</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="pricing-card">
                     <div class="pricing-title">
-                        <h3>$45</h3>
-                        <span>Premium</span>
+                        <h3>$50/month</h3>
+                        <h5>Deluxe</h5>
                     </div>
                     <ul>
-                        <li><i class='bx bx-check'></i> 30 Workouts</li>
-                        <li><i class='bx bx-check'></i> Meal Plans & Analysis</li>
-                        <li><i class='bx bx-check'></i> Weight Assessment</li>
-                        <li><i class='bx bx-check'></i> Physical Activities</li>
-                        <li><i class='bx bx-check'></i> Client Monitoring</li>
+                        <li><i class='bx bx-check'></i> Exclusive Recipes</li>
+                        <li><i class='bx bx-check'></i> Personalized Shopping List</li>
+                        <li><i class='bx bx-check'></i> Nutrition Information</li>
+                        <li><i class='bx bx-check'></i> Member Discounts</li>
+                        <li><i class='bx bx-check'></i> Monthly Cooking Webinars</li>
+                        <li><i class='bx bx-check'></i> Access to Premium Recipes</li>
+                        <li><i class='bx bx-check'></i> Personalized Chef Consultation</li>
                         <li><i class='bx bx-check'></i> 24/7 Support</li>
                     </ul>
                     <div class="price-btn-area text-center">
-                        <a href="pricing.html" class="default-btn">Book Now</a>
+                        <a href="subscription.html" class="default-btn">Buy Now</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <div class="blog-area pt-100 pb-70">
     <div class="container">
@@ -517,11 +667,13 @@
                                 <h3>
                                     <a href="blog-details.html">5 Easy Cooking Recipe Tips </a>
                                 </h3>
-                                <p>Don't Leave the Kitchen. It may seem obvious not to leave the kitchen while cooking, but it's a mistake many make. 
+                                <p>
+                                    Don't Leave the Kitchen. It may seem obvious not to leave the kitchen while cooking, but it's a mistake many make.
                                     Buy Fresh Ingredients. ...
-Get a Quality Chef Knife
-Don't Overcrowd Your Pan
-Don't Put Cold Meat in a Hot Pan. </p>
+                                    Get a Quality Chef Knife
+                                    Don't Overcrowd Your Pan
+                                    Don't Put Cold Meat in a Hot Pan.
+                                </p>
                             </div>
                         </div>
                     </div>

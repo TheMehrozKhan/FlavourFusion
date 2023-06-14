@@ -3963,33 +3963,6 @@ Pricing Area
         box-shadow: rgba(17, 12, 46, 0.08) 0px 48px 100px 0px;
     }
 
-        .pricing-card:hover::before {
-            height: 0;
-            opacity: 0;
-        }
-
-        .pricing-card:hover::after {
-            height: 190px;
-            opacity: 1;
-        }
-
-        .pricing-card:hover .pricing-title h3 {
-            background-color: var(--greenColor);
-            color: var(--whiteColor);
-        }
-
-        .pricing-card:hover .pricing-title span {
-            color: var(--titleColor);
-        }
-
-.pricing-shape {
-    position: absolute;
-    bottom: 170px;
-    left: 0;
-    -webkit-animation: movebounce-up 15s infinite linear;
-    animation: movebounce-up 15s infinite linear;
-}
-
 /*================================
 Pricing Area End
 ===================================*/
@@ -6814,7 +6787,9 @@ Map Area End
 /*=================================
 Buy Now Btn
 ====================================*/
-
+.buy-now-btn {
+    display: none;
+}
 
 /*=================================
 404 Error Area

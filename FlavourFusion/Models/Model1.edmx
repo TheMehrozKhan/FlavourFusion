@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RecipeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tbl_Admin">
+          <Key>
+            <PropertyRef Name="ad_id" />
+          </Key>
+          <Property Name="ad_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ad_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ad_email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ad_password" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Category">
+          <Key>
+            <PropertyRef Name="cat_id" />
+          </Key>
+          <Property Name="cat_id" Type="int" Nullable="false" />
+          <Property Name="cat_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ad_id_fk" Type="int" />
+          <Property Name="cat_img" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Tbl_Membership">
+          <Key>
+            <PropertyRef Name="mem_id" />
+          </Key>
+          <Property Name="mem_id" Type="int" Nullable="false" />
+          <Property Name="mem_plan" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="mem_price" Type="int" Nullable="false" />
+          <Property Name="ad_id_fk" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_Recipe">
+          <Key>
+            <PropertyRef Name="rec_id" />
+          </Key>
+          <Property Name="rec_id" Type="int" Nullable="false" />
+          <Property Name="rec_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="rec_desc" Type="varchar(max)" />
+          <Property Name="rec_img" Type="varchar(max)" Nullable="false" />
+          <Property Name="cat_id_fk" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_User">
+          <Key>
+            <PropertyRef Name="us_id" />
+          </Key>
+          <Property Name="us_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="us_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="us_email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="us_password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="us_img" Type="varchar(max)" Nullable="false" />
+          <Property Name="us_phone" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="mem_id_fk" Type="int" />
+        </EntityType>
+        <Association Name="FK__Tbl_Categ__ad_id__5165187F">
+          <End Role="Tbl_Admin" Type="Self.Tbl_Admin" Multiplicity="0..1" />
+          <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Admin">
+              <PropertyRef Name="ad_id" />
+            </Principal>
+            <Dependent Role="Tbl_Category">
+              <PropertyRef Name="ad_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Membe__ad_id__52593CB8">
+          <End Role="Tbl_Admin" Type="Self.Tbl_Admin" Multiplicity="0..1" />
+          <End Role="Tbl_Membership" Type="Self.Tbl_Membership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Admin">
+              <PropertyRef Name="ad_id" />
+            </Principal>
+            <Dependent Role="Tbl_Membership">
+              <PropertyRef Name="ad_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Recip__cat_i__534D60F1">
+          <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="0..1" />
+          <End Role="Tbl_Recipe" Type="Self.Tbl_Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Category">
+              <PropertyRef Name="cat_id" />
+            </Principal>
+            <Dependent Role="Tbl_Recipe">
+              <PropertyRef Name="cat_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_User__mem_id__5441852A">
+          <End Role="Tbl_Membership" Type="Self.Tbl_Membership" Multiplicity="0..1" />
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Membership">
+              <PropertyRef Name="mem_id" />
+            </Principal>
+            <Dependent Role="Tbl_User">
+              <PropertyRef Name="mem_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RecipeModelStoreContainer">
+          <EntitySet Name="Tbl_Admin" EntityType="Self.Tbl_Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Category" EntityType="Self.Tbl_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Membership" EntityType="Self.Tbl_Membership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Recipe" EntityType="Self.Tbl_Recipe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_User" EntityType="Self.Tbl_User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Tbl_Categ__ad_id__5165187F" Association="Self.FK__Tbl_Categ__ad_id__5165187F">
+            <End Role="Tbl_Admin" EntitySet="Tbl_Admin" />
+            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Membe__ad_id__52593CB8" Association="Self.FK__Tbl_Membe__ad_id__52593CB8">
+            <End Role="Tbl_Admin" EntitySet="Tbl_Admin" />
+            <End Role="Tbl_Membership" EntitySet="Tbl_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Recip__cat_i__534D60F1" Association="Self.FK__Tbl_Recip__cat_i__534D60F1">
+            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
+            <End Role="Tbl_Recipe" EntitySet="Tbl_Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_User__mem_id__5441852A" Association="Self.FK__Tbl_User__mem_id__5441852A">
+            <End Role="Tbl_Membership" EntitySet="Tbl_Membership" />
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RecipeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tbl_Admin">
+          <Key>
+            <PropertyRef Name="ad_id" />
+          </Key>
+          <Property Name="ad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ad_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ad_email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ad_password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tbl_Category" Relationship="Self.FK__Tbl_Categ__ad_id__5165187F" FromRole="Tbl_Admin" ToRole="Tbl_Category" />
+          <NavigationProperty Name="Tbl_Membership" Relationship="Self.FK__Tbl_Membe__ad_id__52593CB8" FromRole="Tbl_Admin" ToRole="Tbl_Membership" />
+        </EntityType>
+        <EntityType Name="Tbl_Category">
+          <Key>
+            <PropertyRef Name="cat_id" />
+          </Key>
+          <Property Name="cat_id" Type="Int32" Nullable="false" />
+          <Property Name="cat_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ad_id_fk" Type="Int32" />
+          <Property Name="cat_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Admin" Relationship="Self.FK__Tbl_Categ__ad_id__5165187F" FromRole="Tbl_Category" ToRole="Tbl_Admin" />
+          <NavigationProperty Name="Tbl_Recipe" Relationship="Self.FK__Tbl_Recip__cat_i__534D60F1" FromRole="Tbl_Category" ToRole="Tbl_Recipe" />
+        </EntityType>
+        <EntityType Name="Tbl_Membership">
+          <Key>
+            <PropertyRef Name="mem_id" />
+          </Key>
+          <Property Name="mem_id" Type="Int32" Nullable="false" />
+          <Property Name="mem_plan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mem_price" Type="Int32" Nullable="false" />
+          <Property Name="ad_id_fk" Type="Int32" />
+          <NavigationProperty Name="Tbl_Admin" Relationship="Self.FK__Tbl_Membe__ad_id__52593CB8" FromRole="Tbl_Membership" ToRole="Tbl_Admin" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK__Tbl_User__mem_id__5441852A" FromRole="Tbl_Membership" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_Recipe">
+          <Key>
+            <PropertyRef Name="rec_id" />
+          </Key>
+          <Property Name="rec_id" Type="Int32" Nullable="false" />
+          <Property Name="rec_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rec_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="rec_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cat_id_fk" Type="Int32" />
+          <NavigationProperty Name="Tbl_Category" Relationship="Self.FK__Tbl_Recip__cat_i__534D60F1" FromRole="Tbl_Recipe" ToRole="Tbl_Category" />
+        </EntityType>
+        <EntityType Name="Tbl_User">
+          <Key>
+            <PropertyRef Name="us_id" />
+          </Key>
+          <Property Name="us_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="us_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="us_email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="us_password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="us_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="us_phone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mem_id_fk" Type="Int32" />
+          <NavigationProperty Name="Tbl_Membership" Relationship="Self.FK__Tbl_User__mem_id__5441852A" FromRole="Tbl_User" ToRole="Tbl_Membership" />
+        </EntityType>
+        <Association Name="FK__Tbl_Categ__ad_id__5165187F">
+          <End Role="Tbl_Admin" Type="Self.Tbl_Admin" Multiplicity="0..1" />
+          <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Admin">
+              <PropertyRef Name="ad_id" />
+            </Principal>
+            <Dependent Role="Tbl_Category">
+              <PropertyRef Name="ad_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Membe__ad_id__52593CB8">
+          <End Role="Tbl_Admin" Type="Self.Tbl_Admin" Multiplicity="0..1" />
+          <End Role="Tbl_Membership" Type="Self.Tbl_Membership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Admin">
+              <PropertyRef Name="ad_id" />
+            </Principal>
+            <Dependent Role="Tbl_Membership">
+              <PropertyRef Name="ad_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Recip__cat_i__534D60F1">
+          <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="0..1" />
+          <End Role="Tbl_Recipe" Type="Self.Tbl_Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Category">
+              <PropertyRef Name="cat_id" />
+            </Principal>
+            <Dependent Role="Tbl_Recipe">
+              <PropertyRef Name="cat_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_User__mem_id__5441852A">
+          <End Role="Tbl_Membership" Type="Self.Tbl_Membership" Multiplicity="0..1" />
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Membership">
+              <PropertyRef Name="mem_id" />
+            </Principal>
+            <Dependent Role="Tbl_User">
+              <PropertyRef Name="mem_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RecipeEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tbl_Admin" EntityType="Self.Tbl_Admin" />
+          <EntitySet Name="Tbl_Category" EntityType="Self.Tbl_Category" />
+          <EntitySet Name="Tbl_Membership" EntityType="Self.Tbl_Membership" />
+          <EntitySet Name="Tbl_Recipe" EntityType="Self.Tbl_Recipe" />
+          <EntitySet Name="Tbl_User" EntityType="Self.Tbl_User" />
+          <AssociationSet Name="FK__Tbl_Categ__ad_id__5165187F" Association="Self.FK__Tbl_Categ__ad_id__5165187F">
+            <End Role="Tbl_Admin" EntitySet="Tbl_Admin" />
+            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Membe__ad_id__52593CB8" Association="Self.FK__Tbl_Membe__ad_id__52593CB8">
+            <End Role="Tbl_Admin" EntitySet="Tbl_Admin" />
+            <End Role="Tbl_Membership" EntitySet="Tbl_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Recip__cat_i__534D60F1" Association="Self.FK__Tbl_Recip__cat_i__534D60F1">
+            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
+            <End Role="Tbl_Recipe" EntitySet="Tbl_Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_User__mem_id__5441852A" Association="Self.FK__Tbl_User__mem_id__5441852A">
+            <End Role="Tbl_Membership" EntitySet="Tbl_Membership" />
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RecipeModelStoreContainer" CdmEntityContainer="RecipeEntities1">
+          <EntitySetMapping Name="Tbl_Admin">
+            <EntityTypeMapping TypeName="RecipeModel.Tbl_Admin">
+              <MappingFragment StoreEntitySet="Tbl_Admin">
+                <ScalarProperty Name="ad_id" ColumnName="ad_id" />
+                <ScalarProperty Name="ad_name" ColumnName="ad_name" />
+                <ScalarProperty Name="ad_email" ColumnName="ad_email" />
+                <ScalarProperty Name="ad_password" ColumnName="ad_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Category">
+            <EntityTypeMapping TypeName="RecipeModel.Tbl_Category">
+              <MappingFragment StoreEntitySet="Tbl_Category">
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="cat_name" ColumnName="cat_name" />
+                <ScalarProperty Name="ad_id_fk" ColumnName="ad_id_fk" />
+                <ScalarProperty Name="cat_img" ColumnName="cat_img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Membership">
+            <EntityTypeMapping TypeName="RecipeModel.Tbl_Membership">
+              <MappingFragment StoreEntitySet="Tbl_Membership">
+                <ScalarProperty Name="mem_id" ColumnName="mem_id" />
+                <ScalarProperty Name="mem_plan" ColumnName="mem_plan" />
+                <ScalarProperty Name="mem_price" ColumnName="mem_price" />
+                <ScalarProperty Name="ad_id_fk" ColumnName="ad_id_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Recipe">
+            <EntityTypeMapping TypeName="RecipeModel.Tbl_Recipe">
+              <MappingFragment StoreEntitySet="Tbl_Recipe">
+                <ScalarProperty Name="rec_id" ColumnName="rec_id" />
+                <ScalarProperty Name="rec_name" ColumnName="rec_name" />
+                <ScalarProperty Name="rec_desc" ColumnName="rec_desc" />
+                <ScalarProperty Name="rec_img" ColumnName="rec_img" />
+                <ScalarProperty Name="cat_id_fk" ColumnName="cat_id_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_User">
+            <EntityTypeMapping TypeName="RecipeModel.Tbl_User">
+              <MappingFragment StoreEntitySet="Tbl_User">
+                <ScalarProperty Name="us_id" ColumnName="us_id" />
+                <ScalarProperty Name="us_name" ColumnName="us_name" />
+                <ScalarProperty Name="us_email" ColumnName="us_email" />
+                <ScalarProperty Name="us_password" ColumnName="us_password" />
+                <ScalarProperty Name="us_img" ColumnName="us_img" />
+                <ScalarProperty Name="us_phone" ColumnName="us_phone" />
+                <ScalarProperty Name="mem_id_fk" ColumnName="mem_id_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

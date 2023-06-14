@@ -1,67 +1,67 @@
-﻿<div class="pricing-area pt-100 pb-70">
+﻿@model List<FlavourFusion.Models.Tbl_Membership_Plans>
+
+<div class="pricing-area pt-100 pb-70">
     <div class="container">
         <div class="section-title text-center">
-            <span>Pricing Plan</span>
-            <h2>Choose Your Best Plan</h2>
+            <span>Pricing Plans</span>
+            <h2>Choose Your Subscription</h2>
         </div>
         <div class="row pt-45 justify-content-center">
-            <div class="col-lg-4 col-md-6">
-                <div class="pricing-card">
-                    <div class="pricing-title">
-                        <h3>$25</h3>
-                        <span>Starter</span>
-                    </div>
-                    <ul>
-                        <li><i class='bx bx-check'></i> 20 Workouts</li>
-                        <li><i class='bx bx-check'></i> Meal Plans & Analysis</li>
-                        <li><i class='bx bx-check'></i> Weight Assessment</li>
-                        <li><i class='bx bx-check'></i> Physical Activities</li>
-                        <li><i class='bx bx-check'></i> Client Monitoring</li>
-                        <li><i class='bx bx-check'></i> 24/7 Support</li>
-                    </ul>
-                    <div class="price-btn-area text-center">
-                        <a href="pricing.html" class="default-btn">Book Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="pricing-card">
-                    <div class="pricing-title">
-                        <h3>$45</h3>
-                        <span>Advance</span>
-                    </div>
-                    <ul>
-                        <li><i class='bx bx-check'></i> 24 Workouts</li>
-                        <li><i class='bx bx-check'></i> Meal Plans & Analysis</li>
-                        <li><i class='bx bx-check'></i> Weight Assessment</li>
-                        <li><i class='bx bx-check'></i> Physical Activities</li>
-                        <li><i class='bx bx-check'></i> Client Monitoring</li>
-                        <li><i class='bx bx-check'></i> 24/7 Support</li>
-                    </ul>
-                    <div class="price-btn-area text-center">
-                        <a href="pricing.html" class="default-btn">Book Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="pricing-card">
-                    <div class="pricing-title">
-                        <h3>$45</h3>
-                        <span>Premium</span>
-                    </div>
-                    <ul>
-                        <li><i class='bx bx-check'></i> 30 Workouts</li>
-                        <li><i class='bx bx-check'></i> Meal Plans & Analysis</li>
-                        <li><i class='bx bx-check'></i> Weight Assessment</li>
-                        <li><i class='bx bx-check'></i> Physical Activities</li>
-                        <li><i class='bx bx-check'></i> Client Monitoring</li>
-                        <li><i class='bx bx-check'></i> 24/7 Support</li>
-                    </ul>
-                    <div class="price-btn-area text-center">
-                        <a href="pricing.html" class="default-btn">Book Now</a>
+            @foreach (var plan in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card">
+                        <div class="pricing-title">
+                            <h3>$@plan.price/Month</h3>
+                            <h5>@plan.plan_name</h5>
+                        </div>
+                        <ul>
+                            @if (plan.plan_name.Equals("Premium"))
+                            {
+                                <li><i class='bx bx-check' style="font-size:14px;"></i> Wide Range of Recipe Collection</li>
+                                <li><i class='bx bx-check'></i> Weekly Meal Plans</li>
+                                <li><i class='bx bx-check'></i> Cooking Tips & Tricks</li>
+                                <li><i class='bx bx-check'></i> Personalized Shopping List</li>
+                                <li><i class='bx bx-check'></i> Monthly Cooking Webinars</li>
+                                <li><i class='bx bx-check'></i> Exclusive Recipes</li>
+                                <li><i class='bx bx-check'></i> Member Discounts</li>
+                                <li><i class='bx bx-check'></i> 24/7 Support</li>
+                                <div class="price-btn-area text-center">
+                                    <a href="@Url.Action("Register", "FlavourFusion", new { planId = plan.plan_id })" class="default-btn">Buy Now</a>
+                                </div>
+                            }
+                            @if (plan.plan_name.Equals("Standard"))
+                            {
+                                <li><i class='bx bx-check' style="font-size:14px;"></i> Wide Range of Recipe Collection</li>
+                                <li><i class='bx bx-check'></i> Weekly Meal Plans</li>
+                                <li><i class='bx bx-check'></i> Cooking Tips & Tricks</li>
+                                <li><i class='bx bx-x'></i> Personalized Shopping List</li>
+                                <li><i class='bx bx-check'></i> Monthly Cooking Webinars</li>
+                                <li><i class='bx bx-x'></i> Exclusive Recipes</li>
+                                <li><i class='bx bx-check'></i> Member Discounts</li>
+                                <li><i class='bx bx-check'></i> 24/7 Support</li>
+                                <div class="price-btn-area text-center">
+                                    <a href="@Url.Action("Register", "FlavourFusion", new { planId = plan.plan_id })" class="default-btn">Buy Now</a>
+                                </div>
+                            }
+                            @if (plan.plan_name.Equals("Free"))
+                            {
+                                <li><i class='bx bx-check'></i> Minimum Recipe Collection</li>
+                                <li><i class='bx bx-x'></i> Weekly Meal Plans</li>
+                                <li><i class='bx bx-check'></i> Cooking Tips & Tricks</li>
+                                <li><i class='bx bx-x'></i> Personalized Shopping List</li>
+                                <li><i class='bx bx-check'></i> Monthly Cooking Webinars</li>
+                                <li><i class='bx bx-x'></i> Exclusive Recipes</li>
+                                <li><i class='bx bx-x'></i> Member Discounts</li>
+                                <li><i class='bx bx-check'></i> 24/7 Support</li>
+                                <div class="price-btn-area text-center">
+                                    <a href="@Url.Action("Register", "FlavourFusion", new { planId = plan.plan_id })" class="default-btn">Start Now</a>
+                                </div>
+                            }
+                        </ul>
                     </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </div>
