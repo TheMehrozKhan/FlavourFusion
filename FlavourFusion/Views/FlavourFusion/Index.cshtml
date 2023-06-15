@@ -622,73 +622,58 @@
 <div class="blog-area pt-100 pb-70">
     <div class="container">
         <div class="section-title text-center">
-            <span>Latest News</span>
-            <h2>Latest Recipe From Blog</h2>
+            <span>From Master Chef</span>
+            <h2>Our Latest Recipes</h2>
         </div>
         <div class="row pt-45">
             <div class="col-lg-6">
-                <div class="blog-card">
-                    <div class="blog-img">
-                        <a href="blog-details.html">
-                            <img src="/Template/assets/images/blog/blog-img1.jpg" alt="Blog Images">
-                        </a>
-                        <div class="tag">
-                            <a href="blog-details.html">
-                                22 April, 2021
-                            </a>
+                @if (Model.Count > 0)
+                {
+                    var recipe = Model[0];
+                    <div class="blog-card">
+                        <div class="blog-img">
+                            @if (!string.IsNullOrEmpty(recipe.recipe_image))
+                            {
+                                var imagePaths = recipe.recipe_image.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                var firstImagePath = Url.Content(imagePaths[0]);
+                                <a href="blog-details.html">
+                                    <img src="@firstImagePath" alt="Blog Images" style="border-radius:15px;">
+                                </a>
+                            }
+                        </div>
+                        <div class="content">
+                            <h3><a href="@Url.Action("DisplayRecipe","FlavourFusion")">@recipe.recipe_name</a></h3>
+                            <p>@(recipe.recipe_description.Length > 300 ? recipe.recipe_description.Substring(0, 300) + "..." : recipe.recipe_description)</p>
+                            <a href="blog-details.html" class="read-btn">Read More</a>
                         </div>
                     </div>
-                    <div class="content">
-                        <h3><a href="blog-details.html">Healthy & Simp,gluten free Cookie, Cake Recipes</a></h3>
-                        <p>A cookie made with just rice flour will be too cakey, while one made with only almond meal with be too dense. To mimic wheat flour, you will need to mix flours of different densities with a bit of tapioca or potato starch to lighten it up; the recipe below is a good place to start..</p>
-                        <a href="blog-details.html" class="read-btn">Read More</a>
-                    </div>
-                </div>
+                }
             </div>
             <div class="col-lg-6">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="blog-side-content">
-                            <div class="blog-side-img blog-side1"></div>
-                            <div class="content">
-                                <span><i class="flaticon-calendar-1"></i> 22 April, 2021</span>
-                                <h3>
-                                    <a href="blog-details.html">How to Make Spigots in Easy </a>
-                                </h3>
-                                <p>the faucet located on the outside of your house where you connect a garden hose. In winter, homeowners need to turn off the water to their hose bibbs to prevent flooding. Now, it's almost time to open them so you can water your garden and enjoy the warmer weather </p>
+                    @if (Model.Count > 1)
+                    {
+                        for (int i = 1; i < Model.Count && i <= 2; i++)
+                        {
+                            var recipe = Model[i];
+                            <div class="col-lg-12" style="margin-top:50px;">
+                                <div class="blog-side-content">
+                                    @if (!string.IsNullOrEmpty(recipe.recipe_image))
+                                    {
+                                        var imagePaths = recipe.recipe_image.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                        var imagePath = Url.Content(imagePaths[0]);
+                                        <div class="blog-side-img blog-side@(i+1)">
+                                            <img src="@imagePath" alt="Blog Images" style="border-radius:15px;">
+                                        </div>
+                                    }
+                                <div class="content">
+                                    <h3><a href="@Url.Action("DisplayRecipe","FlavourFusion")">@recipe.recipe_name</a></h3>
+                                    <p>@(recipe.recipe_description.Length > 200 ? recipe.recipe_description.Substring(0, 200) + "..." : recipe.recipe_description)</p>
+                                </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="blog-side-content">
-                            <div class="blog-side-img blog-side2"></div>
-                            <div class="content">
-                                <span><i class="flaticon-calendar-1"></i> 23 April, 2021</span>
-                                <h3>
-                                    <a href="blog-details.html">5 Easy Cooking Recipe Tips </a>
-                                </h3>
-                                <p>
-                                    Don't Leave the Kitchen. It may seem obvious not to leave the kitchen while cooking, but it's a mistake many make.
-                                    Buy Fresh Ingredients. ...
-                                    Get a Quality Chef Knife
-                                    Don't Overcrowd Your Pan
-                                    Don't Put Cold Meat in a Hot Pan.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="blog-side-content">
-                            <div class="blog-side-img blog-side3"></div>
-                            <div class="content">
-                                <span><i class="flaticon-calendar-1"></i> 24 April, 2021</span>
-                                <h3>
-                                    <a href="blog-details.html">How to Make Fit in Your Body</a>
-                                </h3>
-                                <p>Get Enough Sleep. Getting enough sleep is vital to maintain a fit and healthy body,Exercise Daily,Do Not Skip Meals,Avoid Smoking and Drinking.And many things to do . </p>
-                            </div>
-                        </div>
-                    </div>
+                        }
+                    }
                 </div>
             </div>
         </div>

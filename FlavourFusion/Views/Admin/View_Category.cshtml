@@ -1,0 +1,219 @@
+﻿﻿@using PagedList.Mvc
+@model PagedList.IPagedList<FlavourFusion.Models.Tbl_Recipe_Category>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    <title>Veiw All Categories - FlavourFusion</title>
+    <style>
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h4 {
+            font-size: 30px;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            box-shadow: rgba(149, 157, 165, 0.1) 0px 2px 20px;
+            border-color: white;
+            transition: 0.2s;
+        }
+
+            .card:hover {
+                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            }
+
+        .slideshow-section {
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            margin-top: -15px;
+            width: 100vw;
+            overflow: hidden; /* Hide any overflowing content */
+        }
+
+        .slide-item {
+            width: 100%;
+        }
+
+        #thefirstlink {
+            color: black;
+            background-color: white;
+            border: none;
+        }
+
+            #thefirstlink:hover {
+                background-color: rgb(255, 132, 0);
+                color: white;
+                border-color: #F76B6A;
+            }
+
+        .newsletter-btn {
+            position: relative;
+            left: 180px;
+            background-color: #F76B6A;
+        }
+
+        .scroll-vertical {
+            overflow-y: auto;
+            max-height: 200px;
+        }
+
+            .scroll-vertical::-webkit-scrollbar {
+                width: 0.1rem;
+            }
+
+            .scroll-vertical::-webkit-scrollbar-track {
+                background-color: #ffffff; /* white */
+            }
+
+            .scroll-vertical::-webkit-scrollbar-thumb {
+                background-color: rgba(149, 157, 165, 0.1);
+                border-radius: 5px;
+            }
+
+        #navbar-example2 {
+            margin-top: 50px;
+            box-shadow: rgba(0, 0, 0, 0.03) 0px 10px 50px;
+            width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 8px;
+            height: 60px;
+        }
+
+        .thenav-link {
+            color: black;
+            font-size: 17px;
+            transition: 0.2s;
+        }
+
+            .thenav-link:hover {
+                color: rgb(255, 132, 0);
+                font-size: 19px;
+            }
+
+        .nav-link:focus,
+        .nav-link:active,
+        .nav-link:focus,
+        .nav-link:active {
+            color: black;
+            outline: none;
+        }
+
+        .nav-link:hover {
+            color: rgb(255, 132, 0);
+        }
+
+        .dropdown-toggle::after {
+            transition: transform 0.2s ease-in-out;
+            transform: rotate(0deg);
+        }
+
+        .dropdown-toggle:hover::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-toggle[aria-expanded="true"]::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            background: white;
+            border: none;
+            padding: 13px;
+            box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+            border-radius: 8px;
+            height: 90px;
+        }
+    </style>
+</head>
+<nav id="navbar-example2" class="navbar navbar-light d-flex justify-content-center">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link thenav-link" href="@Url.Action("Admin_Panel")">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link thenav-link" href="@Url.Action("Add_Recipe_Category")">Add Categories</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link thenav-link" href="@Url.Action("View_Category")">View Categories</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle thenav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">Recipes</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="@Url.Action("Recipe_Add")">Add Recipe</a></li>
+                <li><a class="dropdown-item" href="@Url.Action("ViewAllRecipes")">View Recipes</a></li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link thenav-link" href="@Url.Action("RegisteredUser")">All Registered Users</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link thenav-link" href="@Url.Action("Logout")">Logout</a>
+        </li>
+    </ul>
+</nav>
+<script>
+    // Open dropdown menu on hover
+    $(document).ready(function () {
+        $('.dropdown').hover(
+            function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(10);
+            },
+            function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(10);
+            }
+        );
+    });
+</script>
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="margin-top: 20px;">
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mx-auto" style="margin-bottom: 20px;">
+                        <div class="card-body">
+                            <img src="@Url.Content(item.category_image)" style="width: 100%; border-radius: 8px;" class="theimg" />
+                            <h5 class="card-title" style="text-align: center; margin-top: 15px;">@item.category_name</h5>
+                            <div style="text-align: center;">
+                                <a href="@Url.Action("Edit_Category", "Admin", new { id = item.category_id })" class="btn btn-primary">Edit</a>
+                                <a href="@Url.Action("Delete", "Admin", new { id = item.category_id })" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<nav aria-label="..." style="margin-top: 50px;">
+    <ul class="pagination pagination-md justify-content-center">
+        <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+            <a class="page-link" href="@Url.Action("View_Category", new { page = Model.PageNumber - 1 })" id="thefirstlink">Previous</a>
+        </li>
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            <li class="page-item @(Model.PageNumber == i ? "active" : "")" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+                <a class="page-link" href="@Url.Action("View_Category", new { page = i })" id="thefirstlink">@i</a>
+            </li>
+        }
+        <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+            <a class="page-link" href="@Url.Action("View_Category", new { page = Model.PageNumber + 1 })" id="thefirstlink">Next</a>
+        </li>
+    </ul>
+</nav>

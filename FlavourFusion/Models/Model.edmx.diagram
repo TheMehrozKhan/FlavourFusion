@@ -11,6 +11,10 @@
         <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Users" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Subsc__plan___5165187F" ManuallyRouted="false" />
         <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Subsc__user___5070F446" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Recipe" Width="1.5" PointX="7.25" PointY="4.625" />
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Recipe_Category" Width="1.5" PointX="5" PointY="4.5" />
+        <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Recip__FK_Ad__02FC7413" />
+        <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Recip__FK_Ca__05D8E0BE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

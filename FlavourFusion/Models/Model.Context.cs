@@ -29,5 +29,7 @@ namespace FlavourFusion.Models
         public virtual DbSet<Tbl_Membership_Plans> Tbl_Membership_Plans { get; set; }
         public virtual DbSet<Tbl_Subscriptions> Tbl_Subscriptions { get; set; }
         public virtual DbSet<Tbl_Users> Tbl_Users { get; set; }
+        public virtual DbSet<Tbl_Recipe> Tbl_Recipe { get; set; }
+        public virtual DbSet<Tbl_Recipe_Category> Tbl_Recipe_Category { get; set; }
     }
 }

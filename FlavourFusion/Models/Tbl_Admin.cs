@@ -14,9 +14,18 @@ namespace FlavourFusion.Models
     
     public partial class Tbl_Admin
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Tbl_Admin()
+        {
+            this.Tbl_Recipe_Category = new HashSet<Tbl_Recipe_Category>();
+        }
+    
         public int admin_id { get; set; }
         public string username { get; set; }
         public string password { get; set; }
         public string email { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tbl_Recipe_Category> Tbl_Recipe_Category { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Data.SqlClient;
 using FlavourFusion.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,8 +15,11 @@ namespace FlavourFusion.Controllers
         FlavourFusionEntities2 db = new FlavourFusionEntities2();
         public ActionResult Index()
         {
-            return View();
+            var latestRecipes = db.Tbl_Recipe.OrderByDescending(x => x.recipe_id).Take(4).ToList();
+
+            return View(latestRecipes);
         }
+
 
         public ActionResult AboutUs()
         {

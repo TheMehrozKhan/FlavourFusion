@@ -23,6 +23,26 @@
           <Property Name="price" Type="int" />
           <Property Name="duration" Type="int" />
         </EntityType>
+        <EntityType Name="Tbl_Recipe">
+          <Key>
+            <PropertyRef Name="recipe_id" />
+          </Key>
+          <Property Name="recipe_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="recipe_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="recipe_description" Type="varchar(max)" Nullable="false" />
+          <Property Name="recipe_image" Type="varchar(max)" Nullable="false" />
+          <Property Name="FK_Category_Recipe" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_Recipe_Category">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="category_image" Type="varchar(max)" Nullable="false" />
+          <Property Name="category_status" Type="int" Nullable="false" />
+          <Property Name="FK_Admin_Category" Type="int" />
+        </EntityType>
         <EntityType Name="Tbl_Subscriptions">
           <Key>
             <PropertyRef Name="subscription_id" />
@@ -44,6 +64,30 @@
           <Property Name="user_img" Type="varchar(max)" />
           <Property Name="is_member" Type="bit" />
         </EntityType>
+        <Association Name="FK__Tbl_Recip__FK_Ad__02FC7413">
+          <End Role="Tbl_Admin" Type="Self.Tbl_Admin" Multiplicity="0..1" />
+          <End Role="Tbl_Recipe_Category" Type="Self.Tbl_Recipe_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Admin">
+              <PropertyRef Name="admin_id" />
+            </Principal>
+            <Dependent Role="Tbl_Recipe_Category">
+              <PropertyRef Name="FK_Admin_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Recip__FK_Ca__05D8E0BE">
+          <End Role="Tbl_Recipe_Category" Type="Self.Tbl_Recipe_Category" Multiplicity="0..1" />
+          <End Role="Tbl_Recipe" Type="Self.Tbl_Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Recipe_Category">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="Tbl_Recipe">
+              <PropertyRef Name="FK_Category_Recipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Tbl_Subsc__plan___5DCAEF64">
           <End Role="Tbl_Membership_Plans" Type="Self.Tbl_Membership_Plans" Multiplicity="0..1" />
           <End Role="Tbl_Subscriptions" Type="Self.Tbl_Subscriptions" Multiplicity="*" />
@@ -71,8 +115,18 @@
         <EntityContainer Name="FlavourFusionModelStoreContainer">
           <EntitySet Name="Tbl_Admin" EntityType="Self.Tbl_Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Membership_Plans" EntityType="Self.Tbl_Membership_Plans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Recipe" EntityType="Self.Tbl_Recipe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Recipe_Category" EntityType="Self.Tbl_Recipe_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Subscriptions" EntityType="Self.Tbl_Subscriptions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Users" EntityType="Self.Tbl_Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Tbl_Recip__FK_Ad__02FC7413" Association="Self.FK__Tbl_Recip__FK_Ad__02FC7413">
+            <End Role="Tbl_Admin" EntitySet="Tbl_Admin" />
+            <End Role="Tbl_Recipe_Category" EntitySet="Tbl_Recipe_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Recip__FK_Ca__05D8E0BE" Association="Self.FK__Tbl_Recip__FK_Ca__05D8E0BE">
+            <End Role="Tbl_Recipe_Category" EntitySet="Tbl_Recipe_Category" />
+            <End Role="Tbl_Recipe" EntitySet="Tbl_Recipe" />
+          </AssociationSet>
           <AssociationSet Name="FK__Tbl_Subsc__plan___5DCAEF64" Association="Self.FK__Tbl_Subsc__plan___5DCAEF64">
             <End Role="Tbl_Membership_Plans" EntitySet="Tbl_Membership_Plans" />
             <End Role="Tbl_Subscriptions" EntitySet="Tbl_Subscriptions" />
@@ -94,6 +148,7 @@
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Recipe_Category" Relationship="FlavourFusionModel.FK__Tbl_Recip__FK_Ad__02FC7413" FromRole="Tbl_Admin" ToRole="Tbl_Recipe_Category" />
         </EntityType>
         <EntityType Name="Tbl_Membership_Plans">
           <Key>
@@ -166,7 +221,64 @@
             <End Role="Tbl_Users" EntitySet="Tbl_Users" />
             <End Role="Tbl_Subscriptions" EntitySet="Tbl_Subscriptions" />
           </AssociationSet>
+          <EntitySet Name="Tbl_Recipe" EntityType="FlavourFusionModel.Tbl_Recipe" />
+          <EntitySet Name="Tbl_Recipe_Category" EntityType="FlavourFusionModel.Tbl_Recipe_Category" />
+          <AssociationSet Name="FK__Tbl_Recip__FK_Ad__02FC7413" Association="FlavourFusionModel.FK__Tbl_Recip__FK_Ad__02FC7413">
+            <End Role="Tbl_Admin" EntitySet="Tbl_Admin" />
+            <End Role="Tbl_Recipe_Category" EntitySet="Tbl_Recipe_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Recip__FK_Ca__05D8E0BE" Association="FlavourFusionModel.FK__Tbl_Recip__FK_Ca__05D8E0BE">
+            <End Role="Tbl_Recipe_Category" EntitySet="Tbl_Recipe_Category" />
+            <End Role="Tbl_Recipe" EntitySet="Tbl_Recipe" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Tbl_Recipe">
+          <Key>
+            <PropertyRef Name="recipe_id" />
+          </Key>
+          <Property Name="recipe_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="recipe_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="recipe_description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="recipe_image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Category_Recipe" Type="Int32" />
+          <NavigationProperty Name="Tbl_Recipe_Category" Relationship="FlavourFusionModel.FK__Tbl_Recip__FK_Ca__05D8E0BE" FromRole="Tbl_Recipe" ToRole="Tbl_Recipe_Category" />
+        </EntityType>
+        <EntityType Name="Tbl_Recipe_Category">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="category_image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="category_status" Type="Int32" Nullable="false" />
+          <Property Name="FK_Admin_Category" Type="Int32" />
+          <NavigationProperty Name="Tbl_Admin" Relationship="FlavourFusionModel.FK__Tbl_Recip__FK_Ad__02FC7413" FromRole="Tbl_Recipe_Category" ToRole="Tbl_Admin" />
+          <NavigationProperty Name="Tbl_Recipe" Relationship="FlavourFusionModel.FK__Tbl_Recip__FK_Ca__05D8E0BE" FromRole="Tbl_Recipe_Category" ToRole="Tbl_Recipe" />
+        </EntityType>
+        <Association Name="FK__Tbl_Recip__FK_Ad__02FC7413">
+          <End Type="FlavourFusionModel.Tbl_Admin" Role="Tbl_Admin" Multiplicity="0..1" />
+          <End Type="FlavourFusionModel.Tbl_Recipe_Category" Role="Tbl_Recipe_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Admin">
+              <PropertyRef Name="admin_id" />
+            </Principal>
+            <Dependent Role="Tbl_Recipe_Category">
+              <PropertyRef Name="FK_Admin_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Recip__FK_Ca__05D8E0BE">
+          <End Type="FlavourFusionModel.Tbl_Recipe_Category" Role="Tbl_Recipe_Category" Multiplicity="0..1" />
+          <End Type="FlavourFusionModel.Tbl_Recipe" Role="Tbl_Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Recipe_Category">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="Tbl_Recipe">
+              <PropertyRef Name="FK_Category_Recipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -213,6 +325,28 @@
                 <ScalarProperty Name="user_password" ColumnName="user_password" />
                 <ScalarProperty Name="user_email" ColumnName="user_email" />
                 <ScalarProperty Name="user_img" ColumnName="user_img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Recipe">
+            <EntityTypeMapping TypeName="FlavourFusionModel.Tbl_Recipe">
+              <MappingFragment StoreEntitySet="Tbl_Recipe">
+                <ScalarProperty Name="FK_Category_Recipe" ColumnName="FK_Category_Recipe" />
+                <ScalarProperty Name="recipe_image" ColumnName="recipe_image" />
+                <ScalarProperty Name="recipe_description" ColumnName="recipe_description" />
+                <ScalarProperty Name="recipe_name" ColumnName="recipe_name" />
+                <ScalarProperty Name="recipe_id" ColumnName="recipe_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Recipe_Category">
+            <EntityTypeMapping TypeName="FlavourFusionModel.Tbl_Recipe_Category">
+              <MappingFragment StoreEntitySet="Tbl_Recipe_Category">
+                <ScalarProperty Name="FK_Admin_Category" ColumnName="FK_Admin_Category" />
+                <ScalarProperty Name="category_status" ColumnName="category_status" />
+                <ScalarProperty Name="category_image" ColumnName="category_image" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
