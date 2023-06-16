@@ -13,6 +13,42 @@
             margin-bottom: 120px;
             box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
         }
+
+        .banner-item-video {
+            position: relative;
+            height: 100vh;
+        }
+
+            .banner-item-video video {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .banner-slider .owl-dots {
+            display: none;
+        }
+
+        /*.banner-slider .owl-dots {
+            top: 370px;*/ /* Adjust the position of the dots */
+            /*display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .banner-slider .owl-dot {
+            background: #000;
+            width: 12px;
+            height: 12px;
+            margin: 50px 6px;*/ /* Adjust the spacing between the dots */
+        /*}*/
+
+        .banner-item:not(:first-child) .banner-item-video {
+            display: none; /* Hide video in all slides except the first one */
+        }
     </style>
 </head>
 @if (TempData["ToastMessage"] != null)
@@ -40,12 +76,18 @@
 <div class="banner-slider-area">
     <div class="banner-slider owl-carousel owl-theme">
         <div class="banner-item">
+            <div class="banner-item-video">
+                <video autoplay loop muted playsinline>
+                    <source src="~/Template/assets/videos/banner/TheBannerVideo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <div class="banner-item-content">
-                            <h1>Explore Global Delights</h1>
-                            <p>
+                    <div class="col-lg-12">
+                        <div class="banner-item-content" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; text-align: center;">
+                            <h1 class="text-white">Explore Global Delights</h1>
+                            <p class="text-white">
                                 Embark on a culinary adventure as we take you on a tantalizing journey across continents, showcasing the rich and diverse flavors of global cuisines.
                             </p>
                             <div class="banner-btn">
@@ -54,14 +96,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 pe-0">
-                        <div class="banner-item-img">
-                            <img src="/Template/assets/images/home-two/the-home-two-img1.png" alt="Banner Images">
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
+        <!-- Add other banner items here -->
         <div class="banner-item">
             <div class="container">
                 <div class="row align-items-center">
@@ -114,6 +152,87 @@
         <img src="/Template/assets/images/shape/shape2.png" alt="Banner Images">
     </div>
 </div>
+
+
+
+
+@*<div class="banner-slider-area">
+        <div class="banner-slider owl-carousel owl-theme">
+            <div class="banner-item">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="banner-item-content">
+                                <h1>Explore Global Delights</h1>
+                                <p>
+                                    Embark on a culinary adventure as we take you on a tantalizing journey across continents, showcasing the rich and diverse flavors of global cuisines.
+                                </p>
+                                <div class="banner-btn">
+                                    <a href="@Url.Action("AboutUs","FlavourFusion")" class="default-btn">Learn More</a>
+                                    <a href="@Url.Action("Contact","FlavourFusion")" class="default-btn two">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 pe-0">
+                            <div class="banner-item-img">
+                                <img src="/Template/assets/images/home-two/the-home-two-img1.png" alt="Banner Images">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="banner-item">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="banner-item-content">
+                                <h1>Master Chef Secrets</h1>
+                                <p>
+                                    Unlock the culinary secrets of renowned master chefs as they share their expert tips, techniques, and signature recipes to help you elevate your cooking skills to new heights.
+                                </p>
+                                <div class="banner-btn">
+                                    <a href="@Url.Action("AboutUs","FlavourFusion")" class="default-btn">Learn More</a>
+                                    <a href="@Url.Action("Contact","FlavourFusion")" class="default-btn two">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 pe-0">
+                            <div class="banner-item-img">
+                                <img src="/Template/assets/images/home-two/the-home-two-img2.png" alt="Banner Images">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="banner-item">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="banner-item-content">
+                                <h1>Seasonal Sensations</h1>
+                                <p>
+                                    Celebrate the beauty of each season with our collection of seasonal recipes, using the freshest ingredients to create mouthwatering dishes that capture the essence of nature's bounty.
+                                </p>
+                                <div class="banner-btn">
+                                    <a href="@Url.Action("AboutUs","FlavourFusion")" class="default-btn">Learn More</a>
+                                    <a href="@Url.Action("Contact","FlavourFusion")" class="default-btn two">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 pe-0">
+                            <div class="banner-item-img">
+                                <img src="/Template/assets/images/home-two/the-home-two-img3.png" alt="Banner Images">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="banner-shape-two">
+            <img src="/Template/assets/images/shape/shape1.png" alt="Banner Images" height="30" width="30">
+            <img src="/Template/assets/images/shape/shape2.png" alt="Banner Images">
+        </div>
+    </div>*@
 
 <div class="banner-bottom-area pt-100 pb-70">
     <div class="container">
@@ -666,10 +785,10 @@
                                             <img src="@imagePath" alt="Blog Images" style="border-radius:15px;">
                                         </div>
                                     }
-                                <div class="content">
-                                    <h3><a href="@Url.Action("DisplayRecipe","FlavourFusion")">@recipe.recipe_name</a></h3>
-                                    <p>@(recipe.recipe_description.Length > 200 ? recipe.recipe_description.Substring(0, 200) + "..." : recipe.recipe_description)</p>
-                                </div>
+                                    <div class="content">
+                                        <h3><a href="@Url.Action("DisplayRecipe","FlavourFusion")">@recipe.recipe_name</a></h3>
+                                        <p>@(recipe.recipe_description.Length > 200 ? recipe.recipe_description.Substring(0, 200) + "..." : recipe.recipe_description)</p>
+                                    </div>
                                 </div>
                             </div>
                         }
