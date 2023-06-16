@@ -20,20 +20,55 @@ namespace FlavourFusion.Controllers
             return View(latestRecipes);
         }
 
-
-        public ActionResult AboutUs()
-        {
-            return View();
-        }
-
         public ActionResult Recipies()
         {
-            return View();
+            List<Tbl_Recipe> recipes;
+
+            // Check if the user is logged in and get their membership plan
+            if (Session["u_id"] != null)
+            {
+                int userId = Convert.ToInt32(Session["u_id"]);
+                Tbl_Users user = db.Tbl_Users.Find(userId);
+                int membershipPlanId = user?.Tbl_Subscriptions.FirstOrDefault()?.Tbl_Membership_Plans?.plan_id ?? 0;
+
+                // Fetch recipes based on the membership plan
+                if (membershipPlanId == 1) // Standard plan
+                {
+                    recipes = db.Tbl_Recipe.OrderByDescending(x => x.recipe_id).Take(20).ToList();
+                }
+                else if (membershipPlanId == 2) // Premium plan
+                {
+                    recipes = db.Tbl_Recipe.OrderByDescending(x => x.recipe_id).ToList();
+                }
+                else // Free plan or unknown plan
+                {
+                    recipes = db.Tbl_Recipe.OrderByDescending(x => x.recipe_id).Take(3).ToList();
+                }
+
+                ViewBag.MembershipPlanId = membershipPlanId;
+            }
+            else // User is not logged in
+            {
+                recipes = db.Tbl_Recipe.OrderByDescending(x => x.recipe_id).Take(3).ToList();
+                ViewBag.MembershipPlanId = 0; // Assuming free plan for non-logged in users
+            }
+
+            ViewBag.ShowLoginMessage = Session["u_id"] == null;
+
+            return View(recipes);
         }
+
+
+
         public ActionResult Pricing()
         {
             List<Tbl_Membership_Plans> plans = db.Tbl_Membership_Plans.ToList();
             return View(plans);
+        }
+
+        public ActionResult AboutUs()
+        {
+            return View();
         }
 
         public ActionResult Contact()

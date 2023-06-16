@@ -1,17 +1,34 @@
-﻿<div class="inner-banner inner-bg5">
+﻿<style>
+    .recent-recipe-area {
+        background: none;
+    }
+    .thecontainer {
+        padding: 15px;
+        background-color: white;
+        height: 60px;
+        border-radius: 8px;
+        border: 0.1px solid rgb(255, 132, 0);
+        width: 550px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+<div class="inner-banner inner-bg5">
     <div class="container">
         <div class="inner-title text-center">
-            <h3> Recipe</h3>
+            <h3>Recipe</h3>
             <ul>
                 <li>
                     <a href="index.html">Home</a>
                 </li>
-                <li> Recipe</li>
+                <li>Recipe</li>
             </ul>
         </div>
     </div>
 </div>
-
 
 <div class="recent-recipe-area pt-100 pb-70">
     <div class="container">
@@ -22,154 +39,65 @@
     </div>
     <div class="container">
         <div class="row pt-45 justify-content-center">
-            <div class="col-lg-4 col-md-6">
-                <div class="recent-recipe-item">
-                    <a href="recipe-details.html">
-                        <img src="/Template/assets/images/recipe-img/recipe-another-img1.jpg" alt="Images">
-                    </a>
-                    <div class="content">
-                        <h3><a href="recipe-details.html">Tart Pecan Pie</a></h3>
-                        <div class="rating">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                        </div>
-                        <p> Pecan pie is a pie of pecan nuts mixed with a filling of eggs, butter, and sugar (typically corn syrup). Variations may include white or brown sugar, cane syrup, sugar syrup, molasses, maple syrup, or honey. </p> 
-                        <ul>
-                            <li>
-                                <img src="/Template/assets/images/recipe-img/recipe-user1.jpg" alt="Images">
-                            </li>
-                            <li><a href="author.html">By Andres</a></li>
-                        </ul>
-                    </div>
+            @if (ViewBag.ShowLoginMessage)
+            {
+                <div class="col-lg-12 text-center">
+                    <p style="font-weight: 500; font-size: 21px;">Please <a href="@Url.Action("Login","FlavourFusion")">Login</a> To View Recipes.</p>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="recent-recipe-item">
-                    <a href="recipe-details.html">
-                        <img src="/Template/assets/images/recipe-img/recipe-another-img2.jpg" alt="Images">
-                    </a>
-                    <div class="content">
-                        <h3><a href="recipe-details.html">Delicious Steak Tohma</a></h3>
-                        <div class="rating">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
+            }
+            else
+            {
+                foreach (var recipe in Model)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="recent-recipe-item">
+                            <a href="recipe-details.html">
+                                @if (!string.IsNullOrEmpty(recipe.recipe_image))
+                                {
+                                    var imagePaths = recipe.recipe_image.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                    var firstImagePath = Url.Content(imagePaths[0]);
+                                    <img src="@firstImagePath" alt="Blog Images" style="border-radius:15px;">
+                                }
+                            </a>
+                            <div class="content">
+                                <h3><a href="recipe-details.html">@recipe.recipe_name</a></h3>
+                                <div class="rating">
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                </div>
+                                <p>@(recipe.recipe_description.Length > 300 ? recipe.recipe_description.Substring(0, 300) + "..." : recipe.recipe_description)</p>
+                            </div>
                         </div>
-                        <p> a slice of meat (usually beef) that's removed from an animal's carcass and cuts across, or perpendicular, to the direction of the muscle fibers.</p>
-                        <ul>
-                            <li>
-                                <img src="/Template/assets/images/recipe-img/recipe-user2.jpg" alt="Images">
-                            </li>
-                            <li><a href="author.html">By Oliva</a></li>
-                        </ul>
                     </div>
+                }
+
+        <div class="col-lg-12 text-center">
+            @if (ViewBag.MembershipPlanId == 1)
+            {
+                <div class="thecontainer">
+                    <p><span style="font-weight: 800;">Note: </span>Upgrade To Premium Plan To View More Recipes.</p>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="recent-recipe-item">
-                    <a href="recipe-details.html">
-                        <img src="/Template/assets/images/recipe-img/recipe-another-img3.jpg" alt="Images">
-                    </a>
-                    <div class="content">
-                        <h3><a href="recipe-details.html">Spanish Dishes</a></h3>
-                        <div class="rating">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                        </div>
-                        <p> Paella Valenciana. Paella is perhaps the most famous Spanish dish of all,Patatas bravas,Gazpacho,Pimientos de Padron</p>
-                        <ul>
-                            <li>
-                                <img src="/Template/assets/images/recipe-img/recipe-user3.jpg" alt="Images">
-                            </li>
-                            <li><a href="author.html">By Willam</a></li>
-                        </ul>
-                    </div>
+            }
+            else if (ViewBag.MembershipPlanId == 2)
+            {
+                <div class="thecontainer">
+                    <p><span style="font-weight: 800;">Note: </span>You're Using Premium Plan Enjoy All Exclusive Recipes.</p>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="recent-recipe-item">
-                    <a href="recipe-details.html">
-                        <img src="/Template/assets/images/recipe-img/recipe-another-img4.jpg" alt="Images">
-                    </a>
-                    <div class="content">
-                        <h3><a href="recipe-details.html">Delicious Beef Stack</a></h3>
-                        <div class="rating">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                        </div>
-                        <p>A steak is a thick cut of meat generally sliced across the muscle fibers, sometimes including a bone. </p>
-                        <ul>
-                            <li>
-                                <img src="/Template/assets/images/recipe-img/recipe-user4.jpg" alt="Images">
-                            </li>
-                            <li><a href="author.html">By Henrry</a></li>
-                        </ul>
-                    </div>
+            }
+            else
+            {
+                <div class="thecontainer">
+                    <p><span style="font-weight: 800;">Note: </span>Sign Up For A Membership Plan To Unlock More Recipes.</p>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="recent-recipe-item">
-                    <a href="recipe-details.html">
-                        <img src="/Template/assets/images/recipe-img/recipe-another-img5.jpg" alt="Images">
-                    </a>
-                    <div class="content">
-                        <h3><a href="recipe-details.html">Backed Egg with Simon</a></h3>
-                        <div class="rating">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                        </div>
-                        <p> Shirred eggs, also known as baked eggs, are eggs that have been baked in a flat-bottomed dish; the name originates from the type of dish in which it was traditionally baked. </p>
-                        <ul>
-                            <li>
-                                <img src="/Template/assets/images/recipe-img/recipe-user5.jpg" alt="Images">
-                            </li>
-                            <li><a href="author.html">By Emma</a></li>
-                        </ul>
-                    </div>
+            }
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="recent-recipe-item">
-                    <a href="recipe-details.html">
-                        <img src="/Template/assets/images/recipe-img/recipe-another-img6.jpg" alt="Images">
-                    </a>
-                    <div class="content">
-                        <h3><a href="recipe-details.html">Beef Spicy Tandori Masala</a></h3>
-                        <div class="rating">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                        </div>
-                        <p>Combine coriander, cumin, garlic powder, ginger, cloves, mace, fenugreek, cinnamon, black pepper, cardamom, and nutmeg together in a bowl; store in an airtight container.</p>
-                        <ul>
-                            <li>
-                                <img src="/Template/assets/images/recipe-img/recipe-user9.jpg" alt="Images">
-                            </li>
-                            <li><a href="author.html">By Jon Ray</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>
-
 
 <div class="recipe-video-area pt-100 pb-70">
     <div class="container">
@@ -292,6 +220,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-6 col-md-6">
                         <div class="recipe-video-list">
                             <a href="https://www.youtube.com/watch?v=yz0r0huhKeI" class="btn-play">

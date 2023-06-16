@@ -82,15 +82,6 @@
         .dropdown-toggle[aria-expanded="true"]::after {
             transform: rotate(180deg);
         }
-
-        .dropdown-menu {
-            background: white;
-            border: none;
-            padding: 13px;
-            box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-            border-radius: 8px;
-            height: 90px;
-        }
     </style>
 </head>
 <nav id="navbar-example2" class="navbar navbar-light d-flex justify-content-center">
@@ -106,7 +97,7 @@
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle thenav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">Recipes</a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" style="background: white; border: none; padding: 13px; box-shadow: rgba(17, 12, 46, 0.2) 0px 48px 100px 0px; border-radius: 8px; height: 90px;">
                 <li><a class="dropdown-item" href="@Url.Action("Recipe_Add")">Add Recipe</a></li>
                 <li><a class="dropdown-item" href="@Url.Action("ViewAllRecipes")">View Recipes</a></li>
             </ul>
