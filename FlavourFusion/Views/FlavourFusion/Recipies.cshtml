@@ -1,7 +1,10 @@
-﻿<style>
+﻿@model List<FlavourFusion.Models.Tbl_Recipe>
+
+<style>
     .recent-recipe-area {
         background: none;
     }
+
     .thecontainer {
         padding: 15px;
         background-color: white;
@@ -33,71 +36,82 @@
 <div class="recent-recipe-area pt-100 pb-70">
     <div class="container">
         <div class="section-title text-center">
-            <span>Recent Recipe</span>
-            <h2>Our Latest Recipe</h2>
+            <span>Best Recipe</span>
+            <h2>Our Recipes</h2>
         </div>
     </div>
     <div class="container">
         <div class="row pt-45 justify-content-center">
-            @if (ViewBag.ShowLoginMessage)
-            {
-                <div class="col-lg-12 text-center">
-                    <p style="font-weight: 500; font-size: 21px;">Please <a href="@Url.Action("Login","FlavourFusion")">Login</a> To View Recipes.</p>
-                </div>
-            }
-            else
-            {
-                foreach (var recipe in Model)
+            <div class="col-lg-12 text-center">
+                @if (ViewBag.ShowLoginMessage)
                 {
-                    <div class="col-lg-4 col-md-6">
-                        <div class="recent-recipe-item">
-                            <a href="recipe-details.html">
-                                @if (!string.IsNullOrEmpty(recipe.recipe_image))
-                                {
-                                    var imagePaths = recipe.recipe_image.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                                    var firstImagePath = Url.Content(imagePaths[0]);
-                                    <img src="@firstImagePath" alt="Blog Images" style="border-radius:15px;">
-                                }
-                            </a>
-                            <div class="content">
-                                <h3><a href="recipe-details.html">@recipe.recipe_name</a></h3>
-                                <div class="rating">
-                                    <i class='bx bxs-star'></i>
-                                    <i class='bx bxs-star'></i>
-                                    <i class='bx bxs-star'></i>
-                                    <i class='bx bxs-star'></i>
-                                    <i class='bx bxs-star'></i>
+                    <p style="font-weight: 500; font-size: 21px;">Please <a href="@Url.Action("Login","FlavourFusion")">Login</a> To View Recipes.</p>
+                }
+                else
+                {
+                    <div class="row">
+                        @if (Model.Count > 0)
+                        {
+                            foreach (var recipe in Model)
+                            {
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="recent-recipe-item">
+                                        <a href="recipe-details.html">
+                                            @if (!string.IsNullOrEmpty(recipe.recipe_image))
+                                            {
+                                                var imagePaths = recipe.recipe_image.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                                var firstImagePath = Url.Content(imagePaths[0]);
+                                                <img src="@firstImagePath" alt="Blog Images" style="border-radius:15px;">
+                                            }
+                                        </a>
+                                        <div class="content">
+                                            <h3><a href="recipe-details.html">@recipe.recipe_name</a></h3>
+                                            <div class="rating">
+                                                <i class='bx bxs-star'></i>
+                                                <i class='bx bxs-star'></i>
+                                                <i class='bx bxs-star'></i>
+                                                <i class='bx bxs-star'></i>
+                                                <i class='bx bxs-star'></i>
+                                            </div>
+                                            <p>@(recipe.recipe_description.Length > 300 ? recipe.recipe_description.Substring(0, 300) + "..." : recipe.recipe_description)</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p>@(recipe.recipe_description.Length > 300 ? recipe.recipe_description.Substring(0, 300) + "..." : recipe.recipe_description)</p>
+                            }
+                        }
+                        else
+                        {
+                            <div class="col-lg-12">
+                                <div class="thecontainer">
+                                    <p><span style="font-weight: 800;">Note: </span>No recipes found for this category.</p>
+                                </div>
                             </div>
+                        }
+                    </div>
+
+                    <div class="col-lg-12 text-center">
+                        <div class="thecontainer">
+                            @if (ViewBag.MembershipPlanId == 1)
+                            {
+                                <p><span style="font-weight: 800;">Note: </span>Upgrade To Premium Plan To View More Recipes.</p>
+                            }
+                            else if (ViewBag.MembershipPlanId == 2)
+                            {
+                                <p><span style="font-weight: 800;">Note: </span>You're Using Premium Plan Enjoy All Exclusive Recipes.</p>
+                            }
+                            else
+                            {
+                                <p><span style="font-weight: 800;">Note: </span>Sign Up For A Membership Plan To Unlock More Recipes.</p>
+                            }
                         </div>
                     </div>
                 }
-
-        <div class="col-lg-12 text-center">
-            @if (ViewBag.MembershipPlanId == 1)
-            {
-                <div class="thecontainer">
-                    <p><span style="font-weight: 800;">Note: </span>Upgrade To Premium Plan To View More Recipes.</p>
-                </div>
-            }
-            else if (ViewBag.MembershipPlanId == 2)
-            {
-                <div class="thecontainer">
-                    <p><span style="font-weight: 800;">Note: </span>You're Using Premium Plan Enjoy All Exclusive Recipes.</p>
-                </div>
-            }
-            else
-            {
-                <div class="thecontainer">
-                    <p><span style="font-weight: 800;">Note: </span>Sign Up For A Membership Plan To Unlock More Recipes.</p>
-                </div>
-            }
-                </div>
-            }
+            </div>
         </div>
     </div>
 </div>
+
+
 
 <div class="recipe-video-area pt-100 pb-70">
     <div class="container">
@@ -106,10 +120,11 @@
             <h2> Most Popular Recipe Video</h2>
         </div>
         <div class="row pt-45">
-            <div class="col-lg-6">
+
+            <div class="col-lg-12">
                 <div class="recipe-video-card">
                     <a href="https://www.youtube.com/watch?v=yz0r0huhKeI" class="btn-play">
-                        <img src="/Template/assets/images/recipe-img/recipe-style1.jpg" alt="Images">
+                        <img src="/Template/assets/images/recipe-img/the-recipe-style1.png" alt="Images">
                     </a>
                     <div class="content">
                         <h3><a href="recipe-details.html">Vegetable with Tomato Salad</a></h3>
@@ -120,8 +135,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+
+            <div class="col-lg-12">
                 <div class="row">
+
                     <div class="col-lg-6 col-md-6">
                         <div class="recipe-video-list">
                             <a href="https://www.youtube.com/watch?v=yz0r0huhKeI" class="btn-play">
@@ -136,6 +153,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-6 col-md-6">
                         <div class="recipe-video-list">
                             <a href="https://www.youtube.com/watch?v=yz0r0huhKeI" class="btn-play">
@@ -150,6 +168,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-6 col-md-6">
                         <div class="recipe-video-list">
                             <a href="https://www.youtube.com/watch?v=yz0r0huhKeI" class="btn-play">
@@ -164,6 +183,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-6 col-md-6">
                         <div class="recipe-video-list">
                             <a href="https://www.youtube.com/watch?v=yz0r0huhKeI" class="btn-play">
@@ -178,6 +198,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-6 col-md-6">
                         <div class="recipe-video-list">
                             <a href="https://www.youtube.com/watch?v=yz0r0huhKeI" class="btn-play">
@@ -192,6 +213,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-6 col-md-6">
                         <div class="recipe-video-list">
                             <a href="https://www.youtube.com/watch?v=yz0r0huhKeI" class="btn-play">
@@ -206,6 +228,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-6 col-md-6">
                         <div class="recipe-video-list">
                             <a href="https://www.youtube.com/watch?v=yz0r0huhKeI" class="btn-play">
@@ -235,6 +258,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

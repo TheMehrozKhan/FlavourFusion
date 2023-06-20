@@ -1,0 +1,104 @@
+﻿﻿@using PagedList.Mvc
+@model PagedList.IPagedList<FlavourFusion.Models.Tbl_Recipe_Category>
+<head>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        h4 {
+            font-size: 30px;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .thecard {
+            box-shadow: rgba(149, 157, 165, 0.1) 0px 2px 20px;
+            border-color: white;
+            transition: 0.2s;
+            margin-bottom: 40px;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 12px;
+            flex: 0 0 calc(25% - 20px);
+        }
+
+            .thecard:hover {
+                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            }
+
+
+        #thefirstlink {
+            color: black;
+            background-color: white;
+            border: none;
+        }
+
+            #thefirstlink:hover {
+                background-color: rgb(255, 132, 0);
+                color: white;
+                border-color: white;
+            }
+    </style>
+</head>
+<main>
+    <div class="container">
+        <div class="text-center">
+            <h1 style="margin-bottom:34px;margin-top:5px;">Choose Your Category<span style="position:relative;bottom:3px;"><img src="/Template/assets/images/emoji/smileface.png" height="50" width="50" /></span> </h1>
+        </div>
+        @{
+            var categoryList = new SelectList(Model, "category_id", "category_name");
+        }
+
+        @using (Html.BeginForm("Recipies", "FlavourFusion", FormMethod.Post))
+        {
+            <div class="text-center" style="margin-top:30px;margin-bottom:30px;">
+                <div class="dropdown" style="display: inline-block; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; border-radius: 8px;">
+                    @Html.DropDownList("id", categoryList, "Select a category", new { @class = "form-control", @style = "border-color:white;height:40px;" })
+                </div>
+                <button type="submit" class="btn btn-primary" style="background-color: rgb(255, 132, 0); border-color:white;">Go</button>
+            </div>
+        }
+
+        <div class="row">
+            @if (Model != null)
+            {
+
+                foreach (var item in Model)
+                {
+                    <div class="col-lg-3 col-md-6 col-6 thecard">
+                        <a class="hover-switch" href="@Url.Action("DisplayAdd", "User", new { id = item.category_id })">
+                            <img class="primary-img rounded-3" src="@Url.Content(item.category_image)" alt="product-img">
+                        </a>
+                        <h3 class="text-center" style="margin-top:15px;">
+                            <a href="#">@Html.ActionLink(item.category_name, "DisplayAdd", new { id = item.category_id }, new { style = "text-decoration:none;color:#001629;" })</a>
+                        </h3>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</main>
+<nav style="margin-top: 50px;">
+    <ul class="pagination pagination-md justify-content-center">
+        <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+            <a class="page-link" href="@Url.Action("CategoryPage", new { page = Model.PageNumber - 1 })" id="thefirstlink">Previous</a>
+        </li>
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            <li class="page-item @(Model.PageNumber == i ? "active" : "")" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+                <a class="page-link" href="@Url.Action("CategoryPage", new { page = i })" id="thefirstlink">@i</a>
+            </li>
+        }
+        <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+            <a class="page-link" href="@Url.Action("CategoryPage", new { page = Model.PageNumber + 1 })" id="thefirstlink">Next</a>
+        </li>
+    </ul>
+</nav>

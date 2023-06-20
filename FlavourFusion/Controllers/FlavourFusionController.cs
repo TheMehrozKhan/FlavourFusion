@@ -13,14 +13,34 @@ namespace FlavourFusion.Controllers
     public class FlavourFusionController : Controller
     {
         FlavourFusionEntities2 db = new FlavourFusionEntities2();
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var latestRecipes = db.Tbl_Recipe.OrderByDescending(x => x.recipe_id).Take(4).ToList();
+            var latestRecipes = db.Tbl_Recipe.OrderByDescending(x => x.recipe_id).ToList();
+            var categories = db.Tbl_Recipe_Category.ToList();
 
-            return View(latestRecipes);
+            var viewModel = new IndexViewModel
+            {
+                Recipes = latestRecipes,
+                Categories = categories
+            };
+
+            return View(viewModel);
         }
 
-        public ActionResult Recipies()
+        public ActionResult CategoryPage(int? page)
+        {
+            int pageSize = 8;
+            int pageIndex = 1;
+
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+
+            var list = db.Tbl_Recipe_Category.Where(x => x.category_status == 1).OrderByDescending(x => x.category_id).ToList();
+            IPagedList<Tbl_Recipe_Category> cateList = list.ToPagedList(pageIndex, pageSize);
+
+            return View(cateList);
+        }
+
+        public ActionResult Recipies(int? id, int? page, string search)
         {
             List<Tbl_Recipe> recipes;
 
@@ -34,22 +54,22 @@ namespace FlavourFusion.Controllers
                 // Fetch recipes based on the membership plan
                 if (membershipPlanId == 1) // Standard plan
                 {
-                    recipes = db.Tbl_Recipe.OrderByDescending(x => x.recipe_id).Take(20).ToList();
+                    recipes = db.Tbl_Recipe.Where(r => r.FK_Category_Recipe == id).OrderByDescending(x => x.recipe_id).Take(20).ToList();
                 }
                 else if (membershipPlanId == 2) // Premium plan
                 {
-                    recipes = db.Tbl_Recipe.OrderByDescending(x => x.recipe_id).ToList();
+                    recipes = db.Tbl_Recipe.Where(r => r.FK_Category_Recipe == id).OrderByDescending(x => x.recipe_id).ToList();
                 }
                 else // Free plan or unknown plan
                 {
-                    recipes = db.Tbl_Recipe.OrderByDescending(x => x.recipe_id).Take(3).ToList();
+                    recipes = db.Tbl_Recipe.Where(r => r.FK_Category_Recipe == id).OrderByDescending(x => x.recipe_id).Take(3).ToList();
                 }
 
                 ViewBag.MembershipPlanId = membershipPlanId;
             }
             else // User is not logged in
             {
-                recipes = db.Tbl_Recipe.OrderByDescending(x => x.recipe_id).Take(3).ToList();
+                recipes = db.Tbl_Recipe.Where(r => r.FK_Category_Recipe == id).OrderByDescending(x => x.recipe_id).Take(3).ToList();
                 ViewBag.MembershipPlanId = 0; // Assuming free plan for non-logged in users
             }
 
@@ -57,8 +77,6 @@ namespace FlavourFusion.Controllers
 
             return View(recipes);
         }
-
-
 
         public ActionResult Pricing()
         {

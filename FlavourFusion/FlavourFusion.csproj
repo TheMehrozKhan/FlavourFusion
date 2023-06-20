@@ -142,6 +142,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -435,6 +436,7 @@
     <Content Include="Views\Admin\RegisteredUser.cshtml" />
     <Content Include="Views\Admin\Recipe_Add.cshtml" />
     <Content Include="Views\Admin\DeleteRecipe.cshtml" />
+    <Content Include="Views\FlavourFusion\CategoryPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

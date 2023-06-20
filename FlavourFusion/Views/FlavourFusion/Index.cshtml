@@ -1,4 +1,5 @@
-﻿<head>
+﻿@model FlavourFusion.Models.IndexViewModel
+<head>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -42,7 +43,7 @@
 
         /*.banner-slider .owl-dots {
             top: 370px;*/ /* Adjust the position of the dots */
-            /*display: flex;
+        /*display: flex;
             justify-content: center;
             align-items: center;
         }
@@ -160,87 +161,6 @@
         <img src="/Template/assets/images/shape/shape2.png" alt="Banner Images">
     </div>
 </div>
-
-
-
-
-@*<div class="banner-slider-area">
-        <div class="banner-slider owl-carousel owl-theme">
-            <div class="banner-item">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="banner-item-content">
-                                <h1>Explore Global Delights</h1>
-                                <p>
-                                    Embark on a culinary adventure as we take you on a tantalizing journey across continents, showcasing the rich and diverse flavors of global cuisines.
-                                </p>
-                                <div class="banner-btn">
-                                    <a href="@Url.Action("AboutUs","FlavourFusion")" class="default-btn">Learn More</a>
-                                    <a href="@Url.Action("Contact","FlavourFusion")" class="default-btn two">Contact Us</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 pe-0">
-                            <div class="banner-item-img">
-                                <img src="/Template/assets/images/home-two/the-home-two-img1.png" alt="Banner Images">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="banner-item">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="banner-item-content">
-                                <h1>Master Chef Secrets</h1>
-                                <p>
-                                    Unlock the culinary secrets of renowned master chefs as they share their expert tips, techniques, and signature recipes to help you elevate your cooking skills to new heights.
-                                </p>
-                                <div class="banner-btn">
-                                    <a href="@Url.Action("AboutUs","FlavourFusion")" class="default-btn">Learn More</a>
-                                    <a href="@Url.Action("Contact","FlavourFusion")" class="default-btn two">Contact Us</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 pe-0">
-                            <div class="banner-item-img">
-                                <img src="/Template/assets/images/home-two/the-home-two-img2.png" alt="Banner Images">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="banner-item">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="banner-item-content">
-                                <h1>Seasonal Sensations</h1>
-                                <p>
-                                    Celebrate the beauty of each season with our collection of seasonal recipes, using the freshest ingredients to create mouthwatering dishes that capture the essence of nature's bounty.
-                                </p>
-                                <div class="banner-btn">
-                                    <a href="@Url.Action("AboutUs","FlavourFusion")" class="default-btn">Learn More</a>
-                                    <a href="@Url.Action("Contact","FlavourFusion")" class="default-btn two">Contact Us</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 pe-0">
-                            <div class="banner-item-img">
-                                <img src="/Template/assets/images/home-two/the-home-two-img3.png" alt="Banner Images">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="banner-shape-two">
-            <img src="/Template/assets/images/shape/shape1.png" alt="Banner Images" height="30" width="30">
-            <img src="/Template/assets/images/shape/shape2.png" alt="Banner Images">
-        </div>
-    </div>*@
 
 <div class="banner-bottom-area pt-100 pb-70">
     <div class="container">
@@ -606,6 +526,136 @@
     </div>
 </div>
 
+<div class="about-area pt-100 pb-70">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="about-content">
+                    <div class="section-title">
+                        <span>About Us</span>
+                        <h2>Change Your Life in the next 90 Days of <b>Practice</b></h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.
+                        </p>
+                    </div>
+                    <h3>Nutrition Special Features</h3>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="about-list">
+                                <ul>
+                                    <li><i class="bx bx-chevrons-right"></i> Nutrient Requirements</li>
+                                    <li><i class="bx bx-chevrons-right"></i> Glyceraldehyde Load</li>
+                                    <li><i class="bx bx-chevrons-right"></i> Ways to Follow Diet</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="about-list">
+                                <ul>
+                                    <li><i class="bx bx-chevrons-right"></i> Medicinal Circumstances</li>
+                                    <li><i class="bx bx-chevrons-right"></i> Glyceraldehyde Load</li>
+                                    <li><i class="bx bx-chevrons-right"></i> A Nutrition Lifestyle</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about-play-btn">
+                    <a href="https://www.youtube.com/watch?v=Zd00oIDAt60" class="play-btn">
+                        <i class="bx bxs-right-arrow"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="about-shape">
+        <img src="/Template/assets/images/about/about-bg-shape.png" alt="About Images">
+        <img src="/Template/assets/images/shape/shape1.png" alt="About Images">
+        <img src="/Template/assets/images/shape/shape2.png" alt="About Images">
+        <img src="/Template/assets/images/shape/shape3.png" alt="About Images">
+    </div>
+</div>
+
+<style>
+    .thecontainer {
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        margin-top: 40px;
+        background-color: white;
+        box-shadow: rgba(17, 12, 46, 0.04) 0px 48px 100px 0px;
+        height: 60px;
+        margin-bottom: 50px;
+        border-radius: 8px;
+        border: 0.1px solid rgb(255, 132, 0);
+        width: 550px;
+    }
+    .category-list {
+        text-align: center;
+        align-items: center;
+        list-style: none;
+        margin-top: 50px;
+        padding: 0;
+    }
+
+        .category-list li {
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 8px;
+            padding: 8px;
+            background: white;
+            transition: 0.4s;
+        }
+
+            .category-list li a {
+                font-size:22px;
+                color: black;
+                text-decoration: none;
+                transition: 0.2s;
+                font-weight:500;
+            }
+
+                .category-list li a:hover{
+                    color:white;
+                }
+
+            .category-list li:hover {
+                border-radius: 5px;
+                padding: 10px;
+                color: white;
+                background: rgb(255, 132, 0);
+                box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+            }
+
+</style>
+
+
+<div class="diet-plan-area pt-100 pb-70">
+    <div class="container">
+        <div class="section-title text-center">
+            <span>Recipe Categories</span>
+            <h2>Our Best Categories</h2>
+        </div>
+        <div class="tab diet-tab pt-45">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="category-list">
+                        @foreach (var category in Model.Categories)
+                        {
+                            <li>
+                                @Html.ActionLink(category.category_name, "Recipies", "FlavourFusion", new { id = category.category_id }, new { @class = "category-link active" })
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -754,9 +804,9 @@
         </div>
         <div class="row pt-45">
             <div class="col-lg-6">
-                @if (Model.Count > 0)
+                @if (Model.Recipes.Count > 0)
                 {
-                    var recipe = Model[0];
+                    var recipe = Model.Recipes[0];
                     <div class="blog-card">
                         <div class="blog-img">
                             @if (!string.IsNullOrEmpty(recipe.recipe_image))
@@ -778,11 +828,11 @@
             </div>
             <div class="col-lg-6">
                 <div class="row">
-                    @if (Model.Count > 1)
+                    @if (Model.Recipes.Count > 1)
                     {
-                        for (int i = 1; i < Model.Count && i <= 2; i++)
+                        for (int i = 1; i < Model.Recipes.Count && i <= 2; i++)
                         {
-                            var recipe = Model[i];
+                            var recipe = Model.Recipes[i];
                             <div class="col-lg-12" style="margin-top:50px;">
                                 <div class="blog-side-content">
                                     @if (!string.IsNullOrEmpty(recipe.recipe_image))
