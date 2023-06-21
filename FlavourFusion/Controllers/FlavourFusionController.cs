@@ -73,9 +73,77 @@ namespace FlavourFusion.Controllers
                 ViewBag.MembershipPlanId = 0; // Assuming free plan for non-logged in users
             }
 
+            var categoryName = string.Empty;
+            if (id != null)
+            {
+                var category = db.Tbl_Recipe_Category.SingleOrDefault(c => c.category_id == id);
+                if (category != null)
+                {
+                    categoryName = category.category_name;
+                }
+            }
+
+            ViewBag.CategoryName = categoryName;
             ViewBag.ShowLoginMessage = Session["u_id"] == null;
 
             return View(recipes);
+        }
+
+        public ActionResult Search(int? id, int? page, string searchTerm)
+        {
+            int pageSize = 6;
+            int pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+
+            List<Tbl_Recipe> productList;
+
+            // Check if the user is logged in and get their membership plan
+            if (Session["u_id"] != null)
+            {
+                int userId = Convert.ToInt32(Session["u_id"]);
+                Tbl_Users user = db.Tbl_Users.Find(userId);
+                int membershipPlanId = user?.Tbl_Subscriptions.FirstOrDefault()?.Tbl_Membership_Plans?.plan_id ?? 0;
+
+                // Fetch recipes based on the membership plan and search term
+                var query = db.Tbl_Recipe.Where(r => r.recipe_name.ToLower().Contains(searchTerm.ToLower()) || r.recipe_description.ToLower().Contains(searchTerm.ToLower()));
+
+                if (id.HasValue)
+                {
+                    query = query.Where(r => r.FK_Category_Recipe == id);
+                }
+
+                if (membershipPlanId == 1) // Standard plan
+                {
+                    productList = query.OrderByDescending(x => x.recipe_id).Take(20).ToList();
+                }
+                else if (membershipPlanId == 2) // Premium plan
+                {
+                    productList = query.OrderByDescending(x => x.recipe_id).ToList();
+                }
+                else // Free plan or unknown plan
+                {
+                    productList = query.OrderByDescending(x => x.recipe_id).Take(3).ToList();
+                }
+            }
+            else // User is not logged in
+            {
+                var query = db.Tbl_Recipe.Where(r => r.recipe_name.ToLower().Contains(searchTerm.ToLower()) || r.recipe_description.ToLower().Contains(searchTerm.ToLower()));
+
+                if (id.HasValue)
+                {
+                    query = query.Where(r => r.FK_Category_Recipe == id);
+                }
+
+                productList = query.OrderByDescending(x => x.recipe_id).Take(3).ToList();
+            }
+
+            IPagedList<Tbl_Recipe> pro = productList.ToPagedList(pageIndex, pageSize);
+
+            int totalProductsFound = productList.Count;
+            ViewBag.TotalProductsFound = totalProductsFound;
+            ViewBag.ShowLoginMessage = Session["u_id"] == null;
+            ViewBag.SearchTerm = searchTerm;
+
+            return View(pro);
         }
 
         public ActionResult Pricing()

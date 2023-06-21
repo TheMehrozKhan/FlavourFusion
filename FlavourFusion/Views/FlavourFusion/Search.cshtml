@@ -1,0 +1,122 @@
+﻿﻿@using PagedList.Mvc
+@model PagedList.IPagedList<FlavourFusion.Models.Tbl_Recipe>
+@{
+    var searchTerm = ViewBag.SearchTerm as string;
+    var categoryName = ViewData["CategoryName"] as string;
+}
+<style>
+    .recent-recipe-area {
+        background: none;
+    }
+
+    .thecontainer {
+        padding: 15px;
+        background-color: white;
+        height: 60px;
+        border-radius: 8px;
+        border: 0.1px solid rgb(255, 132, 0);
+        width: 550px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+<div class="inner-banner inner-bg5">
+    <div class="container">
+        <div class="inner-title text-center">
+            <h3>Recipe</h3>
+            <ul>
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>Recipe</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="recent-recipe-area pt-100 pb-70">
+    <div class="container">
+        <div class="section-title text-center">
+            @if (!string.IsNullOrEmpty(searchTerm))
+            {
+                <h2>Search results for: @searchTerm</h2>
+            }
+            else
+            {
+                <h2>The Recipes</h2>
+            }
+        </div>
+    </div>
+    <div class="container">
+        <div class="row pt-45 justify-content-center">
+            <div class="col-lg-12 text-center">
+                @if (ViewBag.ShowLoginMessage)
+                {
+                    <p style="font-weight: 500; font-size: 21px;">Please <a href="@Url.Action("Login","FlavourFusion")">Login</a> To View Recipes.</p>
+                }
+                else
+                {
+                    <div class="row">
+                        @if (Model.Count > 0)
+                        {
+                            foreach (var recipe in Model)
+                            {
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="recent-recipe-item">
+                                        <a href="recipe-details.html">
+                                            @if (!string.IsNullOrEmpty(recipe.recipe_image))
+                                            {
+                                                var imagePaths = recipe.recipe_image.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                                var firstImagePath = Url.Content(imagePaths[0]);
+                                                <img src="@firstImagePath" alt="Blog Images" style="border-radius:15px;">
+                                            }
+                                        </a>
+                                        <div class="content">
+                                            <h3><a href="recipe-details.html">@recipe.recipe_name</a></h3>
+                                            <div class="rating">
+                                                <i class='bx bxs-star'></i>
+                                                <i class='bx bxs-star'></i>
+                                                <i class='bx bxs-star'></i>
+                                                <i class='bx bxs-star'></i>
+                                                <i class='bx bxs-star'></i>
+                                            </div>
+                                            <p>@(recipe.recipe_description.Length > 300 ? recipe.recipe_description.Substring(0, 300) + "..." : recipe.recipe_description)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="col-lg-12">
+                                <div class="thecontainer">
+                                    <p><span style="font-weight: 800;">Note: </span>No recipes found for this category.</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="col-lg-12 text-center">
+                        <div class="thecontainer">
+                            @if (ViewBag.MembershipPlanId == 1)
+                            {
+                                <p><span style="font-weight: 800;">Note: </span>Upgrade To Premium Plan To View More Recipes.</p>
+                            }
+                            else if (ViewBag.MembershipPlanId == 2)
+                            {
+                                <p><span style="font-weight: 800;">Note: </span>You're Using Premium Plan Enjoy All Exclusive Recipes.</p>
+                            }
+                            else
+                            {
+                                <p><span style="font-weight: 800;">Note: </span>Sign Up For A Membership Plan To Unlock More Recipes.</p>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

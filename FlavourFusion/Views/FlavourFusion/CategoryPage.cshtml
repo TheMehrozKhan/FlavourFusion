@@ -78,7 +78,9 @@
                             <img class="primary-img rounded-3" src="@Url.Content(item.category_image)" alt="product-img">
                         </a>
                         <h3 class="text-center" style="margin-top:15px;">
-                            <a href="#">@Html.ActionLink(item.category_name, "DisplayAdd", new { id = item.category_id }, new { style = "text-decoration:none;color:#001629;" })</a>
+                            <a href="#">
+                                @Html.ActionLink(item.category_name, "Recipies", "FlavourFusion", new { id = item.category_id }, new { @style = "text-decoration:none;color:black;" })
+                            </a>
                         </h3>
                     </div>
                 }

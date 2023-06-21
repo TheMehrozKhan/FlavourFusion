@@ -1,5 +1,7 @@
 ﻿@model List<FlavourFusion.Models.Tbl_Recipe>
-
+@{
+    var categoryName = ViewData["CategoryName"] as string;
+}
 <style>
     .recent-recipe-area {
         background: none;
@@ -36,9 +38,16 @@
 <div class="recent-recipe-area pt-100 pb-70">
     <div class="container">
         <div class="section-title text-center">
-            <span>Best Recipe</span>
-            <h2>Our Recipes</h2>
-        </div>
+            @if (categoryName != null)
+            {
+                <span>Best Recipes in @categoryName </span>
+                <h2>Our @categoryName Recipes</h2>
+            }
+            else
+            {
+                <h2>The Recipes</h2>
+            }
+            </div>
     </div>
     <div class="container">
         <div class="row pt-45 justify-content-center">

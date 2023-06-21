@@ -15,27 +15,14 @@
             box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
         }
 
-        .banner-item-video {
-            position: relative;
+        .banner-item theimg {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 100%;
             height: 100vh;
         }
 
-            .banner-item-video video {
-                border-top-left-radius: 23px;
-                border-top-right-radius: 23px;
-                border-bottom-left-radius: 23px;
-                border-bottom-right-radius: 23px;
-                padding-left: 10px;
-                padding-right: 10px;
-                padding-bottom: 10px;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                margin-bottom: 20px; /* Adjust the margin-bottom value as desired */
-            }
 
         .banner-slider .owl-dots {
             display: none;
@@ -82,9 +69,14 @@
     </script>
 }
 
-<div class="banner-slider-area">
+<div class="banner-slider-area" style="position:relative;bottom:35px;">
     <div class="banner-slider owl-carousel owl-theme">
         <div class="banner-item">
+        <div class="row align-items-center">
+                <img src="/Template/assets/images/home-two/the1.gif" alt="Banner Images" class="theimg">
+        </div>
+        </div>
+        @*<div class="banner-item">
             <div class="banner-item-video">
                 <video autoplay loop muted playsinline>
                     <source src="~/Template/assets/videos/banner/TheBannerVideo.mp4" type="video/mp4">
@@ -107,7 +99,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
         <!-- Add other banner items here -->
         <div class="banner-item">
             <div class="container">
@@ -246,7 +238,7 @@
 <div class="team-area pb-70">
     <div class="container">
         <div class="section-title text-center">
-            <span>Our Popular Nutritionist</span>
+            <span>Our Team</span>
             <h2>Our Technical Team</h2>
         </div>
         <div class="row pt-45 justify-content-center">
@@ -254,11 +246,11 @@
                 <div class="team-card active">
                     <div class="team-img">
                         <a href="team.html">
-                            <img src="/Template/assets/images/team/team-img1.jpg" alt="Team Images">
+                            <img src="/Template/assets/images/team/team-img1.png" alt="Team Images">
                         </a>
                     </div>
                     <div class="content">
-                        <h3><a href="team.html">Mehroz Khan</a></h3>
+                        <h3><a href="#">Mehroz Khan</a></h3>
                         <span>Full Stack Developer</span>
                         <ul class="team-social">
                             <li>
@@ -291,12 +283,12 @@
             <div class="col-lg-3 col-sm-2">
                 <div class="team-card active">
                     <div class="team-img">
-                        <a href="team.html">
+                        <a href="#">
                             <img src="/Template/assets/images/team/team-img3.jpg" alt="Team Images">
                         </a>
                     </div>
                     <div class="content">
-                        <h3><a href="team.html">Ahsan Ashraf</a></h3>
+                        <h3><a href="#">Ahsan Ashraf</a></h3>
                         <span>Web Developer</span>
                         <ul class="team-social">
                             <li>
@@ -327,12 +319,12 @@
             <div class="col-lg-3 col-sm-2">
                 <div class="team-card active">
                     <div class="team-img">
-                        <a href="team.html">
+                        <a href="#">
                             <img src="/Template/assets/images/team/team-img4.jpg" alt="Team Images">
                         </a>
                     </div>
                     <div class="content">
-                        <h3><a href="team.html">Abdul Sami</a></h3>
+                        <h3><a href="#">Abdul Sami</a></h3>
                         <span>Web Developer</span>
                         <ul class="team-social">
                             <li>
@@ -363,12 +355,12 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="team-card active">
                     <div class="team-img">
-                        <a href="team.html">
+                        <a href="#">
                             <img src="/Template/assets/images/team/team-img4.jpg" alt="Team Images">
                         </a>
                     </div>
                     <div class="content">
-                        <h3><a href="team.html">Saad Arif</a></h3>
+                        <h3><a href="#">Saad Arif</a></h3>
                         <span>Full Stack Web Developer</span>
                         <ul class="team-social">
                             <li>
@@ -399,12 +391,12 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="team-card active">
                     <div class="team-img">
-                        <a href="team.html">
+                        <a href="#">
                             <img src="/Template/assets/images/team/team-img2.jpg" alt="Team Images">
                         </a>
                     </div>
                     <div class="content">
-                        <h3><a href="team.html">Taha Kashif</a></h3>
+                        <h3><a href="#">Taha Kashif</a></h3>
                         <span>Data Analysis & Database Management </span>
                         <ul class="team-social">
                             <li>
@@ -435,12 +427,12 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="team-card active">
                     <div class="team-img">
-                        <a href="team.html">
+                        <a href="#">
                             <img src="/Template/assets/images/team/team-img3.jpg" alt="Team Images">
                         </a>
                     </div>
                     <div class="content">
-                        <h3><a href="team.html">Ameen Ansari</a></h3>
+                        <h3><a href="#">Ameen Ansari</a></h3>
                         <span>Web Developer</span>
                         <ul class="team-social">
                             <li>
@@ -651,7 +643,6 @@
                         }
                     </ul>
                 </div>
-
             </div>
         </div>
     </div>
@@ -678,7 +669,7 @@
                         <p>
                             Explore our extensive collection of delicious recipes to inspire your culinary creations. From quick and easy meals to gourmet delights, our recipe collection has something for everyone. Discover new flavors and techniques to elevate your cooking skills and impress your family and friends.
                         </p>
-                        <a href="@Url.Action("Recipies","FlavourFusion")" class="learn-btn">Learn More</a>
+                        <a href="@Url.Action("AboutUs","FlavourFusion")" class="learn-btn">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -694,7 +685,7 @@
                         <p>
                             Master your cooking skills with our expert kitchen tips and tricks. Learn time-saving techniques, ingredient substitutions, cooking hacks, and more great tips. Our tips will help you become a confident and efficient cook, making your time in the kitchen enjoyable and rewarding so make your amazing dish now.
                         </p>
-                        <a href="@Url.Action("Recipies","FlavourFusion")" class="learn-btn">Learn More</a>
+                        <a href="@Url.Action("AboutUs","FlavourFusion")" class="learn-btn">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -710,7 +701,7 @@
                         <p>
                             Simplify your life with our meal planning service. Let us take the guesswork out of your daily meals by providing you with nutritious and delicious meal plans. Whether you're looking for quick weekday dinners or special weekend menus, our meal plans will help you save time, reduce stress, and eat well-balanced meals.
                         </p>
-                        <a href="@Url.Action("Recipies","FlavourFusion")" class="learn-btn">Learn More</a>
+                        <a href="@Url.Action("AboutUs","FlavourFusion")" class="learn-btn">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -744,7 +735,7 @@
                         <li><i class='bx bx-check'></i> 24/7 Support</li>
                     </ul>
                     <div class="price-btn-area text-center">
-                        <a href="subscription.html" class="default-btn">Buy Now</a>
+                        <a href="@Url.Action("Pricing","FlavourFusion")" class="default-btn">Buy Now</a>
                     </div>
                 </div>
             </div>
@@ -765,7 +756,7 @@
                         <li><i class='bx bx-check'></i> 24/7 Support</li>
                     </ul>
                     <div class="price-btn-area text-center">
-                        <a href="subscription.html" class="default-btn">Buy Now</a>
+                        <a href="@Url.Action("Pricing","FlavourFusion")" class="default-btn">Buy Now</a>
                     </div>
                 </div>
             </div>
@@ -786,7 +777,7 @@
                         <li><i class='bx bx-check'></i> 24/7 Support</li>
                     </ul>
                     <div class="price-btn-area text-center">
-                        <a href="subscription.html" class="default-btn">Buy Now</a>
+                        <a href="@Url.Action("Pricing","FlavourFusion")" class="default-btn">Buy Now</a>
                     </div>
                 </div>
             </div>

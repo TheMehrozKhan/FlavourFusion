@@ -132,8 +132,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="@Url.Action("Recipies","FlavourFusion")" class="nav-link">
-                                    Today's Recipe
+                                <a href="@Url.Action("CategoryPage","FlavourFusion")" class="nav-link">
+                                    Our Recipes
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -141,7 +141,6 @@
                                     Pricing
                                 </a>
                             </li>
-                            <li class="nav-item">
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     Authorities
@@ -166,6 +165,7 @@
                                 </ul>
                             </li>
                         </ul>
+
                         <div class="others-options d-flex align-items-center">
                             <div class="optional-item">
                                 <div class="search-btn">
@@ -341,14 +341,16 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="modal-search-form">
-                        <input type="search" class="search-field" placeholder="Search...">
+                    <form action="@Url.Action("Search", "FlavourFusion")" class="modal-search-form">
+                        <input type="search" class="search-field" placeholder="Search..." name="searchTerm">
                         <button type="submit"><i class='bx bx-search-alt'></i></button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+
 
     <script src="/Template/assets/js/jquery.min.js"></script>
     <script src="/Template/assets/js/bootstrap.bundle.min.js"></script>
