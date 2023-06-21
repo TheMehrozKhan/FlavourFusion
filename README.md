@@ -18,6 +18,6 @@
   <h3>2) Insert This Membership Status Code in The Tbl_User for Fetching The Details of Membership in User Model To Display it in User Profile:</h3>
   <code>public string MembershipStatus { get; set; }</code>
 
-  <h2>There is the Complete Data For The Project:</h2>
+  <h2>There is the Complete Category Data For The Project:</h2>
   <a href="https://bit.ly/3PlM2sA">https://bit.ly/3PlM2sA</a>
 </body>
