@@ -10,5 +10,5 @@ VALUES (2, 'Premium', 50, 12);
 INSERT INTO Tbl_Membership_Plans (plan_id, plan_name, price, duration)
 VALUES (3, 'Free', 0, 1);
 
-<h2> 2) Insert This Membership Status Code in The Tbl_User for Fetching The Details of Membership in User Model To Display it in User Profile: </h2>
+<h3> 2) Insert This Membership Status Code in The Tbl_User for Fetching The Details of Membership in User Model To Display it in User Profile: </h3>
 public string MembershipStatus { get; set; }
