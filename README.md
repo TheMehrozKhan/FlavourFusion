@@ -12,3 +12,6 @@ VALUES (3, 'Free', 0, 1);
 
 <h3> 2) Insert This Membership Status Code in The Tbl_User for Fetching The Details of Membership in User Model To Display it in User Profile: </h3>
 public string MembershipStatus { get; set; }
+
+<h2> There is the Complete Data For The Project: </h2>
+https://bit.ly/3PlM2sA
