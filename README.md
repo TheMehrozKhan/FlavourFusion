@@ -1,12 +1,12 @@
-<body>
-<h3>
-  We Had To Finish This Project At 1 July So Done All The Your Work & Also Those Team Member Who Make The Documenation Should Start Work From Now! 
-</h3>
+<body style="font-family: 'Poppins', sans-serif;">
+  <h3>
+    We Had To Finish This Project At 1 July So Done All Your Work & Also Those Team Members Who Made the Documentation Should Start Working From Now!
+  </h3>
   
   <h2>All Team Members There is the Database File for Implementation of This Project:</h2>
   <a href="https://bit.ly/3XjjMZF">https://bit.ly/3XjjMZF</a>
 
-  <h2>There is the General Steps or Precautions For Operating The Project:</h2>
+  <h2>There are General Steps or Precautions For Operating The Project:</h2>
   <h3>1) Run This Query In SQL Server After Importing The Database:</h3>
   <code>INSERT INTO Tbl_Membership_Plans (plan_id,plan_name, price, duration)
     VALUES (1, 'Standard', 35, 6);
