@@ -89,6 +89,38 @@ namespace FlavourFusion.Controllers
             return View(recipes);
         }
 
+        public ActionResult RecipeDetails(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            Tbl_Recipe recipe = db.Tbl_Recipe.Find(id);
+            if (recipe == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var categories = db.Tbl_Recipe_Category.ToList();
+
+            var viewModel = new RecipeDetailViewModel
+            {
+                Recipe = recipe,
+                Categories = categories,
+                recipe_tags = recipe.recipe_tags
+            };
+
+            ViewBag.CategoryName = recipe.Tbl_Recipe_Category.category_name;
+            ViewBag.ShowLoginMessage = Session["u_id"] == null;
+
+            return View(viewModel);
+        }
+
+
+
+
+
         public ActionResult Search(int? id, int? page, string searchTerm)
         {
             int pageSize = 6;
@@ -145,6 +177,24 @@ namespace FlavourFusion.Controllers
 
             return View(pro);
         }
+
+        public ActionResult RecipeDetail(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            Tbl_Recipe recipe = db.Tbl_Recipe.Find(id);
+
+            if (recipe == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(recipe);
+        }
+
 
         public ActionResult Pricing()
         {

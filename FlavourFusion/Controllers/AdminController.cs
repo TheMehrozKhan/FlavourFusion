@@ -141,6 +141,11 @@ namespace FlavourFusion.Controllers
             rec.recipe_name = rc.recipe_name;
             rec.recipe_description = rc.recipe_description;
             rec.FK_Category_Recipe = rc.FK_Category_Recipe;
+            rec.recipe_ingredients = rc.recipe_ingredients;
+            rec.recipe_duration = rc.recipe_duration;
+            rec.recipe_serving_people = rc.recipe_serving_people;
+            rec.recipe_tags = rc.recipe_tags;
+            rec.recipe_publish_date = rc.recipe_publish_date;
 
             if (imagePaths.Count > 0)
             {

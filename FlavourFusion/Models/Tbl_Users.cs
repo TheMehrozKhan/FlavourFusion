@@ -26,8 +26,6 @@ namespace FlavourFusion.Models
         public string user_email { get; set; }
         public string user_img { get; set; }
         public string MembershipStatus { get; set; }
-
-
         public Nullable<bool> is_member { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

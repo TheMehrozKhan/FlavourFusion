@@ -158,6 +158,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\RecipeDetailViewModel.cs" />
     <Compile Include="Models\RecipeViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\Tbl_Admin.cs">
@@ -438,6 +439,7 @@
     <Content Include="Views\Admin\DeleteRecipe.cshtml" />
     <Content Include="Views\FlavourFusion\CategoryPage.cshtml" />
     <Content Include="Views\FlavourFusion\Search.cshtml" />
+    <Content Include="Views\FlavourFusion\RecipeDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

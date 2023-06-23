@@ -41,7 +41,7 @@
             @if (categoryName != null)
             {
                 <span>Best Recipes in @categoryName </span>
-                <h2>Our @categoryName Recipes</h2>
+                <h2 style="font-weight:600">Our @categoryName Recipes</h2>
             }
             else
             {
@@ -74,7 +74,7 @@
                                             }
                                         </a>
                                         <div class="content">
-                                            <h3><a href="recipe-details.html">@recipe.recipe_name</a></h3>
+                                            <h3><a href="">@Html.ActionLink(recipe.recipe_name, "RecipeDetails", new { id = recipe.recipe_id }, new { style = "text-decoration:none;" })</a></h3>
                                             <div class="rating">
                                                 <i class='bx bxs-star'></i>
                                                 <i class='bx bxs-star'></i>

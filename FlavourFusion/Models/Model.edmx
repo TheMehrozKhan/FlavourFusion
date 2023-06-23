@@ -32,6 +32,11 @@
           <Property Name="recipe_description" Type="varchar(max)" Nullable="false" />
           <Property Name="recipe_image" Type="varchar(max)" Nullable="false" />
           <Property Name="FK_Category_Recipe" Type="int" />
+          <Property Name="recipe_ingredients" Type="varchar" MaxLength="255" />
+          <Property Name="recipe_duration" Type="int" />
+          <Property Name="recipe_serving_people" Type="int" />
+          <Property Name="recipe_tags" Type="varchar" MaxLength="255" />
+          <Property Name="recipe_publish_date" Type="date" />
         </EntityType>
         <EntityType Name="Tbl_Recipe_Category">
           <Key>
@@ -242,6 +247,11 @@
           <Property Name="recipe_image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_Category_Recipe" Type="Int32" />
           <NavigationProperty Name="Tbl_Recipe_Category" Relationship="FlavourFusionModel.FK__Tbl_Recip__FK_Ca__05D8E0BE" FromRole="Tbl_Recipe" ToRole="Tbl_Recipe_Category" />
+          <Property Name="recipe_ingredients" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="recipe_duration" Type="Int32" />
+          <Property Name="recipe_serving_people" Type="Int32" />
+          <Property Name="recipe_tags" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="recipe_publish_date" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Tbl_Recipe_Category">
           <Key>
@@ -331,6 +341,11 @@
           <EntitySetMapping Name="Tbl_Recipe">
             <EntityTypeMapping TypeName="FlavourFusionModel.Tbl_Recipe">
               <MappingFragment StoreEntitySet="Tbl_Recipe">
+                <ScalarProperty Name="recipe_publish_date" ColumnName="recipe_publish_date" />
+                <ScalarProperty Name="recipe_tags" ColumnName="recipe_tags" />
+                <ScalarProperty Name="recipe_serving_people" ColumnName="recipe_serving_people" />
+                <ScalarProperty Name="recipe_duration" ColumnName="recipe_duration" />
+                <ScalarProperty Name="recipe_ingredients" ColumnName="recipe_ingredients" />
                 <ScalarProperty Name="FK_Category_Recipe" ColumnName="FK_Category_Recipe" />
                 <ScalarProperty Name="recipe_image" ColumnName="recipe_image" />
                 <ScalarProperty Name="recipe_description" ColumnName="recipe_description" />
