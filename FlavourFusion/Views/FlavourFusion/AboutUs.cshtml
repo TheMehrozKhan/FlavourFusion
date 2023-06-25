@@ -1,4 +1,69 @@
-﻿<div class="about-area-two pt-100 pb-70">
+﻿<style>
+    .subscribe {
+        background-image: url(../../Template/assets/images/calculate-bg.png);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        width: 900px;
+        height: 450px;
+        border-radius: 20px;
+        box-shadow: rgba(17, 12, 46, 0.07) 0px 48px 100px 0px;
+        position: relative;
+        left: 160px;
+        margin-bottom: 150px;
+    }
+
+
+    .subscribe__title {
+        font-weight: bold;
+        font-size: 26px;
+        margin-bottom: 18px;
+    }
+
+    .subscribe__copy {
+        max-width: 450px;
+        text-align: center;
+        margin-bottom: 53px;
+        line-height: 1.5;
+    }
+
+    .form {
+        margin-bottom: 25px;
+    }
+
+    .form__email {
+        padding: 20px 25px;
+        border-radius: 5px;
+        border: 1px solid #CAD3DB;
+        width: 431px;
+        font-size: 18px;
+        color: #0F121F;
+    }
+
+        .form__email:focus {
+            outline: 1px solid black;
+        }
+
+    .form__button {
+        background: rgb(255, 132, 0);
+        padding: 10px;
+        border: none;
+        width: 244px;
+        height: 65px;
+        border-radius: 5px;
+        font-size: 18px;
+        color: white;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+        transition: 0.2s;
+    }
+
+        .form__button:hover {
+            box-shadow: none;
+        }
+</style>
+<div class="about-area-two pt-100 pb-70">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
@@ -8,7 +73,7 @@
                         <h2>Change Your Life in the next 90 Days of Practice</h2>
                         <p>
                             Take some time to deeply reflect on these questions and use them as a source of motivation throughout your journey. It’s also helpful to come up with a phrase that will remind you why you’re working hard to achieve your goal.
-Remember, it’s important to be realistic with your goals. Be honest with yourself and create achievable intentions so you can celebrate your successes. Good luck.
+                            Remember, it’s important to be realistic with your goals. Be honest with yourself and create achievable intentions so you can celebrate your successes. Good luck.
                         </p>
                     </div>
                     <div class="row">
@@ -75,7 +140,7 @@ Remember, it’s important to be realistic with your goals. Be honest with yours
                             <a href="service-details.html">Nutrition Response Testing</a>
                         </h3>
                         <p>
-                          Nutrition Response Testing® is a non-invasive system of analyzing the body to determine the underlying causes of illness and non-optimum health. Our clinically proven system may be quite different from any other healing practice you have experienced.
+                            Nutrition Response Testing® is a non-invasive system of analyzing the body to determine the underlying causes of illness and non-optimum health. Our clinically proven system may be quite different from any other healing practice you have experienced.
                         </p>
                     </div>
                 </div>
@@ -90,11 +155,76 @@ Remember, it’s important to be realistic with your goals. Be honest with yours
                             <a href="service-details.html">Clinical Nutrition</a>
                         </h3>
                         <p>
-                       Clinical nutrition is the prevention, diagnosis, and treatment of chronic diseases and conditions leveraging the power of nutrition. It's the study of how food can be used to improve patient outcomes at all stages of their health and medical journey.
+                            Clinical nutrition is the prevention, diagnosis, and treatment of chronic diseases and conditions leveraging the power of nutrition. It's the study of how food can be used to improve patient outcomes at all stages of their health and medical journey.
                         </p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="appointment-area pt-100 pb-70">
+    <div class="container">
+        <div class="appointment-form">
+            <h2>Gives Us New Recipe Suggestion</h2>
+            <form>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-control" required="" data-error="Please Enter Your Name" placeholder="Name*">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control" required="" data-error="Please Enter Your Email" placeholder="Email*">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <input type="text" name="phone" class="form-control" required="" data-error="Please Enter Your Phone Number" placeholder="Phone*">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <i class="flaticon-weekly-calendar-page-symbol"></i>
+                            <input type="text" id="datetimepicker" class="form-control date hasDatepicker" required="" data-error="Please Enter Date" placeholder="Date">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <select class="form-select form-control">
+                                <option selected="">Type of Service*</option>
+                                <option value="1">Weight Lifting</option>
+                                <option value="2">Organic Yoga</option>
+                                <option value="3">Power Yoga</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        <div class="form-group">
+<textarea name="message" class="form-control" id="message" cols="30" rows="5" required="" data-error="Write your message" placeholder="Your Message"></textarea>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        <button type="submit" class="default-btn">
+                            Submit Now
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="subscribe" style="margin-top:150px;">
+    <h1 class="subscribe__title" style="font-size:50px;">Let's keep in touch</h1>
+    <p class="subscribe__copy">Subscribe to keep up with fresh news and exciting updates. We promise not to spam you!</p>
+    <div class="form">
+        <input type="email" class="form__email" placeholder="Enter your email address" />
+        <button class="form__button" style="font-size:25px;">Send</button>
     </div>
 </div>

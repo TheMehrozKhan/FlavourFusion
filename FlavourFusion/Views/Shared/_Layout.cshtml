@@ -34,8 +34,6 @@
             <div class="dot2"></div>
         </div>
     </div>
-
-
     <header class="top-header top-header-bg-two">
         <div class="container">
             <div class="row align-items-center">
@@ -127,19 +125,37 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="@Url.Action("AboutUs","FlavourFusion")" class="nav-link">
-                                    About Us
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="@Url.Action("CategoryPage","FlavourFusion")" class="nav-link">
-                                    Our Recipes
+                                    Recipes
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="@Url.Action("Pricing","FlavourFusion")" class="nav-link">
-                                    Pricing
+                                <a href="@Url.Action("Contest","FlavourFusion")" class="nav-link">
+                                    Contest
                                 </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    Who We Are?
+                                    <i class='bx bx-chevron-down'></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("AboutUs","FlavourFusion")" class="nav-link">
+                                            About Us
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Register","FlavourFusion")" class="nav-link">
+                                            Announcement
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Faq","FlavourFusion")" class="nav-link">
+                                            FAQ'S
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
@@ -252,23 +268,28 @@
                             <h3 style="color:white;">Useful Links</h3>
                             <ul class="footer-list">
                                 <li>
-                                    <a href="@Url.Action("Index","FlavourFusion")" target="_blank">
-                                        Home
-                                    </a>
-                                </li>
-                                <li>
                                     <a href="@Url.Action("AboutUs","FlavourFusion")" target="_blank">
                                         About Us
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("Recipies","FlavourFusion")" target="_blank">
-                                        Recipes
+                                    <a href="@Url.Action("Contact","FlavourFusion")" target="_blank">
+                                        Contact Us
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("Contact","FlavourFusion")" target="_blank">
-                                        Contact Us
+                                    <a href="@Url.Action("Faq","FlavourFusion")" target="_blank">
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Contest","FlavourFusion")" target="_blank">
+                                        Contest
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Announcment","FlavourFusion")" target="_blank">
+                                        Announcment
                                     </a>
                                 </li>
                             </ul>

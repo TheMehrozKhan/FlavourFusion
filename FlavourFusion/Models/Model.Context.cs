@@ -13,10 +13,10 @@ namespace FlavourFusion.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FlavourFusionEntities2 : DbContext
+    public partial class FlavourFusionEntities3 : DbContext
     {
-        public FlavourFusionEntities2()
-            : base("name=FlavourFusionEntities2")
+        public FlavourFusionEntities3()
+            : base("name=FlavourFusionEntities3")
         {
         }
     
@@ -26,10 +26,12 @@ namespace FlavourFusion.Models
         }
     
         public virtual DbSet<Tbl_Admin> Tbl_Admin { get; set; }
+        public virtual DbSet<Tbl_Comments> Tbl_Comments { get; set; }
         public virtual DbSet<Tbl_Membership_Plans> Tbl_Membership_Plans { get; set; }
-        public virtual DbSet<Tbl_Subscriptions> Tbl_Subscriptions { get; set; }
-        public virtual DbSet<Tbl_Users> Tbl_Users { get; set; }
         public virtual DbSet<Tbl_Recipe> Tbl_Recipe { get; set; }
         public virtual DbSet<Tbl_Recipe_Category> Tbl_Recipe_Category { get; set; }
+        public virtual DbSet<Tbl_Replies> Tbl_Replies { get; set; }
+        public virtual DbSet<Tbl_Subscriptions> Tbl_Subscriptions { get; set; }
+        public virtual DbSet<Tbl_Users> Tbl_Users { get; set; }
     }
 }

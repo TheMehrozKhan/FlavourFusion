@@ -12,7 +12,7 @@ namespace FlavourFusion.Controllers
 {
     public class FlavourFusionController : Controller
     {
-        FlavourFusionEntities2 db = new FlavourFusionEntities2();
+        FlavourFusionEntities3 db = new FlavourFusionEntities3();
         public ActionResult Index(int? page)
         {
             var latestRecipes = db.Tbl_Recipe.OrderByDescending(x => x.recipe_id).ToList();
@@ -114,12 +114,102 @@ namespace FlavourFusion.Controllers
             ViewBag.CategoryName = recipe.Tbl_Recipe_Category.category_name;
             ViewBag.ShowLoginMessage = Session["u_id"] == null;
 
+            var comments = db.Tbl_Comments.Where(c => c.recipe_id == id).ToList();
+            viewModel.Comments = comments;
+
             return View(viewModel);
         }
 
+        [HttpPost]
+        public ActionResult AddComment(int recipeId, string commentText)
+        {
+            int userId = Convert.ToInt32(Session["u_id"]);
+
+            Tbl_Comments comment = new Tbl_Comments
+            {
+                recipe_id = recipeId,
+                user_id = userId,
+                comment_text = commentText,
+                comment_date = DateTime.Now
+            };
+
+            db.Tbl_Comments.Add(comment);
+            db.SaveChanges();
+
+            return RedirectToAction("RecipeDetails", new { id = recipeId });
+        }
+
+        [HttpPost]
+        public ActionResult AddReply(int commentId, string replyText)
+        {
+            int userId = Convert.ToInt32(Session["u_id"]);
+
+            Tbl_Replies reply = new Tbl_Replies
+            {
+                comment_id = commentId,
+                user_id = userId,
+                reply_text = replyText,
+                reply_date = DateTime.Now
+            };
+
+            // Find the associated comment
+            Tbl_Comments comment = db.Tbl_Comments.Find(commentId);
+            if (comment != null)
+            {
+                reply.Tbl_Comments = comment; // Set the comment for the reply
+                db.Tbl_Replies.Add(reply);
+                db.SaveChanges();
+
+                return RedirectToAction("RecipeDetails", new { id = comment.recipe_id });
+            }
+
+            // Handle the case where the associated comment is not found
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            Tbl_Comments ca = db.Tbl_Comments.Where(x => x.comment_id == id).SingleOrDefault();
+            return View(ca);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int? id, Tbl_Recipe_Category cat)
+        {
+            Tbl_Comments ca = db.Tbl_Comments.Include("Tbl_Replies").SingleOrDefault(x => x.comment_id == id);
+
+            // Delete the associated replies
+            foreach (var reply in ca.Tbl_Replies.ToList())
+            {
+                db.Tbl_Replies.Remove(reply);
+            }
+
+            // Delete the comment itself
+            db.Tbl_Comments.Remove(ca);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
 
 
+        [HttpGet]
+        public ActionResult DeleteReply(int? id)
+        {
+            Tbl_Replies ca = db.Tbl_Replies.Where(x => x.reply_id == id).SingleOrDefault();
+            return View(ca);
+        }
 
+        [HttpPost]
+        public ActionResult DeleteReply(int? id, Tbl_Recipe_Category cat)
+        {
+            Tbl_Replies reply = db.Tbl_Replies.Include("Tbl_Comments").SingleOrDefault(x => x.reply_id == id);
+
+            db.Tbl_Replies.Remove(reply);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
 
         public ActionResult Search(int? id, int? page, string searchTerm)
         {
@@ -176,40 +266,6 @@ namespace FlavourFusion.Controllers
             ViewBag.SearchTerm = searchTerm;
 
             return View(pro);
-        }
-
-        public ActionResult RecipeDetail(int? id)
-        {
-            if (id == null)
-            {
-                return HttpNotFound();
-            }
-
-            Tbl_Recipe recipe = db.Tbl_Recipe.Find(id);
-
-            if (recipe == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(recipe);
-        }
-
-
-        public ActionResult Pricing()
-        {
-            List<Tbl_Membership_Plans> plans = db.Tbl_Membership_Plans.ToList();
-            return View(plans);
-        }
-
-        public ActionResult AboutUs()
-        {
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            return View();
         }
 
         [HttpGet]
@@ -356,12 +412,6 @@ namespace FlavourFusion.Controllers
             return View();
         }
 
-
-        public ActionResult ProfileNotFound()
-        {
-            return View();
-        }
-
         [HttpGet]
         public ActionResult Edit_Profile(int id)
         {
@@ -404,6 +454,42 @@ namespace FlavourFusion.Controllers
             return View(user);
         }
 
+        [HttpGet]
+        public ActionResult Contest()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Contest(Tbl_Users us)
+        {
+            return View();
+        }
+
+        public ActionResult Pricing()
+        {
+            List<Tbl_Membership_Plans> plans = db.Tbl_Membership_Plans.ToList();
+            return View(plans);
+        }
+
+        public ActionResult AboutUs()
+        {
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
+
+        public ActionResult ProfileNotFound()
+        {
+            return View();
+        }
+
+        public ActionResult Faq()
+        {
+            return View();
+        }
 
         public string uploadimage(HttpPostedFileBase file)
         {

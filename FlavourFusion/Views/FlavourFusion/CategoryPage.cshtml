@@ -28,6 +28,7 @@
             margin: 10px;
             border-radius: 12px;
             flex: 0 0 calc(25% - 20px);
+            height:350px;
         }
 
             .thecard:hover {
@@ -60,7 +61,7 @@
         @using (Html.BeginForm("Recipies", "FlavourFusion", FormMethod.Post))
         {
             <div class="text-center" style="margin-top:30px;margin-bottom:30px;">
-                <div class="dropdown" style="display: inline-block; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; border-radius: 8px;">
+                <div class="dropdown" style="display: inline-block; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; border-radius: 8px;border-color:white;">
                     @Html.DropDownList("id", categoryList, "Select a category", new { @class = "form-control", @style = "border-color:white;height:40px;" })
                 </div>
                 <button type="submit" class="btn btn-primary" style="background-color: rgb(255, 132, 0); border-color:white;">Go</button>
@@ -74,7 +75,7 @@
                 foreach (var item in Model)
                 {
                     <div class="col-lg-3 col-md-6 col-6 thecard">
-                        <a class="hover-switch" href="@Url.Action("DisplayAdd", "User", new { id = item.category_id })">
+                        <a href="@Url.Action("Recipies", "FlavourFusion", new { id = item.category_id })">
                             <img class="primary-img rounded-3" src="@Url.Content(item.category_image)" alt="product-img">
                         </a>
                         <h3 class="text-center" style="margin-top:15px;">

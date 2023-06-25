@@ -12,27 +12,23 @@ namespace FlavourFusion.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Recipe
+    public partial class Tbl_Comments
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_Recipe()
+        public Tbl_Comments()
         {
-            this.Tbl_Comments = new HashSet<Tbl_Comments>();
+            this.Tbl_Replies = new HashSet<Tbl_Replies>();
         }
     
+        public int comment_id { get; set; }
         public int recipe_id { get; set; }
-        public string recipe_name { get; set; }
-        public string recipe_description { get; set; }
-        public string recipe_image { get; set; }
-        public Nullable<int> FK_Category_Recipe { get; set; }
-        public string recipe_ingredients { get; set; }
-        public Nullable<int> recipe_duration { get; set; }
-        public Nullable<int> recipe_serving_people { get; set; }
-        public string recipe_tags { get; set; }
-        public Nullable<System.DateTime> recipe_publish_date { get; set; }
+        public int user_id { get; set; }
+        public string comment_text { get; set; }
+        public System.DateTime comment_date { get; set; }
     
+        public virtual Tbl_Recipe Tbl_Recipe { get; set; }
+        public virtual Tbl_Users Tbl_Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Comments> Tbl_Comments { get; set; }
-        public virtual Tbl_Recipe_Category Tbl_Recipe_Category { get; set; }
+        public virtual ICollection<Tbl_Replies> Tbl_Replies { get; set; }
     }
 }

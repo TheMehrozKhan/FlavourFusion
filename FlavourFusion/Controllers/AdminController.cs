@@ -10,7 +10,7 @@ namespace FlavourFusion.Controllers
 {
     public class AdminController : Controller
     {
-        FlavourFusionEntities2 db = new FlavourFusionEntities2();
+        FlavourFusionEntities3 db = new FlavourFusionEntities3();
         public ActionResult Index()
         {
             return View();

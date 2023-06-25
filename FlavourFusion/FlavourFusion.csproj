@@ -164,6 +164,9 @@
     <Compile Include="Models\Tbl_Admin.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Tbl_Comments.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Tbl_Membership_Plans.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -171,6 +174,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tbl_Recipe_Category.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_Replies.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tbl_Subscriptions.cs">
@@ -440,6 +446,10 @@
     <Content Include="Views\FlavourFusion\CategoryPage.cshtml" />
     <Content Include="Views\FlavourFusion\Search.cshtml" />
     <Content Include="Views\FlavourFusion\RecipeDetails.cshtml" />
+    <Content Include="Views\FlavourFusion\Delete.cshtml" />
+    <Content Include="Views\FlavourFusion\DeleteReply.cshtml" />
+    <Content Include="Views\FlavourFusion\Contest.cshtml" />
+    <Content Include="Views\FlavourFusion\Faq.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

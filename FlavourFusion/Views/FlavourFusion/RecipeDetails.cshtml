@@ -89,12 +89,17 @@
                             <div class="row align-items-center">
                                 <div class="col-lg-5 col-md-5">
                                     <div class="article-tag">
-                                        <ul>
-                                            <li class="title">Tags :</li>
-                                            <li><a href="tags.html" target="_blank">Health,</a></li>
-                                            <li><a href="tags.html" target="_blank">Food,</a></li>
-                                            <li><a href="tags.html" target="_blank">Nutrition</a></li>
-                                        </ul>
+                                        @if (!string.IsNullOrEmpty(Model.recipe_tags))
+                                        {
+                                            var tags = Model.recipe_tags.Split(',');
+                                            foreach (var tag in tags)
+                                            {
+                                                <ul>
+                                                    <li class="title">Tags :</li>
+                                                    <li>@tag</li>
+                                                </ul>
+                                            }
+                                        }
                                     </div>
                                 </div>
                                 <div class="col-lg-7 col-md-7">
@@ -128,17 +133,18 @@
 
                             <div class="comments-form">
                                 <div class="contact-form">
-                                    <h4>Leave A Reply</h4>
-                                    <form id="contactForm">
+                                    <h4>Add Your Comment on it!</h4>
+                                    <form id="contactForm" action="@Url.Action("AddComment", "FlavourFusion")" method="post">
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <textarea name="message" class="form-control" id="message" cols="30" rows="8" required data-error="Write your message" placeholder="Your Message.."></textarea>
+                                                    <input type="hidden" name="recipeId" value="@Model.Recipe.recipe_id" />
+                                                    <textarea name="commentText" class="form-control" id="message" cols="30" rows="8" @*required data-error="Write your message"*@ placeholder="Your Message"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <button type="submit" class="default-btn">
-                                                    Post A Comment
+                                                    Post This Comment
                                                 </button>
                                             </div>
                                         </div>
@@ -148,41 +154,62 @@
 
                             <div class="comments-wrap">
                                 <div class="comment-title">
-                                    <h4>3 Comments :</h4>
+                                    <h4>@Model.Comments.Count() Comments:</h4>
                                 </div>
                                 <ul class="comment-form">
+
+                                    @foreach (var comment in Model.Comments)
+                                    {
                                     <li>
-                                        <img src="/Template/assets/images/recipe-img/recipe-user7.jpg" alt="Image">
-                                        <h3>Ardin Hajack</h3>
-                                        <span>17 April , 2021 AT 06:30 PM</span>
+                                        <img src="@Url.Content(comment.Tbl_Users.user_img)" alt="Image" height="50" width="50" style="border-radius:50%">
+                                        <h3>@comment.Tbl_Users.user_name</h3>
+                                        <span>@comment.comment_date</span>
                                         <p>
-                                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidu astana glory makes one of
-                                            duo dolores et ea rebum stet clita kasd gubergren, no sea takimata sanctus est.
+                                            @comment.comment_text
+                                            @if (Session["u_id"] != null && int.TryParse(Session["u_id"].ToString(), out int uId) && uId == comment.user_id)
+                                            {
+                                                <a href="@Url.Action("Delete", "FlavourFusion", new { id = comment.comment_id })" style="text-decoration:none;">Delete</a>
+                                            }
                                         </p>
-                                        <a href="blog-details.html"> Reply</a>
+                                        <form class="reply-form" action="@Url.Action("AddReply", "FlavourFusion")" method="post">
+                                            <input type="hidden" name="commentId" value="@comment.comment_id" />
+                                            <textarea name="replyText" placeholder="Add a reply" style="background-color: white; border: none; border-radius: 10px; box-shadow: rgba(17, 12, 46, 0.08) 0px 48px 100px 0px; height: 80px; width: 350px; padding-left: 8px; padding-top: 8px;"></textarea>
+                                            <br />
+                                            <button type="submit" class="default-btn" style="margin-bottom:30px;margin-top:20px;">Reply</button>
+                                        </form>
+
+                                        @if (comment.Tbl_Replies.Any())
+                                        {
+                                            <div class="replies" style="margin-left:20px;">
+                                                @foreach (var reply in comment.Tbl_Replies)
+                                                {
+                                                    <div class="reply">
+                                                        <div class="reply-content">
+                                                            <div class="reply-author">
+                                                                <span>@reply.Tbl_Users.user_name</span>
+                                                                <span class="reply-date">@reply.reply_date</span>
+                                                                @if (Session["u_id"] != null && int.TryParse(Session["u_id"].ToString(), out int replyUserId) && replyUserId == reply.user_id)
+                                                                {
+                                                                    <a href="@Url.Action("DeleteReply", "FlavourFusion", new { id = reply.reply_id })" style="text-decoration:none;">Delete</a>
+                                                                }
+                                                            </div>
+                                                            <p>@reply.reply_text</p>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+
+                                        }
+
+
                                     </li>
-                                    <li class="pl-80">
-                                        <img src="~/Template/assets/images/recipe-img/recipe-user6.jpg" alt="Image">
-                                        <h3>Lisa Mera</h3>
-                                        <span>17 April , 2021 AT 06:30 PM</span>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas
-                                            accumsan lacus vel facilisis.
-                                        </p>
-                                        <a href="blog-details.html"> Reply</a>
-                                    </li>
-                                    <li>
-                                        <img src="/Template/assets/images/recipe-img/recipe-user8.jpg" alt="Image">
-                                        <h3>John Smith</h3>
-                                        <span>17 April , 2021 AT 06:30 PM</span>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidu astana glory makes one of
-                                            duo dolores et ea rebum stet clita kasd gubergren, no sea takimata sanctus est.
-                                        </p>
-                                        <a href="blog-details.html"> Reply</a>
-                                    </li>
+                                    }
                                 </ul>
                             </div>
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -198,8 +225,7 @@
                                     @foreach (var category in Model.Categories)
                                     {
                                         <li>
-                                            @Html.ActionLink(category.category_name, "Recipies", "FlavourFusion", new { id = category.category_id }, new { @class = "category-link active" })
-                                            @*<span>(@category.TotalRecipes)</span>*@
+                                            @Html.ActionLink(category.category_name + " (" + category.Tbl_Recipe.Count() + ")", "Recipies", "FlavourFusion", new { id = category.category_id }, new { @class = "category-link active", @style = "text-decoration:none;" })
                                         </li>
                                     }
                                 </ul>
@@ -270,7 +296,7 @@
                                         var tags = Model.recipe_tags.Split(',');
                                         foreach (var tag in tags)
                                         {
-                                            <li><a href="tags.html" target="_blank">@tag</a></li>
+                                            <li>@tag</li>
                                         }
                                     }
                                 </ul>

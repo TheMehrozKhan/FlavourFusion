@@ -17,6 +17,8 @@ namespace FlavourFusion.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tbl_Users()
         {
+            this.Tbl_Comments = new HashSet<Tbl_Comments>();
+            this.Tbl_Replies = new HashSet<Tbl_Replies>();
             this.Tbl_Subscriptions = new HashSet<Tbl_Subscriptions>();
         }
     
@@ -25,9 +27,13 @@ namespace FlavourFusion.Models
         public string user_password { get; set; }
         public string user_email { get; set; }
         public string user_img { get; set; }
-        public string MembershipStatus { get; set; }
         public Nullable<bool> is_member { get; set; }
+        public string MembershipStatus { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tbl_Comments> Tbl_Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tbl_Replies> Tbl_Replies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Subscriptions> Tbl_Subscriptions { get; set; }
     }
