@@ -164,6 +164,9 @@
     <Compile Include="Models\Tbl_Admin.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Tbl_Announcement.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Tbl_Comments.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -450,6 +453,8 @@
     <Content Include="Views\FlavourFusion\DeleteReply.cshtml" />
     <Content Include="Views\FlavourFusion\Contest.cshtml" />
     <Content Include="Views\FlavourFusion\Faq.cshtml" />
+    <Content Include="Views\FlavourFusion\Announcement.cshtml" />
+    <Content Include="Views\Admin\Add_Annoucement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

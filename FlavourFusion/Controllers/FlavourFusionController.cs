@@ -40,6 +40,12 @@ namespace FlavourFusion.Controllers
             return View(cateList);
         }
 
+        public ActionResult Announcement()
+        {
+            var announcements = db.Tbl_Announcement.OrderByDescending(x => x.Annoucement_id).ToList();
+            return View(announcements);
+        }
+
         public ActionResult Recipies(int? id, int? page, string search)
         {
             List<Tbl_Recipe> recipes;

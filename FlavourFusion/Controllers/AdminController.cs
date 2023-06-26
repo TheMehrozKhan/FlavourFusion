@@ -84,6 +84,30 @@ namespace FlavourFusion.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Add_Annoucement()
+        {
+            if (Session["ad_id"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Add_Annoucement(Tbl_Announcement ann)
+        {
+
+            Tbl_Announcement an = new Tbl_Announcement();
+            an.Annoucement_Text = ann.Annoucement_Text;
+            an.Annoucement_Description = ann.Annoucement_Description;
+            an.Annoucement_Date = ann.Annoucement_Date;
+            db.Tbl_Announcement.Add(an);
+            db.SaveChanges();
+
+            return View();
+        }
+
         public ActionResult View_Category(int? page)
         {
             if (Session["ad_id"] == null)

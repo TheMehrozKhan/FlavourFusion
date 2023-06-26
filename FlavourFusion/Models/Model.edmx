@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FlavourFusionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FlavourFusionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Tbl_Admin">
           <Key>
             <PropertyRef Name="admin_id" />
@@ -13,6 +13,15 @@
           <Property Name="username" Type="varchar" MaxLength="50" />
           <Property Name="password" Type="varchar" MaxLength="50" />
           <Property Name="email" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Tbl_Announcement">
+          <Key>
+            <PropertyRef Name="Annoucement_id" />
+          </Key>
+          <Property Name="Annoucement_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Annoucement_Text" Type="varchar" MaxLength="50" />
+          <Property Name="Annoucement_Description" Type="varchar" MaxLength="350" />
+          <Property Name="Annoucement_Date" Type="date" />
         </EntityType>
         <EntityType Name="Tbl_Comments">
           <Key>
@@ -187,6 +196,7 @@
         </Association>
         <EntityContainer Name="FlavourFusionModelStoreContainer">
           <EntitySet Name="Tbl_Admin" EntityType="Self.Tbl_Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Announcement" EntityType="Self.Tbl_Announcement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Comments" EntityType="Self.Tbl_Comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Membership_Plans" EntityType="Self.Tbl_Membership_Plans" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Recipe" EntityType="Self.Tbl_Recipe" Schema="dbo" store:Type="Tables" />
@@ -227,8 +237,7 @@
             <End Role="Tbl_Subscriptions" EntitySet="Tbl_Subscriptions" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FlavourFusionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -469,7 +478,17 @@
             <End Role="Tbl_Users" EntitySet="Tbl_Users" />
             <End Role="Tbl_Subscriptions" EntitySet="Tbl_Subscriptions" />
           </AssociationSet>
+          <EntitySet Name="Tbl_Announcement" EntityType="FlavourFusionModel.Tbl_Announcement" />
         </EntityContainer>
+        <EntityType Name="Tbl_Announcement">
+          <Key>
+            <PropertyRef Name="Annoucement_id" />
+          </Key>
+          <Property Name="Annoucement_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Annoucement_Text" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Annoucement_Description" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="Annoucement_Date" Type="DateTime" Precision="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -565,6 +584,16 @@
                 <ScalarProperty Name="user_email" ColumnName="user_email" />
                 <ScalarProperty Name="user_img" ColumnName="user_img" />
                 <ScalarProperty Name="is_member" ColumnName="is_member" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Announcement">
+            <EntityTypeMapping TypeName="FlavourFusionModel.Tbl_Announcement">
+              <MappingFragment StoreEntitySet="Tbl_Announcement">
+                <ScalarProperty Name="Annoucement_Date" ColumnName="Annoucement_Date" />
+                <ScalarProperty Name="Annoucement_Description" ColumnName="Annoucement_Description" />
+                <ScalarProperty Name="Annoucement_Text" ColumnName="Annoucement_Text" />
+                <ScalarProperty Name="Annoucement_id" ColumnName="Annoucement_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

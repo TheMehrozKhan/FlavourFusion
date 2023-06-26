@@ -1,0 +1,49 @@
+﻿@model List<FlavourFusion.Models.Tbl_Announcement>
+<style>
+    .accordion-item {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-color: white;
+    }
+
+    #accordionExample {
+        width: 550px;
+        box-shadow: rgba(17, 12, 46, 0.04) 0px 48px 100px 0px;
+    }
+
+    .thecontainer {
+        margin: 30px;
+    }
+</style>
+<div class="inner-banner inner-bg9">
+    <div class="container">
+        <div class="inner-title text-center">
+            <h3>Our Announcement</h3>
+        </div>
+    </div>
+</div>
+<div class="thecontainer mb-5 mt-5" style="display: flex;">
+    <div style="flex: 0 0 auto; margin-right: 20px;">
+        <img src="~/Template/assets/images/updates.png" style="border-radius:12px;" />
+    </div>
+    <div class="accordion" id="accordionExample" style="flex: 1 1 auto;">
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading_@item.Annoucement_id">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@item.Annoucement_id" aria-expanded="true" aria-controls="collapse_@item.Annoucement_id">
+                            @item.Annoucement_Text
+                        </button>
+                    </h2>
+                    <div id="collapse_@item.Annoucement_id" class="accordion-collapse collapse show" aria-labelledby="heading_@item.Annoucement_id" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>@item.Annoucement_Date</strong> @item.Annoucement_Description
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

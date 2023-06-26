@@ -33,5 +33,6 @@ namespace FlavourFusion.Models
         public virtual DbSet<Tbl_Replies> Tbl_Replies { get; set; }
         public virtual DbSet<Tbl_Subscriptions> Tbl_Subscriptions { get; set; }
         public virtual DbSet<Tbl_Users> Tbl_Users { get; set; }
+        public virtual DbSet<Tbl_Announcement> Tbl_Announcement { get; set; }
     }
 }

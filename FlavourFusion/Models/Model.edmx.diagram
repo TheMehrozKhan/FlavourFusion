@@ -21,6 +21,7 @@
         <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Recip__FK_Ca__05D8E0BE" ManuallyRouted="false" />
         <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Repli__user___30C33EC3" ManuallyRouted="false" />
         <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Subsc__user___5CD6CB2B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Announcement" Width="1.5" PointX="6.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
