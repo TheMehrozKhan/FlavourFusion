@@ -5,6 +5,11 @@
   
   <h2>All Team Members There is the Database File for Implementation of This Project:</h2>
   <a href="https://bit.ly/3JwtQJg">https://bit.ly/3XjjMZF</a>
+  <h2>There is the Tutorial Video of How You Can Import The Database into SQL Server:</h2>
+
+
+https://github.com/TheMehrozKhan/FlavourFusion/assets/103773815/6f0b5df6-52a5-4be0-a44c-d730f8593a8b
+
 
   <h2>There are General Steps or Precautions For Operating The Project:</h2>
   <h3>1) Run This Query In SQL Server After Importing The Database:</h3>
