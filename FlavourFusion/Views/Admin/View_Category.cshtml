@@ -135,11 +135,19 @@
         <li class="nav-item">
             <a class="nav-link thenav-link" href="@Url.Action("Admin_Panel")">Home</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link thenav-link" href="@Url.Action("Add_Recipe_Category")">Add Categories</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle thenav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
+            <ul class="dropdown-menu" style="background: white; border: none; padding: 13px; box-shadow: rgba(17, 12, 46, 0.2) 0px 48px 100px 0px; border-radius: 8px; height: 90px;">
+                <li><a class="dropdown-item" href="@Url.Action("Add_Recipe_Category")">Add Category</a></li>
+                <li><a class="dropdown-item" href="@Url.Action("View_Category")">View Category</a></li>
+            </ul>
         </li>
-        <li class="nav-item">
-            <a class="nav-link thenav-link" href="@Url.Action("View_Category")">View Categories</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle thenav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">Events & Updates</a>
+            <ul class="dropdown-menu" style="background: white; border: none; padding: 13px; box-shadow: rgba(17, 12, 46, 0.2) 0px 48px 100px 0px; border-radius: 8px; height: 90px;">
+                <li><a class="dropdown-item" href="#">Contest</a></li>
+                <li><a class="dropdown-item" href="@Url.Action("Add_Annoucement")">Announcement</a></li>
+            </ul>
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle thenav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">Recipes</a>
