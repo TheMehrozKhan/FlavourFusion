@@ -19,22 +19,6 @@
             justify-content: space-between;
         }
 
-        .thecard {
-            box-shadow: rgba(149, 157, 165, 0.1) 0px 2px 20px;
-            border-color: white;
-            transition: 0.2s;
-            margin-bottom: 40px;
-            padding: 20px;
-            margin: 10px;
-            border-radius: 12px;
-            flex: 0 0 calc(25% - 20px);
-            height:350px;
-        }
-
-            .thecard:hover {
-                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-            }
-
 
         #thefirstlink {
             color: black;
@@ -47,6 +31,94 @@
                 color: white;
                 border-color: white;
             }
+
+        .card {
+            border-color: white;
+            transition: 0.2s;
+            margin-bottom: 40px;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 12px;
+            flex: 0 0 calc(25% - 20px);
+            height: 320px;
+            width: 195px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: 0.2s ease-in-out;
+        }
+            .card:hover {
+                box-shadow: rgba(149, 157, 165, 0.25) 0px 8px 24px;
+            }
+
+        .textBox {
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            transition: 0.2s ease-in-out;
+            z-index: 2;
+        }
+
+            .textBox > .text {
+                font-weight: bold;
+            }
+
+            .textBox > .head {
+                font-size: 20px;
+            }
+
+            .textBox > .price {
+                font-size: 17px;
+            }
+
+            .textBox > span {
+                font-size: 12px;
+                color: lightgrey;
+            }
+
+        .card:hover > .textBox {
+            opacity: 1;
+        }
+
+        .card:hover > .img {
+            height: 65%;
+            filter: blur(7px);
+            animation: anim 3s infinite;
+        }
+
+        keyframes anim {
+            0%
+
+        {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+
+        }
+
+        .card:hover {
+            transform: scale(1.04) rotate(-1deg);
+        }
+        .theh3 {
+            font-size:20px;
+        }
+
+        .theh3:hover{
+            color:orange;
+        }
     </style>
 </head>
 <main>
@@ -74,15 +146,17 @@
 
                 foreach (var item in Model)
                 {
-                    <div class="col-lg-3 col-md-6 col-6 thecard">
+                    <div class="card">
                         <a href="@Url.Action("Recipies", "FlavourFusion", new { id = item.category_id })">
-                            <img class="primary-img rounded-3" src="@Url.Content(item.category_image)" alt="product-img">
+                            <img class="primary-img rounded-3 img" src="@Url.Content(item.category_image)" alt="product-img" style="margin-top:10px;">
                         </a>
-                        <h3 class="text-center" style="margin-top:15px;">
-                            <a href="#">
-                                @Html.ActionLink(item.category_name, "Recipies", "FlavourFusion", new { id = item.category_id }, new { @style = "text-decoration:none;color:black;" })
-                            </a>
-                        </h3>
+                        <div class="textBox">
+                            <h3 style="margin-top:10px;" class="theh3">
+                                <a href="#">
+                                    @Html.ActionLink(item.category_name, "Recipies", "FlavourFusion", new { id = item.category_id }, new { @style = "text-decoration:none;color:black;text-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;" })
+                                </a>
+                            </h3>
+                        </div>
                     </div>
                 }
             }
