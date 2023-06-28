@@ -1,5 +1,4 @@
 
-https://github.com/TheMehrozKhan/FlavourFusion/assets/103773815/9d9b7ae0-30a2-437c-a738-3d339323d569
 <body style="font-family: 'Poppins', sans-serif;">
   <h3>
     We Had To Finish This Project At 1 July So Done All Your Work & Also Those Team Members Who Made the Documentation Should Start Working From Now!
@@ -26,7 +25,11 @@ https://github.com/TheMehrozKhan/FlavourFusion/assets/103773815/6f0b5df6-52a5-4b
   <code>public string MembershipStatus { get; set; }</code>
 
 <h2>Tutorial Video of How You Can Solve MembershipStatus Error:</h2>
-https://github.com/TheMehrozKhan/FlavourFusion/assets/103773815/d2e23579-4dfc-42f1-b185-7ae84a8e0d60
+
+
+https://github.com/TheMehrozKhan/FlavourFusion/assets/103773815/8e0929ba-7af0-44a6-b60c-7d0abe35df72
+
+
 
 
   <h2>There is the Complete Category Data For The Project:</h2>
