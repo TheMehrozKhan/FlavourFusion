@@ -140,9 +140,11 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle thenav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">Events & Updates</a>
-                <ul class="dropdown-menu" style="background: white; border: none; padding: 13px; box-shadow: rgba(17, 12, 46, 0.2) 0px 48px 100px 0px; border-radius: 8px; height: 90px;">
-                    <li><a class="dropdown-item" href="#">Contest</a></li>
-                    <li><a class="dropdown-item" href="@Url.Action("Add_Annoucement")">Announcement</a></li>
+                <ul class="dropdown-menu" style="background: white; border: none; padding: 13px; box-shadow: rgba(17, 12, 46, 0.2) 0px 48px 100px 0px; border-radius: 8px; height: 150px;">
+                    <li><a class="dropdown-item" href="@Url.Action("CreateContest")">Add Contest</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("ViewContest")">View Contest</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("Add_Annoucement")">Add Announcement</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("View_Annoucement")">View Announcement</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -208,7 +210,6 @@
                 @Html.TextBoxFor(x => x.recipe_tags, new { @class = "form-control", type = "text" })
             </div>
 
-
             <div class="form-group">
                 @Html.LabelFor(x => x.recipe_description, "Recipe Description:")
                 @Html.TextAreaFor(x => x.recipe_description, new { @class = "form-control" })
@@ -224,12 +225,12 @@
                 <input class="form-control datepicker" type="text" id="datepicker" name="recipe_publish_date" style="background-color:white;" />
             </div>
 
-            <button type="submit" class="btn btn-primary" style="background-color: rgb(255, 132, 0);outline:none;border:none;">Add Recipe</button>
+            <input type="submit" value="Add Recipe" class="btn btn-primary" style="background-color: rgb(255, 132, 0);outline:none;border:none;padding:10px;font-size:18px;margin-top:15px;margin-bottom:15px;" />
         }
 
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-QlVXO1++HQhCPtg63LOHm12RrLcRgtvP+/uFEC5G89bKmBCG02FDU1gJb+NKbxZX" crossorigin="anonymous"></script>
-        
+
         <script>
             flatpickr(".datepicker", {
                 dateFormat: "Y-m-d",

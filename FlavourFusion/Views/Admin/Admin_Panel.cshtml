@@ -159,9 +159,11 @@
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle thenav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">Events & Updates</a>
-            <ul class="dropdown-menu" style="background: white; border: none; padding: 13px; box-shadow: rgba(17, 12, 46, 0.2) 0px 48px 100px 0px; border-radius: 8px; height: 90px;">
-                <li><a class="dropdown-item" href="#">Contest</a></li>
-                <li><a class="dropdown-item" href="@Url.Action("Add_Annoucement")">Announcement</a></li>
+            <ul class="dropdown-menu" style="background: white; border: none; padding: 13px; box-shadow: rgba(17, 12, 46, 0.2) 0px 48px 100px 0px; border-radius: 8px; height: 150px;">
+                <li><a class="dropdown-item" href="@Url.Action("CreateContest")">Add Contest</a></li>
+                <li><a class="dropdown-item" href="@Url.Action("ViewContest")">View Contest</a></li>
+                <li><a class="dropdown-item" href="@Url.Action("Add_Annoucement")">Add Announcement</a></li>
+                <li><a class="dropdown-item" href="@Url.Action("View_Annoucement")">View Announcement</a></li>
             </ul>
         </li>
         <li class="nav-item dropdown">

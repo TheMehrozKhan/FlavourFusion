@@ -20,6 +20,7 @@ namespace FlavourFusion.Models
             this.Tbl_Comments = new HashSet<Tbl_Comments>();
             this.Tbl_Replies = new HashSet<Tbl_Replies>();
             this.Tbl_Subscriptions = new HashSet<Tbl_Subscriptions>();
+            this.Tbl_Submissions = new HashSet<Tbl_Submissions>();
         }
     
         public int user_id { get; set; }
@@ -29,12 +30,15 @@ namespace FlavourFusion.Models
         public string user_img { get; set; }
         public Nullable<bool> is_member { get; set; }
         public string MembershipStatus { get; set; }
-    
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Comments> Tbl_Comments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Replies> Tbl_Replies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Subscriptions> Tbl_Subscriptions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tbl_Submissions> Tbl_Submissions { get; set; }
     }
 }

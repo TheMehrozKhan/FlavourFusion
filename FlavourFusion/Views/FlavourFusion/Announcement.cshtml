@@ -5,20 +5,13 @@
 </head>
 <style>
     .accordion-item {
-        border: 0;
         padding-top: 10px;
         padding-bottom: 10px;
         border-color: white;
-        background-color:none;
     }
 
     #accordionExample {
         box-shadow: rgba(17, 12, 46, 0.04) 0px 48px 100px 0px;
-    }
-
-    .accordion-button.orange {
-        background-color: orange;
-        color: white;
     }
 
     .accordion-item:focus, .accordion-button:focus {
@@ -26,6 +19,21 @@
         outline: none !important;
         box-shadow: none;
     }
+
+    .accordion-button {
+        background-color: transparent;
+        color: black;
+    }
+
+        .accordion-button:hover {
+            background-color: orange;
+            color: white;
+        }
+
+        .accordion-button.active {
+            background-color: orange;
+            color: white;
+        }
 
     .subscribe {
         background-image: url(../../Template/assets/images/calculate-bg.png);
@@ -42,7 +50,6 @@
         left: 160px;
         margin-bottom: 150px;
     }
-
 
     .subscribe__title {
         font-weight: bold;
@@ -131,16 +138,16 @@
                 </div>
             </div>
             <div class="col-lg-6 pe-0">
-                    <img src="~/Template/assets/images/updates.png" alt="Images" style="border-radius:8px;">
-               
+                <img src="~/Template/assets/images/updates.png" alt="Images" style="border-radius:8px;">
             </div>
         </div>
     </div>
 </div>
 <h2 class="text-center">
-    Our Chef Annoucements
+    Our Chef Announcements
 </h2>
-<div class="container" style="margin-left: 45px; margin-top: 15px; margin-bottom:120px;">
+
+<div class="container" style="margin-left: 45px; margin-top: 15px; margin-bottom: 120px;">
     <div class="accordion" id="accordionExample">
         @if (Model != null)
         {
@@ -149,11 +156,11 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading_@item.Annoucement_id">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@item.Annoucement_id"
-                                aria-expanded="true" aria-controls="collapse_@item.Annoucement_id">
+                                aria-expanded="false" aria-controls="collapse_@item.Annoucement_id">
                             @item.Annoucement_Text
                         </button>
                     </h2>
-                    <div id="collapse_@item.Annoucement_id" class="accordion-collapse collapse show" aria-labelledby="heading_@item.Annoucement_id"
+                    <div id="collapse_@item.Annoucement_id" class="accordion-collapse collapse" aria-labelledby="heading_@item.Annoucement_id"
                          data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <strong style="background-color: white; padding: 10px; border-radius: 6px; color: black; box-shadow: rgba(17, 12, 46, 0.1) 0px 48px 100px 0px;">@item.Annoucement_Date</strong> @item.Annoucement_Description
@@ -165,15 +172,6 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $('.accordion-button').click(function () {
-            $('.accordion-button').removeClass('orange'); 
-            $(this).addClass('orange'); 
-        });
-    });
-</script>
-
 <div class="subscribe">
     <h1 class="subscribe__title" style="font-size:50px;">Let's keep in touch</h1>
     <p class="subscribe__copy">Subscribe to keep up with fresh news and exciting updates. We promise not to spam you!</p>
@@ -182,3 +180,12 @@
         <button class="form__button" style="font-size:25px;">Send</button>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('.accordion-button').on('click', function () {
+            $('.accordion-button').removeClass('active');
+            $(this).addClass('active');
+        });
+    });
+</script>

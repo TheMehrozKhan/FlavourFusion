@@ -1,0 +1,186 @@
+﻿@model FlavourFusion.Models.Tbl_Submissions
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add New Recipe - Shopio The Best Ecommerce Store in The Town</title>
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    <style>
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        form {
+            padding-top: 40px;
+            padding-bottom: 30px;
+            padding-left: 100px;
+            padding-right: 100px;
+            margin-top: 50px;
+            border-radius: 25px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            box-shadow: rgba(17, 12, 46, 0.08) 0px 48px 100px 0px;
+        }
+
+        #thebutton {
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 23px;
+            height: 45px;
+        }
+
+            #thebutton:hover {
+                box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+            }
+
+        input {
+            border-radius: 4.5px;
+            padding: 10px;
+            width: 100%;
+            box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+        }
+
+        select.form-control {
+            margin-bottom: 30px;
+        }
+
+        .theform input:focus,
+        .theform textarea:focus,
+        .theform select:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: rgb(255, 132, 0);
+        }
+
+        .theform .form-group {
+            margin-bottom: 25px;
+        }
+
+        textarea {
+            box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+        }
+
+        #navbar-example2 {
+            margin-top: 50px;
+            box-shadow: rgba(0, 0, 0, 0.03) 0px 10px 50px;
+            width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 8px;
+            height: 60px;
+        }
+
+        .thenav-link {
+            color: black;
+            font-size: 17px;
+            transition: 0.2s;
+        }
+
+            .thenav-link:hover {
+                color: rgb(255, 132, 0);
+                font-size: 19px;
+            }
+
+        .nav-link:focus,
+        .nav-link:active,
+        .nav-link:focus,
+        .nav-link:active {
+            color: black;
+            outline: none;
+        }
+
+        .nav-link:hover {
+            color: rgb(255, 132, 0);
+        }
+
+        .dropdown-toggle::after {
+            transition: transform 0.2s ease-in-out;
+            transform: rotate(0deg);
+        }
+
+        .dropdown-toggle:hover::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-toggle[aria-expanded="true"]::after {
+            transform: rotate(180deg);
+        }
+
+        input.form-control {
+            border-radius: 4.5px;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ced4da;
+        }
+
+        .form-control:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: rgb(255, 132, 0);
+        }
+    </style>
+</head>
+<div class="d-flex justify-content-center align-items-center">
+    @using (Html.BeginForm("Participate", "FlavourFusion", new { contestId = ViewBag.ContestId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model => model.ContestId)
+        @Html.HiddenFor(model => model.UserId)
+
+        <h3 class="text-center" style="margin-top:30px;margin-bottom:50px;">Participate In Our Contest!😃</h3>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Recipe_Category, "Select Category:")
+            @Html.DropDownListFor(model => model.Recipe_Category, ViewBag.categorylist as SelectList, "Select Recipe Category", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Recipe Name:</label>
+            @Html.TextBoxFor(model => model.RecipeName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.RecipeName)
+        </div>
+
+        <div class="form-group">
+            <label>Recipe Description:</label>
+            @Html.TextAreaFor(model => model.RecipeDescription, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.RecipeDescription)
+        </div>
+
+        <div class="form-group">
+            <label>Recipe Ingredients:</label>
+            @Html.TextBoxFor(model => model.Recipe_ingredients, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Recipe_ingredients)
+        </div>
+
+        <div class="form-group">
+            <label>Recipe Tags:</label>
+            @Html.TextBoxFor(model => model.Recipe_tags, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Recipe_tags)
+        </div>
+
+        <div class="form-group">
+            <label for="datepicker">Submission Date:</label>
+            <input class="form-control datepicker" type="text" id="datepicker" name="SubmissionDate" style="background-color:white;" />
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Recipe Images:")
+            <input type="file" name="imgfiles" id="imgfiles" class="form-control-file" required multiple />
+        </div>
+
+        <input type="submit" value="Submit Recipe" class="btn btn-primary" style="background-color: rgb(255, 132, 0);outline:none;border:none;padding:10px;font-size:18px;margin-top:15px;margin-bottom:15px;"/>
+    }
+</div>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-QlVXO1++HQhCPtg63LOHm12RrLcRgtvP+/uFEC5G89bKmBCG02FDU1gJb+NKbxZX" crossorigin="anonymous"></script>
+
+<script>
+    flatpickr(".datepicker", {
+        dateFormat: "Y-m-d",
+        enableTime: false,
+    });
+</script>

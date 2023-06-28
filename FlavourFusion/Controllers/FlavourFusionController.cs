@@ -50,33 +50,31 @@ namespace FlavourFusion.Controllers
         {
             List<Tbl_Recipe> recipes;
 
-            // Check if the user is logged in and get their membership plan
             if (Session["u_id"] != null)
             {
                 int userId = Convert.ToInt32(Session["u_id"]);
                 Tbl_Users user = db.Tbl_Users.Find(userId);
                 int membershipPlanId = user?.Tbl_Subscriptions.FirstOrDefault()?.Tbl_Membership_Plans?.plan_id ?? 0;
 
-                // Fetch recipes based on the membership plan
-                if (membershipPlanId == 1) // Standard plan
+                if (membershipPlanId == 1) 
                 {
                     recipes = db.Tbl_Recipe.Where(r => r.FK_Category_Recipe == id).OrderByDescending(x => x.recipe_id).Take(20).ToList();
                 }
-                else if (membershipPlanId == 2) // Premium plan
+                else if (membershipPlanId == 2) 
                 {
                     recipes = db.Tbl_Recipe.Where(r => r.FK_Category_Recipe == id).OrderByDescending(x => x.recipe_id).ToList();
                 }
-                else // Free plan or unknown plan
+                else 
                 {
                     recipes = db.Tbl_Recipe.Where(r => r.FK_Category_Recipe == id).OrderByDescending(x => x.recipe_id).Take(3).ToList();
                 }
 
                 ViewBag.MembershipPlanId = membershipPlanId;
             }
-            else // User is not logged in
+            else 
             {
                 recipes = db.Tbl_Recipe.Where(r => r.FK_Category_Recipe == id).OrderByDescending(x => x.recipe_id).Take(3).ToList();
-                ViewBag.MembershipPlanId = 0; // Assuming free plan for non-logged in users
+                ViewBag.MembershipPlanId = 0; 
             }
 
             var categoryName = string.Empty;
@@ -158,18 +156,18 @@ namespace FlavourFusion.Controllers
                 reply_date = DateTime.Now
             };
 
-            // Find the associated comment
+            
             Tbl_Comments comment = db.Tbl_Comments.Find(commentId);
             if (comment != null)
             {
-                reply.Tbl_Comments = comment; // Set the comment for the reply
+                reply.Tbl_Comments = comment;
                 db.Tbl_Replies.Add(reply);
                 db.SaveChanges();
 
                 return RedirectToAction("RecipeDetails", new { id = comment.recipe_id });
             }
 
-            // Handle the case where the associated comment is not found
+            
             return RedirectToAction("Index");
         }
 
@@ -185,13 +183,11 @@ namespace FlavourFusion.Controllers
         {
             Tbl_Comments ca = db.Tbl_Comments.Include("Tbl_Replies").SingleOrDefault(x => x.comment_id == id);
 
-            // Delete the associated replies
             foreach (var reply in ca.Tbl_Replies.ToList())
             {
                 db.Tbl_Replies.Remove(reply);
             }
-
-            // Delete the comment itself
+            
             db.Tbl_Comments.Remove(ca);
             db.SaveChanges();
 
@@ -224,14 +220,12 @@ namespace FlavourFusion.Controllers
 
             List<Tbl_Recipe> productList;
 
-            // Check if the user is logged in and get their membership plan
             if (Session["u_id"] != null)
             {
                 int userId = Convert.ToInt32(Session["u_id"]);
                 Tbl_Users user = db.Tbl_Users.Find(userId);
                 int membershipPlanId = user?.Tbl_Subscriptions.FirstOrDefault()?.Tbl_Membership_Plans?.plan_id ?? 0;
 
-                // Fetch recipes based on the membership plan and search term
                 var query = db.Tbl_Recipe.Where(r => r.recipe_name.ToLower().Contains(searchTerm.ToLower()) || r.recipe_description.ToLower().Contains(searchTerm.ToLower()));
 
                 if (id.HasValue)
@@ -239,20 +233,20 @@ namespace FlavourFusion.Controllers
                     query = query.Where(r => r.FK_Category_Recipe == id);
                 }
 
-                if (membershipPlanId == 1) // Standard plan
+                if (membershipPlanId == 1) 
                 {
                     productList = query.OrderByDescending(x => x.recipe_id).Take(20).ToList();
                 }
-                else if (membershipPlanId == 2) // Premium plan
+                else if (membershipPlanId == 2) 
                 {
                     productList = query.OrderByDescending(x => x.recipe_id).ToList();
                 }
-                else // Free plan or unknown plan
+                else 
                 {
                     productList = query.OrderByDescending(x => x.recipe_id).Take(3).ToList();
                 }
             }
-            else // User is not logged in
+            else 
             {
                 var query = db.Tbl_Recipe.Where(r => r.recipe_name.ToLower().Contains(searchTerm.ToLower()) || r.recipe_description.ToLower().Contains(searchTerm.ToLower()));
 
@@ -381,6 +375,103 @@ namespace FlavourFusion.Controllers
             return View(model);
         }
 
+        public ActionResult Contest()
+        {
+            if (Session["u_id"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var contests = db.Tbl_Contests.ToList();
+            var contestViewModels = contests.Select(contest => new ContestViewModel
+            {
+                Contest = contest,
+                Submission = new Tbl_Submissions()
+            }).ToList();
+
+            return View(contestViewModels);
+        }
+
+
+        [HttpGet]
+        public ActionResult Participate(int? contestId)
+        {
+            if (contestId == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                var contest = db.Tbl_Contests.FirstOrDefault(c => c.Contest_Id == contestId);
+                if (contest == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.ContestId = contestId;
+                ViewBag.UserId = Session["u_id"];
+                List<Tbl_Recipe_Category> li = db.Tbl_Recipe_Category.ToList();
+                ViewBag.categorylist = new SelectList(li, "category_id", "category_name");
+
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Participate(Tbl_Submissions submission, HttpPostedFileBase[] imgfiles)
+        {
+            List<Tbl_Recipe_Category> li = db.Tbl_Recipe_Category.ToList();
+            ViewBag.categorylist = new SelectList(li, "category_id", "category_name");
+
+            List<string> imagePaths = new List<string>();
+
+            if (imgfiles != null && imgfiles.Length > 0)
+            {
+                foreach (HttpPostedFileBase imgfile in imgfiles)
+                {
+                    string path = uploadimage(imgfile);
+
+                    if (path.Equals(-1))
+                    {
+                        ViewBag.Error = "Image Couldn't Uploaded Try Again";
+                        return View();
+                    }
+
+                    imagePaths.Add(path);
+                }
+            }
+
+            Tbl_Submissions rec = new Tbl_Submissions();
+            rec.Recipe_Category = submission.Recipe_Category;
+            rec.RecipeName = submission.RecipeName;
+            rec.RecipeDescription = submission.RecipeDescription;
+            rec.Recipe_ingredients = submission.Recipe_ingredients;
+            rec.Recipe_tags = submission.Recipe_tags;
+            rec.SubmissionDate = submission.SubmissionDate;
+
+            if (imagePaths.Count > 0)
+            {
+                rec.Recipe_image = string.Join(",", imagePaths);
+            }
+
+            if (Session["u_id"] != null && int.TryParse(Session["u_id"].ToString(), out int userId))
+            {
+                rec.ContestId = submission.ContestId;
+                rec.UserId = userId;
+
+                db.Tbl_Submissions.Add(rec);
+                db.SaveChanges();
+
+                return RedirectToAction("Contest");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+
+
         public ActionResult Logout()
         {
             Session.Clear();
@@ -460,17 +551,6 @@ namespace FlavourFusion.Controllers
             return View(user);
         }
 
-        [HttpGet]
-        public ActionResult Contest()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Contest(Tbl_Users us)
-        {
-            return View();
-        }
-
         public ActionResult Pricing()
         {
             List<Tbl_Membership_Plans> plans = db.Tbl_Membership_Plans.ToList();
@@ -483,11 +563,6 @@ namespace FlavourFusion.Controllers
         }
 
         public ActionResult Contact()
-        {
-            return View();
-        }
-
-        public ActionResult ProfileNotFound()
         {
             return View();
         }

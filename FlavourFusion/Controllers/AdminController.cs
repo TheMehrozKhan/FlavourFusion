@@ -85,6 +85,91 @@ namespace FlavourFusion.Controllers
         }
 
         [HttpGet]
+        public ActionResult CreateContest()
+        {
+            if (Session["ad_id"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateContest(Tbl_Contests contest, HttpPostedFileBase imgfile)
+        {
+            string path = uploadimage(imgfile);
+            if (path.Equals(-1))
+            {
+                ViewBag.Error = "Image Couldn't Uploaded Try Again";
+            }
+            else
+            {
+                Tbl_Contests ca = new Tbl_Contests();
+                ca.Contest_Id = contest.Contest_Id;
+                ca.ContestName = contest.ContestName;
+                ca.ContestDescription = contest.ContestDescription;
+                ca.StartDate = contest.StartDate;
+                ca.EndDate = contest.EndDate;
+                db.Tbl_Contests.Add(ca);
+                db.SaveChanges();
+                return RedirectToAction("ViewContests");
+            }
+            return View();
+        }
+
+        public ActionResult ViewContest()
+        {
+            if (Session["ad_id"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            List<Tbl_Contests> userList = db.Tbl_Contests.ToList();
+            return View(userList);
+        }
+
+        [HttpGet]
+        public ActionResult ViewSubmissions(int contestId)
+        {
+            if (Session["ad_id"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                var submissions = db.Tbl_Submissions.Where(s => s.ContestId == contestId).ToList();
+                return View(submissions);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult SelectWinner(int submissionId)
+        {
+            Tbl_Submissions submission = null;
+
+            if (Session["ad_id"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                submission = db.Tbl_Submissions.FirstOrDefault(s => s.Submission_Id == submissionId);
+                if (submission != null)
+                {
+                    submission.WinnerStatus = true;
+                    db.SaveChanges();
+                }
+            }
+            if (submission != null)
+            {
+                return RedirectToAction("ViewSubmissions", new { contestId = submission.ContestId });
+            }
+            else
+            {
+                return RedirectToAction("ViewContests");
+            }
+        }
+
+        [HttpGet]
         public ActionResult Add_Annoucement()
         {
             if (Session["ad_id"] == null)
@@ -106,6 +191,12 @@ namespace FlavourFusion.Controllers
             db.SaveChanges();
 
             return View();
+        }
+
+        public ActionResult View_Annoucement(int? id)
+        {
+            List<Tbl_Announcement> announcements = db.Tbl_Announcement.ToList();
+            return View(announcements);
         }
 
         public ActionResult View_Category(int? page)

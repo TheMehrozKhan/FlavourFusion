@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b424feb5eafa4fa9b0330edc281d436a" Name="Diagram1">
+      <Diagram DiagramId="b424feb5eafa4fa9b0330edc281d436a" Name="Diagram1" ZoomLevel="63">
         <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Admin" Width="1.5" PointX="1.5" PointY="15" IsExpanded="true" />
         <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Comments" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Membership_Plans" Width="1.5" PointX="3.75" PointY="8" IsExpanded="true" />
@@ -22,6 +22,11 @@
         <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Repli__user___30C33EC3" ManuallyRouted="false" />
         <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Subsc__user___5CD6CB2B" ManuallyRouted="false" />
         <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Announcement" Width="1.5" PointX="6.375" PointY="6.75" />
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Contests" Width="1.5" PointX="4.5" PointY="11.375" />
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Submissions" Width="1.5" PointX="6.75" PointY="9.75" />
+        <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Submi__Conte__58D1301D" />
+        <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Submi__Recip__57DD0BE4" />
+        <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Submi__UserI__59C55456" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

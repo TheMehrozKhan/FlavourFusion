@@ -1,8 +1,4 @@
-﻿﻿@model FlavourFusion.Models.Tbl_Announcement
-@{
-    ViewBag.Title = "Add_Category";
-}
-
+﻿﻿@model FlavourFusion.Models.Tbl_Contests
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -11,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
-
     <title>Add New Category in Store - Shopio</title>
     <style>
         body {
@@ -154,33 +149,37 @@
     });
 </script>
 <div class="d-flex justify-content-center align-items-center vh-100">
-    @using (Html.BeginForm("Add_Annoucement", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("CreateContest", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <form method="post">
             <div class="form-group">
-                <label for="username">Annoucement Title:</label>
-                @Html.TextBoxFor(x => x.Annoucement_Text, new { @class = "form-control", @id = "custom-input", @placeholder = "Enter Category Name" })
-                <span style="color: red">@Html.ValidationMessageFor(x => x.Annoucement_Text)</span>
+                <label for="username">Contest Name:</label>
+                @Html.TextBoxFor(x => x.ContestName, new { @class = "form-control", @id = "custom-input", @placeholder = "Enter Category Name" })
+                <span style="color: red">@Html.ValidationMessageFor(x => x.ContestName)</span>
             </div>
             <div class="form-group">
-                <label for="username">Annoucement Description:</label>
-                @Html.TextBoxFor(x => x.Annoucement_Description, new { @class = "form-control", @id = "custom-input", @placeholder = "Enter Category Name" })
-                <span style="color: red">@Html.ValidationMessageFor(x => x.Annoucement_Description)</span>
+                <label for="username">Contest Description:</label>
+                @Html.TextBoxFor(x => x.ContestDescription, new { @class = "form-control", @id = "custom-input", @placeholder = "Enter Category Name" })
+                <span style="color: red">@Html.ValidationMessageFor(x => x.ContestDescription)</span>
             </div>
             <div class="form-group">
-                <label for="datepicker">Select Date:</label>
-                <input class="form-control datepicker" type="text" id="datepicker" name="Annoucement_Date" style="background-color:white;" />
+                <label for="datepicker">Start Date:</label>
+                <input class="form-control datepicker" type="text" id="datepicker" name="StartDate" style="background-color:white;" />
+            </div>
+            <div class="form-group">
+                <label for="datepicker">End Date:</label>
+                <input class="form-control datepicker" type="text" id="datepicker" name="EndDate" style="background-color:white;" />
             </div>
             <button type="submit" class="btn btn-primary" id="thebutton" style="margin-bottom: 5px; margin-top: 5px; background-color: rgb(255, 132, 0); outline: none; border: none;">Add</button>
         </form>
     }
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-QlVXO1++HQhCPtg63LOHm12RrLcRgtvP+/uFEC5G89bKmBCG02FDU1gJb+NKbxZX" crossorigin="anonymous"></script>
-
-    <script>
-        flatpickr(".datepicker", {
-            dateFormat: "Y-m-d",
-            enableTime: false,
-        });
-    </script>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-QlVXO1++HQhCPtg63LOHm12RrLcRgtvP+/uFEC5G89bKmBCG02FDU1gJb+NKbxZX" crossorigin="anonymous"></script>
+
+<script>
+    flatpickr(".datepicker", {
+        dateFormat: "Y-m-d",
+        enableTime: false,
+    });
+</script>

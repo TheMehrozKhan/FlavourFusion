@@ -12,24 +12,20 @@ namespace FlavourFusion.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Recipe_Category
+    public partial class Tbl_Contests
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_Recipe_Category()
+        public Tbl_Contests()
         {
-            this.Tbl_Recipe = new HashSet<Tbl_Recipe>();
             this.Tbl_Submissions = new HashSet<Tbl_Submissions>();
         }
     
-        public int category_id { get; set; }
-        public string category_name { get; set; }
-        public string category_image { get; set; }
-        public int category_status { get; set; }
-        public Nullable<int> FK_Admin_Category { get; set; }
+        public int Contest_Id { get; set; }
+        public string ContestName { get; set; }
+        public string ContestDescription { get; set; }
+        public System.DateTime StartDate { get; set; }
+        public System.DateTime EndDate { get; set; }
     
-        public virtual Tbl_Admin Tbl_Admin { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Recipe> Tbl_Recipe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Submissions> Tbl_Submissions { get; set; }
     }
