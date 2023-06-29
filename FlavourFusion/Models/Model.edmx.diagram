@@ -4,29 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b424feb5eafa4fa9b0330edc281d436a" Name="Diagram1" ZoomLevel="63">
-        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Admin" Width="1.5" PointX="1.5" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Comments" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Membership_Plans" Width="1.5" PointX="3.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Recipe" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Recipe_Category" Width="1.5" PointX="1.5" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Replies" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Subscriptions" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Users" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+      <Diagram DiagramId="fce0324b4eec4af289f007010dfedead" Name="Diagram1">
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Admin" Width="1.5" PointX="1.5" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Announcement" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Comments" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Contests" Width="1.5" PointX="3.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Membership_Plans" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Recipe" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Recipe_Category" Width="1.5" PointX="1.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Replies" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Submissions" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Subscriptions" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Users" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
         <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Recip__FK_Ad__02FC7413" ManuallyRouted="false" />
         <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Comme__recip__2BFE89A6" ManuallyRouted="false" />
         <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Comme__user___2CF2ADDF" ManuallyRouted="false" />
         <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Repli__comme__2FCF1A8A" ManuallyRouted="false" />
+        <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Submi__Conte__58D1301D" ManuallyRouted="false" />
         <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Subsc__plan___5DCAEF64" ManuallyRouted="false" />
         <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Recip__FK_Ca__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Submi__Recip__57DD0BE4" ManuallyRouted="false" />
         <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Repli__user___30C33EC3" ManuallyRouted="false" />
+        <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Submi__UserI__59C55456" ManuallyRouted="false" />
         <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Subsc__user___5CD6CB2B" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Announcement" Width="1.5" PointX="6.375" PointY="6.75" />
-        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Contests" Width="1.5" PointX="4.5" PointY="11.375" />
-        <EntityTypeShape EntityType="FlavourFusionModel.Tbl_Submissions" Width="1.5" PointX="6.75" PointY="9.75" />
-        <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Submi__Conte__58D1301D" />
-        <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Submi__Recip__57DD0BE4" />
-        <AssociationConnector Association="FlavourFusionModel.FK__Tbl_Submi__UserI__59C55456" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

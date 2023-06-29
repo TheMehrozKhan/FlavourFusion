@@ -1,4 +1,6 @@
-﻿using FlavourFusion.Models;
+﻿using SendGrid;
+using SendGrid.Helpers.Mail;
+using FlavourFusion.Models;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ namespace FlavourFusion.Controllers
 {
     public class AdminController : Controller
     {
-        FlavourFusionEntities3 db = new FlavourFusionEntities3();
+        FlavourFusionEntities4 db = new FlavourFusionEntities4();
         public ActionResult Index()
         {
             return View();
@@ -112,7 +114,7 @@ namespace FlavourFusion.Controllers
                 ca.EndDate = contest.EndDate;
                 db.Tbl_Contests.Add(ca);
                 db.SaveChanges();
-                return RedirectToAction("ViewContests");
+                return RedirectToAction("ViewContest");
             }
             return View();
         }
@@ -128,37 +130,118 @@ namespace FlavourFusion.Controllers
         }
 
         [HttpGet]
-        public ActionResult ViewSubmissions(int contestId)
+        public ActionResult DeleteContest(int? id)
         {
-            if (Session["ad_id"] == null)
-            {
-                return RedirectToAction("Login");
-            }
-            else
-            {
-                var submissions = db.Tbl_Submissions.Where(s => s.ContestId == contestId).ToList();
-                return View(submissions);
-            }
+            Tbl_Contests ca = db.Tbl_Contests.Where(x => x.Contest_Id == id).SingleOrDefault();
+            return View(ca);
         }
 
         [HttpPost]
-        public ActionResult SelectWinner(int submissionId)
+        public ActionResult DeleteContest(int? id, Tbl_Contests cat)
         {
-            Tbl_Submissions submission = null;
+            Tbl_Contests ca = db.Tbl_Contests.Where(x => x.Contest_Id == id).SingleOrDefault();
+            db.Tbl_Contests.Remove(ca);
+            db.SaveChanges();
+            return RedirectToAction("ViewContest");
+        }
 
+        [HttpGet]
+        public ActionResult ViewSubmissions()
+        {
             if (Session["ad_id"] == null)
             {
                 return RedirectToAction("Login");
             }
-            else
+            List<Tbl_Submissions> submissions = db.Tbl_Submissions.ToList();
+            return View(submissions);
+        }
+
+        [HttpGet]
+        public ActionResult DeleteSubmission(int? id)
+        {
+            Tbl_Submissions ca = db.Tbl_Submissions.Where(x => x.Submission_Id == id).SingleOrDefault();
+            return View(ca);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteSubmission(int? id, Tbl_Submissions cat)
+        {
+            Tbl_Submissions ca = db.Tbl_Submissions.Where(x => x.Submission_Id == id).SingleOrDefault();
+            db.Tbl_Submissions.Remove(ca);
+            db.SaveChanges();
+            return RedirectToAction("ViewSubmissions");
+        }
+
+        public void SendWinnerNotificationEmail(string recipientEmail)
+        {
+            string senderEmail = "khanmehroz245@gmail.com";
+            string apiKey = "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";
+            string subject = "Congratulations! You're The Winner of FlavourFusion Contest!";
+            string body = "Dear participant, congratulations! Your recipe has been selected as the winner of the contest.";
+
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress(senderEmail);
+            var to = new EmailAddress(recipientEmail);
+            var plainTextContent = body;
+            var htmlContent = "<strong>" + body + "</strong>";
+
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = client.SendEmailAsync(msg).Result;
+
+            if (response.StatusCode != System.Net.HttpStatusCode.Accepted)
             {
-                submission = db.Tbl_Submissions.FirstOrDefault(s => s.Submission_Id == submissionId);
-                if (submission != null)
+                Console.WriteLine($"Failed to send email: {response.StatusCode}");
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult SelectWinner(int submissionId)
+        {
+            if (Session["ad_id"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var submission = db.Tbl_Submissions.FirstOrDefault(s => s.Submission_Id == submissionId);
+            if (submission != null)
+            {
+                var contestId = submission.ContestId;
+                var contestSubmissions = db.Tbl_Submissions.Where(s => s.ContestId == contestId).ToList();
+
+                if (submission.WinnerStatus ?? false)
+                {
+                    TempData["ErrorMessage"] = "You have already declared this recipe as the winner.";
+                }
+                else
                 {
                     submission.WinnerStatus = true;
                     db.SaveChanges();
+
+                    foreach (var contestSubmission in contestSubmissions)
+                    {
+                        if (contestSubmission.Submission_Id != submissionId)
+                        {
+                            contestSubmission.WinnerStatus = false;
+                        }
+                    }
+                    db.SaveChanges();
+
+                    var user = db.Tbl_Users.FirstOrDefault(u => u.user_id == submission.UserId);
+                    if (user != null)
+                    {
+                        try
+                        {
+                            SendWinnerNotificationEmail(user.user_email);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error sending email: {ex.Message}");
+                        }
+                    }
                 }
             }
+
             if (submission != null)
             {
                 return RedirectToAction("ViewSubmissions", new { contestId = submission.ContestId });
@@ -168,6 +251,7 @@ namespace FlavourFusion.Controllers
                 return RedirectToAction("ViewContests");
             }
         }
+
 
         [HttpGet]
         public ActionResult Add_Annoucement()
@@ -197,6 +281,22 @@ namespace FlavourFusion.Controllers
         {
             List<Tbl_Announcement> announcements = db.Tbl_Announcement.ToList();
             return View(announcements);
+        }
+
+        [HttpGet]
+        public ActionResult DeleteAnnoucement(int? id)
+        {
+            Tbl_Announcement ca = db.Tbl_Announcement.Where(x => x.Annoucement_id == id).SingleOrDefault();
+            return View(ca);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteAnnoucement(int? id, Tbl_Announcement cat)
+        {
+            Tbl_Announcement ca = db.Tbl_Announcement.Where(x => x.Annoucement_id == id).SingleOrDefault();
+            db.Tbl_Announcement.Remove(ca);
+            db.SaveChanges();
+            return RedirectToAction("View_Annoucement");
         }
 
         public ActionResult View_Category(int? page)

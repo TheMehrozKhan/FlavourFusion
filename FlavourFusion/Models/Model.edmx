@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="FlavourFusionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FlavourFusionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Tbl_Admin">
           <Key>
             <PropertyRef Name="admin_id" />
@@ -96,7 +96,7 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Recipe_Category" Type="int" Nullable="false" />
           <Property Name="RecipeName" Type="varchar" MaxLength="255" />
-          <Property Name="RecipeDescription" Type="varchar" MaxLength="255" />
+          <Property Name="RecipeDescription" Type="varchar(max)" />
           <Property Name="Recipe_image" Type="varchar(max)" />
           <Property Name="Recipe_ingredients" Type="int" />
           <Property Name="Recipe_tags" Type="varchar" MaxLength="250" />
@@ -313,7 +313,8 @@
             <End Role="Tbl_Subscriptions" EntitySet="Tbl_Subscriptions" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FlavourFusionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -327,6 +328,15 @@
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Tbl_Recipe_Category" Relationship="Self.FK__Tbl_Recip__FK_Ad__02FC7413" FromRole="Tbl_Admin" ToRole="Tbl_Recipe_Category" />
         </EntityType>
+        <EntityType Name="Tbl_Announcement">
+          <Key>
+            <PropertyRef Name="Annoucement_id" />
+          </Key>
+          <Property Name="Annoucement_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Annoucement_Text" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Annoucement_Description" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="Annoucement_Date" Type="DateTime" Precision="0" />
+        </EntityType>
         <EntityType Name="Tbl_Comments">
           <Key>
             <PropertyRef Name="comment_id" />
@@ -339,6 +349,17 @@
           <NavigationProperty Name="Tbl_Recipe" Relationship="Self.FK__Tbl_Comme__recip__2BFE89A6" FromRole="Tbl_Comments" ToRole="Tbl_Recipe" />
           <NavigationProperty Name="Tbl_Users" Relationship="Self.FK__Tbl_Comme__user___2CF2ADDF" FromRole="Tbl_Comments" ToRole="Tbl_Users" />
           <NavigationProperty Name="Tbl_Replies" Relationship="Self.FK__Tbl_Repli__comme__2FCF1A8A" FromRole="Tbl_Comments" ToRole="Tbl_Replies" />
+        </EntityType>
+        <EntityType Name="Tbl_Contests">
+          <Key>
+            <PropertyRef Name="Contest_Id" />
+          </Key>
+          <Property Name="Contest_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContestName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContestDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Tbl_Submissions" Relationship="Self.FK__Tbl_Submi__Conte__58D1301D" FromRole="Tbl_Contests" ToRole="Tbl_Submissions" />
         </EntityType>
         <EntityType Name="Tbl_Membership_Plans">
           <Key>
@@ -378,7 +399,7 @@
           <Property Name="FK_Admin_Category" Type="Int32" />
           <NavigationProperty Name="Tbl_Admin" Relationship="Self.FK__Tbl_Recip__FK_Ad__02FC7413" FromRole="Tbl_Recipe_Category" ToRole="Tbl_Admin" />
           <NavigationProperty Name="Tbl_Recipe" Relationship="Self.FK__Tbl_Recip__FK_Ca__05D8E0BE" FromRole="Tbl_Recipe_Category" ToRole="Tbl_Recipe" />
-          <NavigationProperty Name="Tbl_Submissions" Relationship="FlavourFusionModel.FK__Tbl_Submi__Recip__57DD0BE4" FromRole="Tbl_Recipe_Category" ToRole="Tbl_Submissions" />
+          <NavigationProperty Name="Tbl_Submissions" Relationship="Self.FK__Tbl_Submi__Recip__57DD0BE4" FromRole="Tbl_Recipe_Category" ToRole="Tbl_Submissions" />
         </EntityType>
         <EntityType Name="Tbl_Replies">
           <Key>
@@ -391,6 +412,25 @@
           <Property Name="reply_date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Tbl_Comments" Relationship="Self.FK__Tbl_Repli__comme__2FCF1A8A" FromRole="Tbl_Replies" ToRole="Tbl_Comments" />
           <NavigationProperty Name="Tbl_Users" Relationship="Self.FK__Tbl_Repli__user___30C33EC3" FromRole="Tbl_Replies" ToRole="Tbl_Users" />
+        </EntityType>
+        <EntityType Name="Tbl_Submissions">
+          <Key>
+            <PropertyRef Name="Submission_Id" />
+          </Key>
+          <Property Name="Submission_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContestId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Recipe_Category" Type="Int32" Nullable="false" />
+          <Property Name="RecipeName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RecipeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Recipe_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Recipe_ingredients" Type="Int32" />
+          <Property Name="Recipe_tags" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="SubmissionDate" Type="DateTime" Precision="0" />
+          <Property Name="WinnerStatus" Type="Boolean" />
+          <NavigationProperty Name="Tbl_Contests" Relationship="Self.FK__Tbl_Submi__Conte__58D1301D" FromRole="Tbl_Submissions" ToRole="Tbl_Contests" />
+          <NavigationProperty Name="Tbl_Recipe_Category" Relationship="Self.FK__Tbl_Submi__Recip__57DD0BE4" FromRole="Tbl_Submissions" ToRole="Tbl_Recipe_Category" />
+          <NavigationProperty Name="Tbl_Users" Relationship="Self.FK__Tbl_Submi__UserI__59C55456" FromRole="Tbl_Submissions" ToRole="Tbl_Users" />
         </EntityType>
         <EntityType Name="Tbl_Subscriptions">
           <Key>
@@ -416,8 +456,8 @@
           <Property Name="is_member" Type="Boolean" />
           <NavigationProperty Name="Tbl_Comments" Relationship="Self.FK__Tbl_Comme__user___2CF2ADDF" FromRole="Tbl_Users" ToRole="Tbl_Comments" />
           <NavigationProperty Name="Tbl_Replies" Relationship="Self.FK__Tbl_Repli__user___30C33EC3" FromRole="Tbl_Users" ToRole="Tbl_Replies" />
+          <NavigationProperty Name="Tbl_Submissions" Relationship="Self.FK__Tbl_Submi__UserI__59C55456" FromRole="Tbl_Users" ToRole="Tbl_Submissions" />
           <NavigationProperty Name="Tbl_Subscriptions" Relationship="Self.FK__Tbl_Subsc__user___5CD6CB2B" FromRole="Tbl_Users" ToRole="Tbl_Subscriptions" />
-          <NavigationProperty Name="Tbl_Submissions" Relationship="FlavourFusionModel.FK__Tbl_Submi__UserI__59C55456" FromRole="Tbl_Users" ToRole="Tbl_Submissions" />
         </EntityType>
         <Association Name="FK__Tbl_Recip__FK_Ad__02FC7413">
           <End Role="Tbl_Admin" Type="Self.Tbl_Admin" Multiplicity="0..1" />
@@ -467,6 +507,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Tbl_Submi__Conte__58D1301D">
+          <End Role="Tbl_Contests" Type="Self.Tbl_Contests" Multiplicity="1" />
+          <End Role="Tbl_Submissions" Type="Self.Tbl_Submissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Contests">
+              <PropertyRef Name="Contest_Id" />
+            </Principal>
+            <Dependent Role="Tbl_Submissions">
+              <PropertyRef Name="ContestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Tbl_Subsc__plan___5DCAEF64">
           <End Role="Tbl_Membership_Plans" Type="Self.Tbl_Membership_Plans" Multiplicity="0..1" />
           <End Role="Tbl_Subscriptions" Type="Self.Tbl_Subscriptions" Multiplicity="*" />
@@ -491,6 +543,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Tbl_Submi__Recip__57DD0BE4">
+          <End Role="Tbl_Recipe_Category" Type="Self.Tbl_Recipe_Category" Multiplicity="1" />
+          <End Role="Tbl_Submissions" Type="Self.Tbl_Submissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Recipe_Category">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="Tbl_Submissions">
+              <PropertyRef Name="Recipe_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Tbl_Repli__user___30C33EC3">
           <End Role="Tbl_Users" Type="Self.Tbl_Users" Multiplicity="1" />
           <End Role="Tbl_Replies" Type="Self.Tbl_Replies" Multiplicity="*" />
@@ -500,6 +564,18 @@
             </Principal>
             <Dependent Role="Tbl_Replies">
               <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Submi__UserI__59C55456">
+          <End Role="Tbl_Users" Type="Self.Tbl_Users" Multiplicity="1" />
+          <End Role="Tbl_Submissions" Type="Self.Tbl_Submissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Tbl_Submissions">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -515,13 +591,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FlavourFusionEntities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FlavourFusionEntities4" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Tbl_Admin" EntityType="Self.Tbl_Admin" />
+          <EntitySet Name="Tbl_Announcement" EntityType="Self.Tbl_Announcement" />
           <EntitySet Name="Tbl_Comments" EntityType="Self.Tbl_Comments" />
+          <EntitySet Name="Tbl_Contests" EntityType="Self.Tbl_Contests" />
           <EntitySet Name="Tbl_Membership_Plans" EntityType="Self.Tbl_Membership_Plans" />
           <EntitySet Name="Tbl_Recipe" EntityType="Self.Tbl_Recipe" />
           <EntitySet Name="Tbl_Recipe_Category" EntityType="Self.Tbl_Recipe_Category" />
           <EntitySet Name="Tbl_Replies" EntityType="Self.Tbl_Replies" />
+          <EntitySet Name="Tbl_Submissions" EntityType="Self.Tbl_Submissions" />
           <EntitySet Name="Tbl_Subscriptions" EntityType="Self.Tbl_Subscriptions" />
           <EntitySet Name="Tbl_Users" EntityType="Self.Tbl_Users" />
           <AssociationSet Name="FK__Tbl_Recip__FK_Ad__02FC7413" Association="Self.FK__Tbl_Recip__FK_Ad__02FC7413">
@@ -540,6 +619,10 @@
             <End Role="Tbl_Comments" EntitySet="Tbl_Comments" />
             <End Role="Tbl_Replies" EntitySet="Tbl_Replies" />
           </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Submi__Conte__58D1301D" Association="Self.FK__Tbl_Submi__Conte__58D1301D">
+            <End Role="Tbl_Contests" EntitySet="Tbl_Contests" />
+            <End Role="Tbl_Submissions" EntitySet="Tbl_Submissions" />
+          </AssociationSet>
           <AssociationSet Name="FK__Tbl_Subsc__plan___5DCAEF64" Association="Self.FK__Tbl_Subsc__plan___5DCAEF64">
             <End Role="Tbl_Membership_Plans" EntitySet="Tbl_Membership_Plans" />
             <End Role="Tbl_Subscriptions" EntitySet="Tbl_Subscriptions" />
@@ -548,111 +631,29 @@
             <End Role="Tbl_Recipe_Category" EntitySet="Tbl_Recipe_Category" />
             <End Role="Tbl_Recipe" EntitySet="Tbl_Recipe" />
           </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Submi__Recip__57DD0BE4" Association="Self.FK__Tbl_Submi__Recip__57DD0BE4">
+            <End Role="Tbl_Recipe_Category" EntitySet="Tbl_Recipe_Category" />
+            <End Role="Tbl_Submissions" EntitySet="Tbl_Submissions" />
+          </AssociationSet>
           <AssociationSet Name="FK__Tbl_Repli__user___30C33EC3" Association="Self.FK__Tbl_Repli__user___30C33EC3">
             <End Role="Tbl_Users" EntitySet="Tbl_Users" />
             <End Role="Tbl_Replies" EntitySet="Tbl_Replies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Submi__UserI__59C55456" Association="Self.FK__Tbl_Submi__UserI__59C55456">
+            <End Role="Tbl_Users" EntitySet="Tbl_Users" />
+            <End Role="Tbl_Submissions" EntitySet="Tbl_Submissions" />
           </AssociationSet>
           <AssociationSet Name="FK__Tbl_Subsc__user___5CD6CB2B" Association="Self.FK__Tbl_Subsc__user___5CD6CB2B">
             <End Role="Tbl_Users" EntitySet="Tbl_Users" />
             <End Role="Tbl_Subscriptions" EntitySet="Tbl_Subscriptions" />
           </AssociationSet>
-          <EntitySet Name="Tbl_Announcement" EntityType="FlavourFusionModel.Tbl_Announcement" />
-          <EntitySet Name="Tbl_Contests" EntityType="FlavourFusionModel.Tbl_Contests" />
-          <EntitySet Name="Tbl_Submissions" EntityType="FlavourFusionModel.Tbl_Submissions" />
-          <AssociationSet Name="FK__Tbl_Submi__Conte__58D1301D" Association="FlavourFusionModel.FK__Tbl_Submi__Conte__58D1301D">
-            <End Role="Tbl_Contests" EntitySet="Tbl_Contests" />
-            <End Role="Tbl_Submissions" EntitySet="Tbl_Submissions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Submi__Recip__57DD0BE4" Association="FlavourFusionModel.FK__Tbl_Submi__Recip__57DD0BE4">
-            <End Role="Tbl_Recipe_Category" EntitySet="Tbl_Recipe_Category" />
-            <End Role="Tbl_Submissions" EntitySet="Tbl_Submissions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Submi__UserI__59C55456" Association="FlavourFusionModel.FK__Tbl_Submi__UserI__59C55456">
-            <End Role="Tbl_Users" EntitySet="Tbl_Users" />
-            <End Role="Tbl_Submissions" EntitySet="Tbl_Submissions" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Tbl_Announcement">
-          <Key>
-            <PropertyRef Name="Annoucement_id" />
-          </Key>
-          <Property Name="Annoucement_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Annoucement_Text" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Annoucement_Description" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
-          <Property Name="Annoucement_Date" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="Tbl_Contests">
-          <Key>
-            <PropertyRef Name="Contest_Id" />
-          </Key>
-          <Property Name="Contest_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ContestName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContestDescription" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Tbl_Submissions" Relationship="FlavourFusionModel.FK__Tbl_Submi__Conte__58D1301D" FromRole="Tbl_Contests" ToRole="Tbl_Submissions" />
-        </EntityType>
-        <EntityType Name="Tbl_Submissions">
-          <Key>
-            <PropertyRef Name="Submission_Id" />
-          </Key>
-          <Property Name="Submission_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ContestId" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Recipe_Category" Type="Int32" Nullable="false" />
-          <Property Name="RecipeName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="RecipeDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Recipe_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Recipe_ingredients" Type="Int32" />
-          <Property Name="Recipe_tags" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="SubmissionDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Tbl_Contests" Relationship="FlavourFusionModel.FK__Tbl_Submi__Conte__58D1301D" FromRole="Tbl_Submissions" ToRole="Tbl_Contests" />
-          <NavigationProperty Name="Tbl_Recipe_Category" Relationship="FlavourFusionModel.FK__Tbl_Submi__Recip__57DD0BE4" FromRole="Tbl_Submissions" ToRole="Tbl_Recipe_Category" />
-          <NavigationProperty Name="Tbl_Users" Relationship="FlavourFusionModel.FK__Tbl_Submi__UserI__59C55456" FromRole="Tbl_Submissions" ToRole="Tbl_Users" />
-          <Property Name="WinnerStatus" Type="Boolean" />
-        </EntityType>
-        <Association Name="FK__Tbl_Submi__Conte__58D1301D">
-          <End Type="FlavourFusionModel.Tbl_Contests" Role="Tbl_Contests" Multiplicity="1" />
-          <End Type="FlavourFusionModel.Tbl_Submissions" Role="Tbl_Submissions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Contests">
-              <PropertyRef Name="Contest_Id" />
-            </Principal>
-            <Dependent Role="Tbl_Submissions">
-              <PropertyRef Name="ContestId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Tbl_Submi__Recip__57DD0BE4">
-          <End Type="FlavourFusionModel.Tbl_Recipe_Category" Role="Tbl_Recipe_Category" Multiplicity="1" />
-          <End Type="FlavourFusionModel.Tbl_Submissions" Role="Tbl_Submissions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Recipe_Category">
-              <PropertyRef Name="category_id" />
-            </Principal>
-            <Dependent Role="Tbl_Submissions">
-              <PropertyRef Name="Recipe_Category" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Tbl_Submi__UserI__59C55456">
-          <End Type="FlavourFusionModel.Tbl_Users" Role="Tbl_Users" Multiplicity="1" />
-          <End Type="FlavourFusionModel.Tbl_Submissions" Role="Tbl_Submissions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Users">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="Tbl_Submissions">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FlavourFusionModelStoreContainer" CdmEntityContainer="FlavourFusionEntities3">
+        <EntityContainerMapping StorageEntityContainer="FlavourFusionModelStoreContainer" CdmEntityContainer="FlavourFusionEntities4">
           <EntitySetMapping Name="Tbl_Admin">
             <EntityTypeMapping TypeName="FlavourFusionModel.Tbl_Admin">
               <MappingFragment StoreEntitySet="Tbl_Admin">
@@ -660,6 +661,16 @@
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Announcement">
+            <EntityTypeMapping TypeName="FlavourFusionModel.Tbl_Announcement">
+              <MappingFragment StoreEntitySet="Tbl_Announcement">
+                <ScalarProperty Name="Annoucement_id" ColumnName="Annoucement_id" />
+                <ScalarProperty Name="Annoucement_Text" ColumnName="Annoucement_Text" />
+                <ScalarProperty Name="Annoucement_Description" ColumnName="Annoucement_Description" />
+                <ScalarProperty Name="Annoucement_Date" ColumnName="Annoucement_Date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -671,6 +682,17 @@
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="comment_text" ColumnName="comment_text" />
                 <ScalarProperty Name="comment_date" ColumnName="comment_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Contests">
+            <EntityTypeMapping TypeName="FlavourFusionModel.Tbl_Contests">
+              <MappingFragment StoreEntitySet="Tbl_Contests">
+                <ScalarProperty Name="Contest_Id" ColumnName="Contest_Id" />
+                <ScalarProperty Name="ContestName" ColumnName="ContestName" />
+                <ScalarProperty Name="ContestDescription" ColumnName="ContestDescription" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -722,6 +744,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Submissions">
+            <EntityTypeMapping TypeName="FlavourFusionModel.Tbl_Submissions">
+              <MappingFragment StoreEntitySet="Tbl_Submissions">
+                <ScalarProperty Name="Submission_Id" ColumnName="Submission_Id" />
+                <ScalarProperty Name="ContestId" ColumnName="ContestId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Recipe_Category" ColumnName="Recipe_Category" />
+                <ScalarProperty Name="RecipeName" ColumnName="RecipeName" />
+                <ScalarProperty Name="RecipeDescription" ColumnName="RecipeDescription" />
+                <ScalarProperty Name="Recipe_image" ColumnName="Recipe_image" />
+                <ScalarProperty Name="Recipe_ingredients" ColumnName="Recipe_ingredients" />
+                <ScalarProperty Name="Recipe_tags" ColumnName="Recipe_tags" />
+                <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
+                <ScalarProperty Name="WinnerStatus" ColumnName="WinnerStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Tbl_Subscriptions">
             <EntityTypeMapping TypeName="FlavourFusionModel.Tbl_Subscriptions">
               <MappingFragment StoreEntitySet="Tbl_Subscriptions">
@@ -742,44 +781,6 @@
                 <ScalarProperty Name="user_email" ColumnName="user_email" />
                 <ScalarProperty Name="user_img" ColumnName="user_img" />
                 <ScalarProperty Name="is_member" ColumnName="is_member" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_Announcement">
-            <EntityTypeMapping TypeName="FlavourFusionModel.Tbl_Announcement">
-              <MappingFragment StoreEntitySet="Tbl_Announcement">
-                <ScalarProperty Name="Annoucement_Date" ColumnName="Annoucement_Date" />
-                <ScalarProperty Name="Annoucement_Description" ColumnName="Annoucement_Description" />
-                <ScalarProperty Name="Annoucement_Text" ColumnName="Annoucement_Text" />
-                <ScalarProperty Name="Annoucement_id" ColumnName="Annoucement_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_Contests">
-            <EntityTypeMapping TypeName="FlavourFusionModel.Tbl_Contests">
-              <MappingFragment StoreEntitySet="Tbl_Contests">
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="ContestDescription" ColumnName="ContestDescription" />
-                <ScalarProperty Name="ContestName" ColumnName="ContestName" />
-                <ScalarProperty Name="Contest_Id" ColumnName="Contest_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_Submissions">
-            <EntityTypeMapping TypeName="FlavourFusionModel.Tbl_Submissions">
-              <MappingFragment StoreEntitySet="Tbl_Submissions">
-                <ScalarProperty Name="WinnerStatus" ColumnName="WinnerStatus" />
-                <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
-                <ScalarProperty Name="Recipe_tags" ColumnName="Recipe_tags" />
-                <ScalarProperty Name="Recipe_ingredients" ColumnName="Recipe_ingredients" />
-                <ScalarProperty Name="Recipe_image" ColumnName="Recipe_image" />
-                <ScalarProperty Name="RecipeDescription" ColumnName="RecipeDescription" />
-                <ScalarProperty Name="RecipeName" ColumnName="RecipeName" />
-                <ScalarProperty Name="Recipe_Category" ColumnName="Recipe_Category" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ContestId" ColumnName="ContestId" />
-                <ScalarProperty Name="Submission_Id" ColumnName="Submission_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

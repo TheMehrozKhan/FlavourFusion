@@ -1,4 +1,4 @@
-﻿﻿@model FlavourFusion.Models.Tbl_Recipe
+﻿﻿@model FlavourFusion.Models.Tbl_Submissions
 <head>
     <title>Delete Categories - Shopio</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
@@ -29,16 +29,16 @@
     }
 </style>
 <div style="display:flex;justify-content:center;align-items:center;height:100vh;">
-    @using (Html.BeginForm("DeleteRecipe", "Admin", FormMethod.Post, new { @class = "delete-form" }))
+    @using (Html.BeginForm("DeleteSubmission", "Admin", FormMethod.Post, new { @class = "delete-form" }))
     {
         <div class="form-wrapper">
             <form>
-                <h3>Do You Want to Delete This Recipe 🤔?</h3>
+                <h3>Do You Want to Delete This Submission 🤔?</h3>
                 <div class="form-group">
-                    @Html.TextBoxFor(x => x.recipe_name, new { @class = "form-control", @readonly = "readonly", })
+                    @Html.TextBoxFor(x => x.RecipeName, new { @class = "form-control", @readonly = "readonly", })
                     <input type="submit" style="margin-top:5px;" value="YES" class="btn btn-danger" id="thebtn" />
                 </div>
             </form>
         </div>
-     }
+    }
 </div>

@@ -6,6 +6,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+
     <title>All Registered Users - Shopio</title>
     <style>
 
@@ -98,9 +100,10 @@
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle thenav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">Events & Updates</a>
-            <ul class="dropdown-menu" style="background: white; border: none; padding: 13px; box-shadow: rgba(17, 12, 46, 0.2) 0px 48px 100px 0px; border-radius: 8px; height: 150px;">
+            <ul class="dropdown-menu" style="background: white; border: none; padding: 13px; box-shadow: rgba(17, 12, 46, 0.2) 0px 48px 100px 0px; border-radius: 8px;">
                 <li><a class="dropdown-item" href="@Url.Action("CreateContest")">Add Contest</a></li>
                 <li><a class="dropdown-item" href="@Url.Action("ViewContest")">View Contest</a></li>
+                <li><a class="dropdown-item" href="@Url.Action("ViewSubmissions")">Contest Submissions</a></li>
                 <li><a class="dropdown-item" href="@Url.Action("Add_Annoucement")">Add Announcement</a></li>
                 <li><a class="dropdown-item" href="@Url.Action("View_Annoucement")">View Announcement</a></li>
             </ul>
@@ -136,7 +139,7 @@
 <div class="center-card" style="border: none;">
     <div class="card container center-table bg-white" style="box-shadow: rgba(17, 12, 46, 0.05) 0px 48px 100px 0px;">
         <div class="container center-heading">
-            <h3>Our <span style="color:rgb(255, 132, 0);">Contests</span></h3>
+            <h3>Our <span style="color:rgb(255, 132, 0);">Announcements</span></h3>
         </div>
         <hr style="color:black;" />
         <div class="table-responsive" style="height: 300px; overflow-y: scroll;">
@@ -148,6 +151,7 @@
                             <td>Annoucement Name</td>
                             <td>Annoucement Description</td>
                             <td>Annoucement Date</td>
+                            <td>Actions</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -160,6 +164,11 @@
                                     <td>@item.Annoucement_Text</td>
                                     <td>@item.Annoucement_Description</td>
                                     <td>@item.Annoucement_Date</td>
+                                    <td>
+                                        <a href="@Url.Action("DeleteAnnoucement", "Admin", new { id = item.Annoucement_id })">
+                                            <i class="ri-delete-bin-5-line"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             }
                         }

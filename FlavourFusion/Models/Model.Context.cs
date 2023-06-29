@@ -13,10 +13,10 @@ namespace FlavourFusion.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FlavourFusionEntities3 : DbContext
+    public partial class FlavourFusionEntities4 : DbContext
     {
-        public FlavourFusionEntities3()
-            : base("name=FlavourFusionEntities3")
+        public FlavourFusionEntities4()
+            : base("name=FlavourFusionEntities4")
         {
         }
     
@@ -26,15 +26,15 @@ namespace FlavourFusion.Models
         }
     
         public virtual DbSet<Tbl_Admin> Tbl_Admin { get; set; }
+        public virtual DbSet<Tbl_Announcement> Tbl_Announcement { get; set; }
         public virtual DbSet<Tbl_Comments> Tbl_Comments { get; set; }
+        public virtual DbSet<Tbl_Contests> Tbl_Contests { get; set; }
         public virtual DbSet<Tbl_Membership_Plans> Tbl_Membership_Plans { get; set; }
         public virtual DbSet<Tbl_Recipe> Tbl_Recipe { get; set; }
         public virtual DbSet<Tbl_Recipe_Category> Tbl_Recipe_Category { get; set; }
         public virtual DbSet<Tbl_Replies> Tbl_Replies { get; set; }
+        public virtual DbSet<Tbl_Submissions> Tbl_Submissions { get; set; }
         public virtual DbSet<Tbl_Subscriptions> Tbl_Subscriptions { get; set; }
         public virtual DbSet<Tbl_Users> Tbl_Users { get; set; }
-        public virtual DbSet<Tbl_Announcement> Tbl_Announcement { get; set; }
-        public virtual DbSet<Tbl_Contests> Tbl_Contests { get; set; }
-        public virtual DbSet<Tbl_Submissions> Tbl_Submissions { get; set; }
     }
 }

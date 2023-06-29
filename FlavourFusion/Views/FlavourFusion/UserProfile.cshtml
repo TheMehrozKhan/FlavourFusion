@@ -141,7 +141,7 @@
                 </div>
             </div>
             <div class="profile-actions">
-                @if (Session["u_id"] != null)
+                @if (Convert.ToInt32(Session["u_id"]) == Model.user_id)  // Only show buttons for the logged-in user's own profile
                 {
                     <div style="margin-top:20px;">
                         <a href="@Url.Action("Edit_Profile", "FlavourFusion", new { id = Model.user_id })" class="btn btn-primary" style="background-color: rgb(255, 132, 0);outline:none;border:none">Edit</a>

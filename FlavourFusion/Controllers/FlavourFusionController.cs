@@ -12,7 +12,7 @@ namespace FlavourFusion.Controllers
 {
     public class FlavourFusionController : Controller
     {
-        FlavourFusionEntities3 db = new FlavourFusionEntities3();
+        FlavourFusionEntities4 db = new FlavourFusionEntities4();
         public ActionResult Index(int? page)
         {
             var latestRecipes = db.Tbl_Recipe.OrderByDescending(x => x.recipe_id).ToList();
@@ -383,13 +383,32 @@ namespace FlavourFusion.Controllers
             }
 
             var contests = db.Tbl_Contests.ToList();
-            var contestViewModels = contests.Select(contest => new ContestViewModel
-            {
-                Contest = contest,
-                Submission = new Tbl_Submissions()
-            }).ToList();
+            var contestViewModels = new List<ContestViewModel>();
 
-            return View(contestViewModels);
+            foreach (var contest in contests)
+            {
+                var submissions = db.Tbl_Submissions.Where(s => s.ContestId == contest.Contest_Id).ToList();
+                var contestSubmissions = new List<SubmissionViewModel>();
+
+                foreach (var submission in submissions)
+                {
+                    var user = db.Tbl_Users.FirstOrDefault(u => u.user_id == submission.UserId);
+                    contestSubmissions.Add(new SubmissionViewModel
+                    {
+                        Submission = submission,
+                        User = user,
+                        User_name = user != null ? user.user_name : ""
+                    });
+                }
+
+                contestViewModels.Add(new ContestViewModel
+                {
+                    Contest = contest,
+                    Submissions = contestSubmissions
+                });
+            }
+
+            return View(contestViewModels.OrderBy(c => c.Contest.Contest_Id).ToList());
         }
 
 
@@ -482,7 +501,7 @@ namespace FlavourFusion.Controllers
         {
             int userId = Convert.ToInt32(Session["u_id"]);
 
-            if (id == null || userId != id)
+            if (id == null)
             {
                 return RedirectToAction("UserProfile", new { id = userId });
             }
@@ -499,7 +518,6 @@ namespace FlavourFusion.Controllers
                 {
                     membershipStatus = "Yes"; 
                 }
-
                 ViewBag.MembershipStatus = membershipStatus;
 
                 return View(profileUser);

@@ -48,7 +48,8 @@
                                     </div>
                                     <h3><a href="@Url.Action("Participate", "FlavourFusion", new { contestId = contest.Contest_Id })"> @contest.ContestName </a></h3>
                                     <p>@contest.ContestDescription</p>
-                                    <a href="@Url.Action("Participate", "FlavourFusion", new { contestId = contest.Contest_Id })"><i class="bx bx-alarm"></i>@contest.StartDate - @contest.EndDate</a>
+                                    <a href="#"><i class="bx bx-alarm"></i>@contest.StartDate - @contest.EndDate</a>
+                                    <a href="@Url.Action("Participate", "FlavourFusion", new { contestId = contest.Contest_Id })" class="default-btn" style="margin-top:15px;color:white;">Partcipate</a>
                                 </div>
                             </div>
                         }
@@ -67,3 +68,64 @@
         </div>
     </div>
 </div>
+
+
+@if (Model.Any(m => m.Submissions != null && m.Submissions.Any()))
+{
+    <div class="container">
+        <div class="row">
+            <div class="section-title text-center mt-5 mb-1">
+                <h2 style="font-weight:600">User's Submissions</h2>
+            </div>
+            @foreach (var contestViewModel in Model)
+            {
+                var contest = contestViewModel.Contest;
+                var submissions = contestViewModel.Submissions;
+
+                if (submissions != null && submissions.Any())
+                {
+                    <div class="col-lg-12">
+                        <h3 class="text-center mb-5">Competition: <span style="color:darkorange;"> @contest.ContestName </span></h3>
+                    </div>
+
+                    foreach (var submissionViewModel in submissions)
+                    {
+                        var submission = submissionViewModel.Submission;
+                        var user = submissionViewModel.User;
+
+                        if (submission != null && user != null)
+                        {
+                            <div class="col-lg-4 col-md-6">
+                                <div class="recent-recipe-item">
+                                    @if (submission.WinnerStatus.HasValue && submission.WinnerStatus.Value)
+                                    {
+                                        <span class="winner-label" style="position:absolute;background-color:darkorange;color:white;padding:8px;margin-left:15px;margin-top:5px;border-radius:5px;">Winner</span>
+                                    }
+                                    <a href="@Url.Action("RecipeDetails", "FlavourFusion", new { id = submission.Submission_Id })">
+                                        @if (!string.IsNullOrEmpty(submission.Recipe_image))
+                                        {
+                                            var imagePaths = submission.Recipe_image.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                            var firstImagePath = Url.Content(imagePaths[0]);
+                                            <img src="@firstImagePath" alt="Recipe Image" style="border-radius: 15px;">
+                                        }
+                                    </a>
+                                    <div class="content">
+                                        <h3 class="text-center"><a href="@Url.Action("RecipeDetails", "FlavourFusion", new { id = submission.Submission_Id })">@submission.RecipeName</a></h3>
+                                        <div class="user-info">
+                                            <a class="text-center" style="color:black;" href="@Url.Action("UserProfile", "FlavourFusion", new { id = user?.user_id })">
+                                                <img src="@Url.Content(user.user_img)" alt="User Image" style="border-radius: 50%; width: 30px; height: 30px;">
+                                                @user.user_name
+                                            </a>
+                                        </div>
+                                        <p>@(submission.RecipeDescription.Length > 300 ? submission.RecipeDescription.Substring(0, 300) + "..." : submission.RecipeDescription)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            }
+        </div>
+    </div>
+}
+
