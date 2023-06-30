@@ -23,14 +23,39 @@
         .buy-now-btn {
             display: none;
         }
+
+        .preloader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .loader {
+            border: 12px solid #f3f3f3;
+            border-top: 12px solid darkorange;
+            border-radius: 50%;
+            width: 95px;
+            height: 95px;
+            animation: spin 2s linear infinite;
+        }
+
+        keyframes spin {
+            0%
+
+        {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+        }
     </style>
 </head>
 <body>
     <div class="preloader">
-        <div class="spinner">
-            <div class="dot1"></div>
-            <div class="dot2"></div>
-        </div>
+        <div class="loader"></div>
     </div>
     <header class="top-header top-header-bg-two">
         <div class="container">
@@ -129,7 +154,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="@Url.Action("Contest", "FlavourFusion", new { contestId = ViewBag.ContestId })" class="nav-link">
-                                Contest
+                                    Contest
                                 </a>
                             </li>
                             <li class="nav-item">

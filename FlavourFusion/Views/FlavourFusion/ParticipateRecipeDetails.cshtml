@@ -87,8 +87,8 @@
                         <div class="text-left">
                             <p>@Html.Raw(Model.Recipe.recipe_direction)</p>
                         </div>
-                        <div class="recipe-details-video">
-                            <h3>Watch Video</h3>
+                        <div class="recipe-details-video" style="margin-top:30px;">
+                            <h3 class="text-left">Watch Video</h3>
                             @if (!string.IsNullOrEmpty(Model.Recipe.recipe_tutorial_video))
                             {
                                 <div class="video-container">

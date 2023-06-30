@@ -9,17 +9,17 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
     <title>All Registered Users - Shopio</title>
     <style>
-
         .table-responsive::-webkit-scrollbar {
-            background-color: whitesmoke;
-            height:10px;
-            margin-bottom:50px;
-            border-radius:12px;
-            transition:0.5s;
+            display: none;
         }
-
-        .table-responsive::-webkit-scrollbar:hover {
-            background-color:darkgrey;
+        .thescrollbar::-webkit-scrollbar {
+            height:7px;
+            border-radius:12px;
+            background-color:darkgray;
+            transition:0.3s;
+        }
+        .thescrollbar::-webkit-scrollbar:hover{
+            background:black;
         }
 
         body {
@@ -155,69 +155,82 @@
         </div>
         <hr style="color:black;" />
         <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
-            <table class="table table-borderless bg-white text-black customtable">
-                <thead>
-                    <tr>
-                        <td>Submission Id</td>
-                        <td>Contest Id</td>
-                        <td>User Id</td>
-                        <td>Recipe Category</td>
-                        <td>Recipe Name</td>
-                        <td>Recipe Description</td>
-                        <td>Recipe Ingredients</td>
-                        <td>Recipe Tags</td>
-                        <td>Submission Date</td>
-                        <td>Delete</td>
-                        <td>Declare Winner</td>
-                        <td>Winner Status</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model != null)
-                    {
-                        foreach (var item in Model)
+            <div style="overflow-x: auto; width: 100%;" class="thescrollbar">
+                <table class="table table-borderless bg-white text-black customtable">
+                    <thead>
+                        <tr>
+                            <td>Submission Id</td>
+                            <td>Contest Id</td>
+                            <td>User Id</td>
+                            <td>Recipe Category</td>
+                            <td>Recipe Name</td>
+                            <td>Recipe Description</td>
+                            <td>Recipe Directions</td>
+                            <td>Recipe Ingredients</td>
+                            <td>Recipe Tags</td>
+                            <td>Submission Date</td>
+                            <td>Delete</td>
+                            <td>Declare Winner</td>
+                            <td>Winner Status</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Submission_Id</td>
+                                    <td>@item.ContestId</td>
+                                    <td>@item.UserId</td>
+                                    <td>@item.Recipe_Category</td>
+                                    <td>@item.RecipeName</td>
+                                    <td>@(item.RecipeDescription.Length > 100 ? item.RecipeDescription.Substring(0, 100) + "..." : item.RecipeDescription)</td>
+                                    <td class="recipe-direction">
+                                        @if (item.recipe_direction.Length > 100)
+                                        {
+                                            @Html.Raw(item.recipe_direction.Substring(0, 100) + "...")
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw(item.recipe_direction)
+                                        }
+                                    </td>
+                                    <td>@item.Recipe_ingredients</td>
+                                    <td>@item.Recipe_tags</td>
+                                    <td>@item.SubmissionDate</td>
+                                    <td>
+                                        <a href="@Url.Action("DeleteSubmission", "Admin", new { id = item.Submission_Id })">
+                                            <i class="ri-delete-bin-5-line"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("SelectWinner", "Admin", new { submissionId = item.Submission_Id })">
+                                            <button type="button" class="btn btn-success">Declare Winner</button>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @if (item.WinnerStatus ?? false)
+                                        {
+                                            <span class="winner-label">Winner</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        @if (TempData["ErrorMessage"] != null)
                         {
                             <tr>
-                                <td>@item.Submission_Id</td>
-                                <td>@item.ContestId</td>
-                                <td>@item.UserId</td>
-                                <td>@item.Recipe_Category</td>
-                                <td>@item.RecipeName</td>
-                                <td>@item.RecipeDescription</td>
-                                <td>@item.Recipe_ingredients</td>
-                                <td>@item.Recipe_tags</td>
-                                <td>@item.SubmissionDate</td>
-                                <td>
-                                    <a href="@Url.Action("DeleteSubmission", "Admin", new { id = item.Submission_Id })">
-                                        <i class="ri-delete-bin-5-line"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="@Url.Action("SelectWinner", "Admin", new { submissionId = item.Submission_Id })">
-                                        <button type="button" class="btn btn-success">Declare Winner</button>
-                                    </a>
-                                </td>
-                                <td>
-                                    @if (item.WinnerStatus ?? false)
-                                    {
-                                        <span class="winner-label">Winner</span>
-                                    }
+                                <td colspan="12">
+                                    <div class="alert alert-danger" role="alert">
+                                        @TempData["ErrorMessage"]
+                                    </div>
                                 </td>
                             </tr>
                         }
-                    }
-                    @if (TempData["ErrorMessage"] != null)
-                    {
-                        <tr>
-                            <td colspan="12">
-                                <div class="alert alert-danger" role="alert">
-                                    @TempData["ErrorMessage"]
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
