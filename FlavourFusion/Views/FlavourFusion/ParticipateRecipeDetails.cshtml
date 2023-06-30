@@ -1,0 +1,159 @@
+﻿@model FlavourFusion.Models.ParticipateDetailViewModel
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #recipeCarousel {
+            position: relative;
+            background-color: none;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            color: white;
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="background-color: white; width: 500px; height: 150px; margin-top: 50px; border-radius: 12px; box-shadow: rgba(17, 12, 46, 0.06) 0px 48px 100px 0px;">
+        <div class="d-flex justify-content-center align-items-center" style="height: 150px;">
+            <div>
+                <img src="@Url.Content(Model.Users.user_img)" style="border-radius: 50%;" height="90" width="90" />
+            </div>
+            <div>
+                <h1 style="margin-left: 10px;margin-top:10px;">@Model.Users.user_name</h1>
+                <h3 style="margin-left: 10px;font-size:15px;position:relative;bottom:9px;">Submitted By Our<span style="color:darkorange"> Contestant</span></h3>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="recipe-details-area pt-100 pb-70">
+        <div class="about-shape">
+            <img src="/Template/assets/images/shape/shape2.png" alt="About Images" style="position:relative;top:40px;left:40px;">
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="recipe-details-content text-center">
+                        <div class="recipe-preview-img">
+                            <div id="recipeCarousel" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    @if (!string.IsNullOrEmpty(Model.Recipe.recipe_image))
+                                    {
+                                        var imagePaths = Model.Recipe.recipe_image.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                        for (int i = 0; i < imagePaths.Length; i++)
+                                        {
+                                            var imageUrl = Url.Content(imagePaths[i]);
+                                            var activeClass = i == 0 ? "active" : "";
+                                            <div class="carousel-item @activeClass">
+                                                <img src="@imageUrl" style="box-shadow: rgba(17, 12, 46, 0.08) 0px 48px 100px 0px; border-radius: 8px;" />
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
+                                    <i class="ri-arrow-left-double-line" aria-hidden="true" style="font-size:70px;color:white;"></i>
+                                </a>
+                                <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next">
+                                    <i class="ri-arrow-right-double-line" aria-hidden="true" style="font-size:70px;color:white;"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <ul class="tag-list">
+                                <li><i class='bx bx-calendar'></i> @Model.Recipe.recipe_publish_date </li>
+                            </ul>
+                            <ul class="recipe-tag-list">
+                                @if (!string.IsNullOrEmpty(Model.Recipe.recipe_ingredients))
+                                {
+                                    <li><i class='bx bx-dish'></i>@Model.Recipe.recipe_ingredients.ToString() ingredients</li>
+                                }
+                            </ul>
+                        </div>
+                        <h2 class="text-left">@Model.Recipe.recipe_name</h2>
+                        <div class="text-left">
+                            <p>@Model.Recipe.recipe_description</p>
+                        </div>
+                        <h3 class="text-left">Directions</h3>
+                        <div class="text-left">
+                            <p>@Html.Raw(Model.Recipe.recipe_direction)</p>
+                        </div>
+                        <div class="recipe-details-video">
+                            <h3>Watch Video</h3>
+                            @if (!string.IsNullOrEmpty(Model.Recipe.recipe_tutorial_video))
+                            {
+                                <div class="video-container">
+                                    @Html.Raw(Model.Recipe.recipe_tutorial_video)
+                                </div>
+                            }
+                            else
+                            {
+                                <p>No tutorial video available for this recipe.</p>
+                            }
+                        </div>
+
+                        <div class="recipe-details-share">
+                            <div class="row align-items-center">
+                                <div class="col-lg-5 col-md-5">
+                                    <div class="article-tag">
+                                        @if (!string.IsNullOrEmpty(Model.thesubmission.Recipe_tags))
+                                        {
+                                            var tags = Model.thesubmission.Recipe_tags.Split(',');
+                                            foreach (var tag in tags)
+                                            {
+                                                <ul>
+                                                    <li class="title">Tags :</li>
+                                                    <li>@tag</li>
+                                                </ul>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-7 col-md-7">
+                                    <div class="article-social-icon">
+                                        <ul class="social-icon">
+                                            <li class="title">Share :</li>
+                                            <li>
+                                                <a href="https://www.facebook.com/" target="_blank">
+                                                    <i class='bx bxl-facebook'></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.linkedin.com/" target="_blank">
+                                                    <i class='bx bxl-linkedin'></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://twitter.com/" target="_blank">
+                                                    <i class='bx bxl-twitter'></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.instagram.com/" target="_blank">
+                                                    <i class='bx bxl-instagram'></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="about-shape">
+            <img src="/Template/assets/images/shape/shape3.png" alt="About Images" style="position:relative;left:1100px;top:50px;">
+        </div>
+    </div>
+</body>

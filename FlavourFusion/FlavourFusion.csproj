@@ -212,6 +212,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ParticipateDetailViewModel.cs" />
     <Compile Include="Models\RecipeDetailViewModel.cs" />
     <Compile Include="Models\RecipeViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
@@ -524,6 +525,7 @@
     <Content Include="Views\Admin\DeleteContest.cshtml" />
     <Content Include="Views\Admin\DeleteSubmission.cshtml" />
     <Content Include="Views\Admin\DeleteAnnoucement.cshtml" />
+    <Content Include="Views\FlavourFusion\ParticipateRecipeDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

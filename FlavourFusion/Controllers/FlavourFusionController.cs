@@ -467,6 +467,8 @@ namespace FlavourFusion.Controllers
             rec.Recipe_ingredients = submission.Recipe_ingredients;
             rec.Recipe_tags = submission.Recipe_tags;
             rec.SubmissionDate = submission.SubmissionDate;
+            rec.recipe_direction = HttpUtility.HtmlDecode(submission.recipe_direction);
+            rec.recipe_tutorial_video = submission.recipe_tutorial_video;
 
             if (imagePaths.Count > 0)
             {
@@ -489,7 +491,50 @@ namespace FlavourFusion.Controllers
             }
         }
 
+        public ActionResult ParticipateRecipeDetails(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
 
+            Tbl_Submissions submission = db.Tbl_Submissions.Find(id);
+            if (submission == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var categories = db.Tbl_Recipe_Category.ToList();
+
+            var viewModel = new ParticipateDetailViewModel
+            {
+                Recipe = new Tbl_Recipe
+                {
+                    recipe_description = submission.RecipeDescription,
+                    recipe_image = submission.Recipe_image,
+                    recipe_ingredients = Convert.ToString(submission.Recipe_ingredients),
+                    recipe_name = submission.RecipeName,
+                    recipe_publish_date = submission.SubmissionDate,
+                    recipe_tags = submission.Recipe_tags,
+                    recipe_tutorial_video = submission.recipe_tutorial_video,
+                    recipe_direction = submission.recipe_direction
+                },
+                thesubmission = new Tbl_Submissions
+                {
+                    Recipe_tags = submission.Recipe_tags
+                },
+                Users = new Tbl_Users
+                { 
+                    user_name = submission.Tbl_Users.user_name,
+                    user_img = submission.Tbl_Users.user_img
+                },
+                Categories = categories
+            };
+            ViewBag.CategoryName = submission.Tbl_Recipe_Category.category_name;
+            ViewBag.ShowLoginMessage = Session["u_id"] == null;
+
+            return View(viewModel);
+        }
 
         public ActionResult Logout()
         {
