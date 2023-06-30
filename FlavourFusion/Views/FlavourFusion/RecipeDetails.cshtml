@@ -54,7 +54,7 @@
                         </div>
                         <ul class="tag-list">
                             <li><i class='bx bx-calendar'></i> @Model.Recipe.recipe_publish_date </li>
-                            <li><i class='bx bx-comment-dots'></i> 3 Comments </li>
+                            <li><i class='bx bx-comment-dots'></i> @Model.Comments.Count() Comments </li>
                         </ul>
                         <h2>@Model.Recipe.recipe_name</h2>
                         <div class="rating">
