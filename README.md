@@ -25,6 +25,7 @@ https://github.com/TheMehrozKhan/FlavourFusion/assets/103773815/6f0b5df6-52a5-4b
   <code>public string MembershipStatus { get; set; }</code>
 
 <h3>3) Insert this Code in The Model of Tbl_Recipe for Fetching the Recipe Direction & Video:</h3> 
+<code>using System.Web.Mvc;</code>
 <code>  [AllowHtml]
         public string recipe_direction { get; set; }
         [AllowHtml]
