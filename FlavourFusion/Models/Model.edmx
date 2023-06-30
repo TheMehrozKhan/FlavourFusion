@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FlavourFusionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FlavourFusionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Tbl_Admin">
           <Key>
             <PropertyRef Name="admin_id" />
@@ -66,6 +66,8 @@
           <Property Name="recipe_serving_people" Type="int" />
           <Property Name="recipe_tags" Type="varchar" MaxLength="255" />
           <Property Name="recipe_publish_date" Type="date" />
+          <Property Name="recipe_direction" Type="varchar(max)" />
+          <Property Name="recipe_tutorial_video" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Tbl_Recipe_Category">
           <Key>
@@ -313,8 +315,7 @@
             <End Role="Tbl_Subscriptions" EntitySet="Tbl_Subscriptions" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FlavourFusionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -387,6 +388,8 @@
           <Property Name="recipe_publish_date" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Tbl_Comments" Relationship="Self.FK__Tbl_Comme__recip__2BFE89A6" FromRole="Tbl_Recipe" ToRole="Tbl_Comments" />
           <NavigationProperty Name="Tbl_Recipe_Category" Relationship="Self.FK__Tbl_Recip__FK_Ca__05D8E0BE" FromRole="Tbl_Recipe" ToRole="Tbl_Recipe_Category" />
+          <Property Name="recipe_direction" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="recipe_tutorial_video" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Tbl_Recipe_Category">
           <Key>
@@ -709,6 +712,8 @@
           <EntitySetMapping Name="Tbl_Recipe">
             <EntityTypeMapping TypeName="FlavourFusionModel.Tbl_Recipe">
               <MappingFragment StoreEntitySet="Tbl_Recipe">
+                <ScalarProperty Name="recipe_tutorial_video" ColumnName="recipe_tutorial_video" />
+                <ScalarProperty Name="recipe_direction" ColumnName="recipe_direction" />
                 <ScalarProperty Name="recipe_id" ColumnName="recipe_id" />
                 <ScalarProperty Name="recipe_name" ColumnName="recipe_name" />
                 <ScalarProperty Name="recipe_description" ColumnName="recipe_description" />

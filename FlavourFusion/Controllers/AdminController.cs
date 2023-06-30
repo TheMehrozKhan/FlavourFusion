@@ -1,4 +1,6 @@
-﻿using SendGrid;
+﻿using System.Web.Mvc;
+using System.Web;
+using SendGrid;
 using SendGrid.Helpers.Mail;
 using FlavourFusion.Models;
 using PagedList;
@@ -6,8 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 namespace FlavourFusion.Controllers
 {
     public class AdminController : Controller
@@ -361,7 +361,10 @@ namespace FlavourFusion.Controllers
             rec.recipe_serving_people = rc.recipe_serving_people;
             rec.recipe_tags = rc.recipe_tags;
             rec.recipe_publish_date = rc.recipe_publish_date;
+            rec.recipe_direction = HttpUtility.HtmlDecode(rc.recipe_direction);
+            rec.recipe_tutorial_video = rc.recipe_tutorial_video;
 
+            
             if (imagePaths.Count > 0)
             {
                 rec.recipe_image = string.Join(",", imagePaths);

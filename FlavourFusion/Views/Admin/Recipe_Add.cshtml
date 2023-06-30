@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    <script src="https://cdn.tiny.cloud/1/jnktx2v6142bcrf6cymwo599cgled9z9v20mlgcvi0a9ua1q/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <style>
 
         body {
@@ -222,6 +223,17 @@
             </div>
 
             <div class="form-group">
+                <label for="recipe-directions">Recipe Directions:</label>
+                <textarea id="recipe-directions" name="recipe_direction"></textarea>
+            </div>
+
+
+            <div class="form-group">
+                <label>Recipe Tutorial Video Embed Link:</label>
+                <textarea name="recipe_tutorial_video" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group">
                 <label for="datepicker">Select Date:</label>
                 <input class="form-control datepicker" type="text" id="datepicker" name="recipe_publish_date" style="background-color:white;" />
             </div>
@@ -236,6 +248,13 @@
             flatpickr(".datepicker", {
                 dateFormat: "Y-m-d",
                 enableTime: false,
+            });
+
+            tinymce.init({
+                selector: '#recipe-directions',
+                height: 300,
+                plugins: 'advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen',
+                toolbar: 'undo redo | formatselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | link image | code'
             });
         </script>
     </div>

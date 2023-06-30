@@ -64,7 +64,7 @@
                             <i class='bx bxs-star'></i>
                             <i class='bx bxs-star'></i>
                         </div>
-                        <p>@Model.Recipe.recipe_description</p>
+                        <p>@Model.Recipe.recipe_description)</p>
                         <ul class="recipe-tag-list">
                             @if (!string.IsNullOrEmpty(Model.Recipe.recipe_ingredients))
                             {
@@ -74,17 +74,21 @@
                             <li><i class='bx bxs-user-pin'></i> @Model.Recipe.recipe_serving_people.ToString() People</li>
                         </ul>
                         <h3>Directions</h3>
-                        <p>@Model.Recipe.recipe_description</p>
-
-
+                        <p>@Html.Raw(Model.Recipe.recipe_direction)</p>
                         <div class="recipe-details-video">
                             <h3>Watch Video</h3>
-                            <div class="video-btn-ara">
-                                <a href="https://www.youtube.com/watch?v=yz0r0huhKeI" class="btn-play video-btn">
-                                    <i class='bx bx-play'></i>
-                                </a>
-                            </div>
+                            @if (!string.IsNullOrEmpty(Model.Recipe.recipe_tutorial_video))
+                            {
+                                <div class="video-container">
+                                    @Html.Raw(Model.Recipe.recipe_tutorial_video)
+                                </div>
+                            }
+                            else
+                            {
+                                <p>No tutorial video available for this recipe.</p>
+                            }
                         </div>
+
                         <div class="recipe-details-share">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 col-md-5">
@@ -160,56 +164,52 @@
 
                                     @foreach (var comment in Model.Comments)
                                     {
-                                    <li>
-                                        <img src="@Url.Content(comment.Tbl_Users.user_img)" alt="Image" height="50" width="50" style="border-radius:50%">
-                                        <h3>@comment.Tbl_Users.user_name</h3>
-                                        <span>@comment.comment_date</span>
-                                        <p>
-                                            @comment.comment_text
-                                            @if (Session["u_id"] != null && int.TryParse(Session["u_id"].ToString(), out int uId) && uId == comment.user_id)
-                                            {
-                                                <a href="@Url.Action("Delete", "FlavourFusion", new { id = comment.comment_id })" style="text-decoration:none;">Delete</a>
-                                            }
-                                        </p>
-                                        <form class="reply-form" action="@Url.Action("AddReply", "FlavourFusion")" method="post">
-                                            <input type="hidden" name="commentId" value="@comment.comment_id" />
-                                            <textarea name="replyText" placeholder="Add a reply" style="background-color: white; border: none; border-radius: 10px; box-shadow: rgba(17, 12, 46, 0.08) 0px 48px 100px 0px; height: 80px; width: 350px; padding-left: 8px; padding-top: 8px;"></textarea>
-                                            <br />
-                                            <button type="submit" class="default-btn" style="margin-bottom:30px;margin-top:20px;">Reply</button>
-                                        </form>
-
-                                        @if (comment.Tbl_Replies.Any())
-                                        {
-                                            <div class="replies" style="margin-left:20px;">
-                                                @foreach (var reply in comment.Tbl_Replies)
+                                        <li>
+                                            <img src="@Url.Content(comment.Tbl_Users.user_img)" alt="Image" height="50" width="50" style="border-radius:50%">
+                                            <h3>@comment.Tbl_Users.user_name</h3>
+                                            <span>@comment.comment_date</span>
+                                            <p>
+                                                @comment.comment_text
+                                                @if (Session["u_id"] != null && int.TryParse(Session["u_id"].ToString(), out int uId) && uId == comment.user_id)
                                                 {
-                                                    <div class="reply">
-                                                        <div class="reply-content">
-                                                            <div class="reply-author">
-                                                                <span>@reply.Tbl_Users.user_name</span>
-                                                                <span class="reply-date">@reply.reply_date</span>
-                                                                @if (Session["u_id"] != null && int.TryParse(Session["u_id"].ToString(), out int replyUserId) && replyUserId == reply.user_id)
-                                                                {
-                                                                    <a href="@Url.Action("DeleteReply", "FlavourFusion", new { id = reply.reply_id })" style="text-decoration:none;">Delete</a>
-                                                                }
-                                                            </div>
-                                                            <p>@reply.reply_text</p>
-                                                        </div>
-                                                    </div>
+                                                    <a href="@Url.Action("Delete", "FlavourFusion", new { id = comment.comment_id })" style="text-decoration:none;">Delete</a>
                                                 }
-                                            </div>
+                                            </p>
+                                            <form class="reply-form" action="@Url.Action("AddReply", "FlavourFusion")" method="post">
+                                                <input type="hidden" name="commentId" value="@comment.comment_id" />
+                                                <textarea name="replyText" placeholder="Add a reply" style="background-color: white; border: none; border-radius: 10px; box-shadow: rgba(17, 12, 46, 0.08) 0px 48px 100px 0px; height: 80px; width: 350px; padding-left: 8px; padding-top: 8px;"></textarea>
+                                                <br />
+                                                <button type="submit" class="default-btn" style="margin-bottom:30px;margin-top:20px;">Reply</button>
+                                            </form>
 
-                                        }
+                                            @if (comment.Tbl_Replies.Any())
+                                            {
+                                                <div class="replies" style="margin-left:20px;">
+                                                    @foreach (var reply in comment.Tbl_Replies)
+                                                    {
+                                                        <div class="reply">
+                                                            <div class="reply-content">
+                                                                <div class="reply-author">
+                                                                    <span>@reply.Tbl_Users.user_name</span>
+                                                                    <span class="reply-date">@reply.reply_date</span>
+                                                                    @if (Session["u_id"] != null && int.TryParse(Session["u_id"].ToString(), out int replyUserId) && replyUserId == reply.user_id)
+                                                                    {
+                                                                        <a href="@Url.Action("DeleteReply", "FlavourFusion", new { id = reply.reply_id })" style="text-decoration:none;">Delete</a>
+                                                                    }
+                                                                </div>
+                                                                <p>@reply.reply_text</p>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+
+                                            }
 
 
-                                    </li>
+                                        </li>
                                     }
                                 </ul>
                             </div>
-
-
-
-
                         </div>
                     </div>
                 </div>

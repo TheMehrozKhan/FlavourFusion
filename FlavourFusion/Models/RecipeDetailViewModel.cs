@@ -17,6 +17,7 @@ namespace FlavourFusion.Models
         public DateTime recipe_publish_date { get; set; }
         public int recipe_serving_people { get; set; }
         public string recipe_tags { get; set; }
+        public string recipe_tutorial_video { get; set; }
         public List<Tbl_Comments> Comments { get; set; }
 
     }
