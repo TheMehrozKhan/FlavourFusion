@@ -526,6 +526,8 @@
     <Content Include="Views\Admin\DeleteSubmission.cshtml" />
     <Content Include="Views\Admin\DeleteAnnoucement.cshtml" />
     <Content Include="Views\FlavourFusion\ParticipateRecipeDetails.cshtml" />
+    <Content Include="Views\FlavourFusion\TermsConditions.cshtml" />
+    <Content Include="Views\FlavourFusion\PrivacyPolicy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

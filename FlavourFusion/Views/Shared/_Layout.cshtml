@@ -16,10 +16,13 @@
     <link rel="stylesheet" href="/Template/assets/css/meanmenu.min.css">
     <link rel="stylesheet" href="/Template/assets/css/style.css">
     <link rel="stylesheet" href="/Template/assets/css/responsive.css">
-    <link rel="stylesheet" href="/Template/assets/css/theme-dark.css">
     <link rel="icon" type="image/png" href="/Template/assets/images/thefavicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <style>
+        .switch-box {
+            display:none;
+        }
+
         .buy-now-btn {
             display: none;
         }
@@ -249,132 +252,135 @@
 
     @RenderBody()
 
-    <footer class="footer-area footer-area-bg">
-        <div class="container">
-            <div class="footer-top pt-100 pb-70">
-                <div class="row">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="footer-widget">
-                            <div class="footer-logo">
-                                <a href="index.html">
-                                    <img src="/Template/assets/images/the-logo-white.png" alt="Images">
+<footer class="footer-area footer-area-bg">
+    <div class="container">
+        <div class="footer-top pt-100 pb-70">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="footer-widget">
+                        <div class="footer-logo">
+                            <a href="index.html">
+                                <img src="/Template/assets/images/the-logo-white.png" alt="Images">
+                            </a>
+                        </div>
+                        <p>
+                            Welcome to Flavour Fusion, your ultimate destination for delicious recipes and culinary inspiration.
+                            Join our community and explore a world of flavors.
+                        </p>
+                        <ul class="social-link">
+                            <li>
+                                <a href="https://www.facebook.com/" target="_blank">
+                                    <i class='bx bxl-facebook'></i>
                                 </a>
-                            </div>
-                            <p>
-                                Welcome to Flavour Fusion, your ultimate destination for delicious recipes and culinary inspiration.
-                                Join our community and explore a world of flavors.
-                            </p>
-                            <ul class="social-link">
-                                <li>
-                                    <a href="https://www.facebook.com/" target="_blank">
-                                        <i class='bx bxl-facebook'></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.linkedin.com/" target="_blank">
-                                        <i class='bx bxl-linkedin'></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.pinterest.com/" target="_blank">
-                                        <i class='bx bxl-pinterest-alt'></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.instagram.com/" target="_blank">
-                                        <i class='bx bxl-instagram'></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/" target="_blank">
+                                    <i class='bx bxl-linkedin'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.pinterest.com/" target="_blank">
+                                    <i class='bx bxl-pinterest-alt'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/" target="_blank">
+                                    <i class='bx bxl-instagram'></i>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="col-lg-2 col-sm-6">
-                        <div class="footer-widget ps-5">
-                            <h3 style="color:white;">Useful Links</h3>
-                            <ul class="footer-list">
-                                <li>
-                                    <a href="@Url.Action("AboutUs","FlavourFusion")" target="_blank">
-                                        About Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Contact","FlavourFusion")" target="_blank">
-                                        Contact Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Faq","FlavourFusion")" target="_blank">
-                                        FAQ
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Contest","FlavourFusion")" target="_blank">
-                                        Contest
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Announcement","FlavourFusion")" target="_blank">
-                                        Announcement
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <div class="footer-widget ps-5">
+                        <h3 style="color:white;">Useful Links</h3>
+                        <ul class="footer-list">
+                            <li>
+                                <a href="@Url.Action("AboutUs","FlavourFusion")" target="_blank">
+                                    About Us
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Contact","FlavourFusion")" target="_blank">
+                                    Contact Us
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Faq","FlavourFusion")" target="_blank">
+                                    FAQ
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Contest","FlavourFusion")" target="_blank">
+                                    Contest
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Announcement","FlavourFusion")" target="_blank">
+                                    Announcement
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="footer-widget ps-5">
-                            <h3 style="color:white;">Information</h3>
-                            <ul class="footer-contact">
-                                <li>
-                                    Phone:
-                                    <span>
-                                        <a href="tel:+8245678924">+92-3121206489</a><br>
-                                        <a href="tel:+8245668964">+92-3152834644</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    Email:
-                                    <span style="font-size: 15px;">
-                                        info@flavourfusion.com
-                                    </span>
-                                </li>
-                                <li>
-                                    Address:
-                                    <span>
-                                        Aptech NK, Karachi<br>
-                                        Pakistan
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="footer-widget ps-5">
+                        <h3 style="color:white;">Information</h3>
+                        <ul class="footer-contact">
+                            <li>
+                                Phone:
+                                <span>
+                                    <a href="tel:+8245678924">+92-3121206489</a><br>
+                                    <a href="tel:+8245668964">+92-3152834644</a>
+                                </span>
+                            </li>
+                            <li>
+                                Email:
+                                <span style="font-size: 15px;">
+                                    info@flavourfusion.com
+                                </span>
+                            </li>
+                            <li>
+                                Address:
+                                <span>
+                                    Aptech NK, Karachi<br>
+                                    Pakistan
+                                </span>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="footer-widget ps-5">
-                            <h3 style="color:white;">Newsletter</h3>
-                            <p>Subscribe to our newsletter and stay updated with our latest recipes, cooking tips, and offers.</p>
-                            <div class="newsletter-area">
-                                <form class="newsletter-form" data-toggle="validator" method="POST">
-                                    <input type="email" class="form-control" placeholder="Enter Your Email" name="EMAIL" required autocomplete="off">
-                                    <button class="subscribe-btn" type="submit">
-                                        Subscribe
-                                    </button>
-                                    <div id="validator-newsletter" class="form-result"></div>
-                                </form>
-                            </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="footer-widget ps-5">
+                        <h3 style="color:white;">Newsletter</h3>
+                        <p>Subscribe to our newsletter and stay updated with our latest recipes, cooking tips, and offers.</p>
+                        <div class="newsletter-area">
+                            <form class="newsletter-form" data-toggle="validator" method="POST">
+                                <input type="email" class="form-control" placeholder="Enter Your Email" name="EMAIL" required autocomplete="off">
+                                <button class="subscribe-btn" type="submit">
+                                    Subscribe
+                                </button>
+                                <div id="validator-newsletter" class="form-result"></div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="copyright-area">
-            <div class="container">
-                <div class="copy-right-text text-center">
-                    <p>
-                        &copy; 2023 Flavour Fusion. All rights reserved.
-                    </p>
-                </div>
+    </div>
+    <div class="copyright-area">
+        <div class="container">
+            <div class="copy-right-text">
+                <p style="display: flex; justify-content: space-between; align-items: center;">
+                    <a href="@Url.Action("TermsConditions","FlavourFusion")" style="text-align: right;color:white;">Terms & Conditions</a>
+                    <span style="text-align: center;">&copy; 2023 Flavour Fusion All rights reserved.</span>
+                    <a href="@Url.Action("PrivacyPolicy","FlavourFusion")" style="text-align: right;color:white;">Privacy Policy</a>
+                </p>
             </div>
         </div>
-    </footer>
+    </div>
+
+</footer>
 
 
 

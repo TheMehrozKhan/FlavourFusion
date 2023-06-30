@@ -635,6 +635,15 @@ namespace FlavourFusion.Controllers
             return View();
         }
 
+        public ActionResult TermsConditions()
+        {
+            return View();
+        }
+        public ActionResult PrivacyPolicy()
+        {
+            return View();
+        }
+
         public string uploadimage(HttpPostedFileBase file)
         {
             Random r = new Random();
