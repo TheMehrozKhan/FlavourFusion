@@ -1,6 +1,6 @@
 ﻿@using System.Web.Mvc.Html
 @model FlavourFusion.Models.Tbl_Users
-
+<title> Your Profile - FlavourFusion</title>
 <style>
     .circle-img {
         width: 70px;
@@ -126,13 +126,13 @@
                 <div class="profile-details-item">
                     <div class="profile-details-label">Password:</div>
                     <div class="profile-details-value">
-                        <input type="password" class="profile-input" value="@Model.user_password" readonly style="text-align:right;"/>
+                        <input type="password" class="profile-input" value="@Model.user_password" readonly style="text-align:right;" />
                     </div>
                 </div>
                 <div class="profile-details-item">
                     <div class="profile-details-label">Email:</div>
                     <div class="profile-details-value">
-                        <input type="email" class="profile-input" value="@Model.user_email" readonly style="text-align:right;"/>
+                        <input type="email" class="profile-input" value="@Model.user_email" readonly style="text-align:right;" />
                     </div>
                 </div>
                 <div class="profile-details-item">
@@ -151,4 +151,4 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
