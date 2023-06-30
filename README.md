@@ -24,12 +24,11 @@ https://github.com/TheMehrozKhan/FlavourFusion/assets/103773815/6f0b5df6-52a5-4b
   <h3>2) Insert This Membership Status Code in The Tbl_User for Fetching The Details of Membership in User Model To Display it in User Profile:</h3>
   <code>public string MembershipStatus { get; set; }</code>
 
-<h3>Insert this Code in The Model of Tbl_Recipe for Fetching the Recipe Direction & Video:</h3> <code>
-  [AllowHtml]
+<h3>3) Insert this Code in The Model of Tbl_Recipe for Fetching the Recipe Direction & Video:</h3> 
+<code>  [AllowHtml]
         public string recipe_direction { get; set; }
         [AllowHtml]
-        public string recipe_tutorial_video { get; set; }
-</code>
+        public string recipe_tutorial_video { get; set; } </code>
 
 <h2>Tutorial Video of How You Can Solve MembershipStatus Error:</h2>
 
