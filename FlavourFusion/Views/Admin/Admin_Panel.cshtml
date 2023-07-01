@@ -1,5 +1,4 @@
-﻿﻿@model FlavourFusion.Models.Tbl_Admin
-<head>
+﻿<head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -111,15 +110,22 @@
 
         .dropdown-toggle::after {
             transition: transform 0.2s ease-in-out;
-            transform: rotate(0deg); 
+            transform: rotate(0deg);
         }
 
         .dropdown-toggle:hover::after {
-            transform: rotate(180deg); 
+            transform: rotate(180deg);
         }
 
         .dropdown-toggle[aria-expanded="true"]::after {
-            transform: rotate(180deg); 
+            transform: rotate(180deg);
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -196,95 +202,183 @@
     });
 </script>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6" style="margin-top:50px;">
-            <div class="thecard mx-auto">
-                <div class="card-statistic-3 p-4">
-                    <div class="card-icon card-icon-large">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="mb-4" style="margin-top: 30px;">
-                        <h5 class="card-title mb-0 text-white">Total Recipes</h5>
-                    </div>
-                    <div class="row align-items-center mb-2 d-flex">
-                        <div class="col-8">
-                            <h2 class="d-flex align-items-center mb-0 text-white">
-                                @ViewBag.TotalOrders
-                            </h2>
-                        </div>
-                        <div class="col-4 text-right">
-                            <span class="text-white">12.5% <i class="fa fa-arrow-up"></i></span>
-                        </div>
-                    </div>
-                    <div class="progress mt-1 " data-height="8" style="height: 8px;">
-                        <div class="progress-bar" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;background-color:greenyellow;"></div>
-                    </div>
-                </div>
+<div class="center-card" style="border: none; text-align: center">
+    <div class="card container center-table bg-white" style="box-shadow: rgba(17, 12, 46, 0.06) 0px 48px 100px 0px; border-color: white;border-radius:12px;">
+        <!-- Display Announcements -->
+        <h2 style="margin-top:30px;">Announcements</h2>
+        <div class="container" style="margin-top: 15px; margin-bottom: 20px; border-radius: 12px; box-shadow: rgba(17, 12, 46, 0.03) 0px 48px 100px 0px; border: 0.5px solid darkorange;">
+            <table class="table table-borderless customtable">
+                <thead>
+                    <tr style="text-align:left">
+                        <td>Annoucement ID</td>
+                        <td>Annoucement Title</td>
+                        <td>Annoucement Description</td>
+                        <td>Annoucement Date</td>
+                    </tr>
+                </thead>
+                <tbody style="border-top: 0.5px solid grey; text-align: left">
+                    @foreach (var announcement in ViewBag.Announcements)
+                    {
+                        <tr>
+                            <td>@announcement.Annoucement_id</td>
+                            <td>@announcement.Annoucement_Text</td>
+                            <td>@announcement.Annoucement_Description</td>
+                            <td>@announcement.Annoucement_Date</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Display Comments -->
+        <h2 style="margin-top:80px;">Comments</h2>
+        <div class="container" style="margin-top: 15px; margin-bottom: 20px; border-radius: 12px; box-shadow: rgba(17, 12, 46, 0.03) 0px 48px 100px 0px; border: 0.5px solid darkorange;">
+            <table class="table table-borderless customtable">
+                <thead>
+                    <tr style="text-align:left">
+                        <td>Comment ID</td>
+                        <td>User ID</td>
+                        <td>Recipe ID</td>
+                        <td>User Comment</td>
+                        <td>Comment Date</td>
+                    </tr>
+                </thead>
+                <tbody style="border-top: 0.5px solid grey; text-align: left">
+                    @foreach (var comment in ViewBag.Comments)
+                    {
+                        <tr>
+                            <td>@comment.comment_id</td>
+                            <td>@comment.user_id</td>
+                            <td>@comment.recipe_id</td>
+                            <td>@comment.comment_text</td>
+                            <td>@comment.comment_date</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Display Replies -->
+        <h2 style="margin-top:80px;">Replies</h2>
+        <div class="container" style="margin-top: 15px; margin-bottom: 20px; border-radius: 12px; box-shadow: rgba(17, 12, 46, 0.03) 0px 48px 100px 0px; border: 0.5px solid darkorange;">
+            <table class="table table-borderless customtable">
+                <thead>
+                    <tr style="text-align:left">
+                        <td>Reply ID</td>
+                        <td>Comment ID</td>
+                        <td>User ID</td>
+                        <td>User Reply</td>
+                        <td>Reply Date</td>
+                    </tr>
+                </thead>
+                <tbody style="border-top: 0.5px solid grey; text-align: left">
+                    @foreach (var replies in ViewBag.Replies)
+                    {
+                        <tr style="text-align:left">
+                            <td>@replies.reply_id</td>
+                            <td>@replies.comment_id</td>
+                            <td>@replies.user_id</td>
+                            <td>@replies.reply_text</td>
+                            <td>@replies.reply_date</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="container" style="margin-top:80px;display:flex;justify-content:center;align-items:center;">
+            <h2 style="background-color: white; box-shadow: rgba(17, 12, 46, 0.05) 0px 48px 100px 0px; border: 0.5px solid darkorange;padding:5px;border-radius:8px;width:350px;">Contest & Recipes</h2>
+        </div>
+        <div class="container" style="display: flex; justify-content: center; align-items: flex-end; position: relative; bottom: 50px;">
+            <div class="chart-container" style="height: 550px; width: 350px;">
+                <canvas id="contestsChart"></canvas>
+            </div>
+            <div class="chart-container" style="height: 550px; width: 350px; margin-left: 20px;">
+                <canvas id="recipesChart"></canvas>
             </div>
         </div>
 
-        <div class="col-md-6" style="margin-top:50px;">
-            <div class="thecard mx-auto">
-                <div class="card-statistic-3 p-4">
-                    <div class="card-icon card-icon-large">
-                        <i class="fas fa-shopping-cart" style="font-size: 150px; margin-top: 50px; text-align: center; margin-right: 3px; color: white; position: absolute; right: -4px; top: 20px; opacity: 0.08;"></i>
-                    </div>
-                    <div class="mb-4" style="margin-top: 30px;">
-                        <h5 class="card-title mb-0 text-white">Total Members</h5>
-                    </div>
-                    <div class="row align-items-center mb-2 d-flex">
-                        <div class="col-8">
-                            <h2 class="d-flex align-items-center mb-0 text-white">
-                                @ViewBag.totalProducts
-                            </h2>
-                        </div>
-                        <div class="col-4 text-right">
-                            <span class="text-white">10.5% <i class="fa fa-arrow-up"></i></span>
-                        </div>
-                    </div>
-                    <div class="progress mt-1 " data-height="8" style="height: 8px;">
-                        <div class="progress-bar" role="progressbar" data-width="20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;background-color:greenyellow;"></div>
-                    </div>
-                </div>
+        <div class="container" style="position:relative;bottom:85px;">
+            <div class="container" style="margin-top:80px;display:flex;justify-content:center;align-items:center;">
+                <h2 style="background-color: white; box-shadow: rgba(17, 12, 46, 0.05) 0px 48px 100px 0px; border: 0.5px solid darkorange;padding:5px;border-radius:8px;width:450px;">Contest Submissions</h2>
             </div>
+            <div class="chart-container" style="display: flex; justify-content: center; align-items: center; height: 450px;">
+                <canvas id="submissionsChart"></canvas>
+            </div>
+        </div>
+
+
+
+
+
+
         </div>
     </div>
 
 
-    <div class="center-card" style="border: none; text-align: center">
-        <div class="card container center-table bg-white" style="box-shadow: rgba(17, 12, 46, 0.06) 0px 48px 100px 0px; border-color: white;border-radius:12px;">
-            <div class="table-responsive" style="height: 500px; overflow-y: scroll;">
-                <h2 style="margin-bottom: 25px; margin-top: 25px;">Our <span style="color: rgb(255, 132, 0);">Users</span></h2>
-                <hr style="font-weight:100;color:rgba(17, 12, 46, 0.05);" />
-                @if (ViewBag.Orders != null)
-                {
-                    <table class="table table-borderless bg-white text-black customtable" style="border-radius: 80px;">
-                        <thead>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Product ID</th>
-                                <th>Bill</th>
-                                <th>Quantity</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var order in ViewBag.Orders)
-                            {
-                                <tr>
-                                    <td>@order.o_id</td>
-                                    <td>@order.o_fk_pro</td>
-                                    <td>@order.o_bill</td>
-                                    <td>@order.o_qty</td>
-                                    <td>@order.o_date</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                }
-                <canvas id="orderChart" style="margin:auto;height:320px;width:880px;"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
+
+<!-- Place this at the bottom of your view -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    // Announcements Chart
+    var contestsData = {
+        labels: [@foreach (var contest in ViewBag.Contests) {
+            @Html.Raw("\"" + contest.ContestName + "\",")
+        }],
+        datasets: [{
+            data: [@foreach (var contest in ViewBag.Contests) {
+                @Html.Raw("\"" + contest.Contest_Id + "\",")
+            }],
+            backgroundColor: ["#00bfff", "#FFA500", "#606060FF"]
+        }]
+    };
+
+    var contestsChart = new Chart(document.getElementById('contestsChart'), {
+        type: 'pie',
+        data: contestsData
+    });
+
+    var recipData = {
+        labels: [@foreach (var recipes in ViewBag.Recipes) {
+            @Html.Raw("\"" + recipes.recipe_name + "\",")
+        }],
+        datasets: [{
+            data: [@foreach (var recipes in ViewBag.Recipes) {
+                @Html.Raw("\"" + recipes.recipe_id + "\",")
+            }],
+            backgroundColor: ["#00bfff", "#FFA500", "#606060FF"]
+        }]
+    };
+
+    var recipData = new Chart(document.getElementById('recipesChart'), {
+        type: 'pie',
+        data: recipData
+    });
+
+    var SubmissionData = {
+        labels: [@foreach (var submissions in ViewBag.Submissions) {
+            @Html.Raw("\"" + submissions.RecipeName + "\",")
+        }],
+        datasets: [{
+            data: [@foreach (var submissions in ViewBag.Submissions) {
+                @Html.Raw("\"" + submissions.UserId + "\",")
+            }],
+            backgroundColor: ["#00bfff", "#FFA500", "#606060FF"]
+        }]
+    };
+
+    var SubmissionData = new Chart(document.getElementById('submissionsChart'), {
+        type: 'pie',
+        data: SubmissionData
+    });
+</script>

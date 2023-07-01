@@ -50,8 +50,26 @@ namespace FlavourFusion.Controllers
                 return RedirectToAction("Login");
             }
 
+            var announcements = db.Tbl_Announcement.ToList();
+            var comments = db.Tbl_Comments.ToList();
+            var contests = db.Tbl_Contests.ToList();
+            var recipes = db.Tbl_Recipe.ToList();
+            var replies = db.Tbl_Replies.ToList();
+            var submissions = db.Tbl_Submissions.ToList();
+            var users = db.Tbl_Users.ToList();
+
+            ViewBag.Announcements = announcements;
+            ViewBag.Comments = comments;
+            ViewBag.Contests = contests;
+            ViewBag.Recipes = recipes;
+            ViewBag.Replies = replies;
+            ViewBag.Submissions = submissions;
+            ViewBag.Users = users;
+            ViewBag.ToastMessage = TempData["ToastMessage"];
+
             return View();
         }
+
 
         [HttpGet]
         public ActionResult Add_Recipe_Category()
