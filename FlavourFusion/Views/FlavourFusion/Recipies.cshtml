@@ -1,4 +1,5 @@
-﻿@model List<FlavourFusion.Models.Tbl_Recipe>
+﻿﻿@using PagedList.Mvc
+@model PagedList.IPagedList<FlavourFusion.Models.Tbl_Recipe>
 @{
     var categoryName = ViewData["CategoryName"] as string;
 }
@@ -121,6 +122,22 @@
             </div>
         </div>
     </div>
+    <nav style="margin-top: 50px;">
+        <ul class="pagination pagination-md justify-content-center">
+            <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+                <a class="page-link" href="@Url.Action("Recipies", new { page = Model.PageNumber - 1 })" id="thefirstlink">Previous</a>
+            </li>
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                <li class="page-item @(Model.PageNumber == i ? "active" : "")" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+                    <a class="page-link" href="@Url.Action("Recipies", new { page = i })" id="thefirstlink">@i</a>
+                </li>
+            }
+            <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+                <a class="page-link" href="@Url.Action("Recipies", new { page = Model.PageNumber + 1 })" id="thefirstlink">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 
@@ -156,7 +173,7 @@
                                 <img src="/Template/assets/images/recipe-img/recipe-side-img1.jpg" alt="Images">
                             </a>
                             <div class="content">
-                                <h3><a href="recipe-details.html">Vegetable Sauce</a></h3>
+                                <h3><a href="https://www.youtube.com/watch?v=yz0r0huhKeI">Vegetable Sauce</a></h3>
                                 <ul>
                                     <li><i class='bx bx-time-five'></i> 60 Minutes</li>
                                     <li><i class='bx bx-check'></i> 3 Steps</li>
@@ -171,7 +188,7 @@
                                 <img src="/Template/assets/images/recipe-img/recipe-side-img3.jpg" alt="Images">
                             </a>
                             <div class="content">
-                                <h3><a href="recipe-details.html">Egg Pouch</a></h3>
+                                <h3><a href="https://www.youtube.com/watch?v=yz0r0huhKeI">Egg Pouch</a></h3>
                                 <ul>
                                     <li><i class='bx bx-time-five'></i> 5 Minutes</li>
                                     <li><i class='bx bx-check'></i> 2 Steps</li>
@@ -186,7 +203,7 @@
                                 <img src="/Template/assets/images/recipe-img/recipe-side-img2.jpg" alt="Images">
                             </a>
                             <div class="content">
-                                <h3><a href="recipe-details.html">Chocolate Chip</a></h3>
+                                <h3><a href="https://www.youtube.com/watch?v=yz0r0huhKeI">Chocolate Chip</a></h3>
                                 <ul>
                                     <li><i class='bx bx-time-five'></i> 40 Minutes</li>
                                     <li><i class='bx bx-check'></i> 4 Steps</li>
@@ -201,7 +218,7 @@
                                 <img src="/Template/assets/images/recipe-img/recipe-side-img4.jpg" alt="Images">
                             </a>
                             <div class="content">
-                                <h3><a href="recipe-details.html">Beef Stack</a></h3>
+                                <h3><a href="https://www.youtube.com/watch?v=yz0r0huhKeI">Beef Stack</a></h3>
                                 <ul>
                                     <li><i class='bx bx-time-five'></i> 50 Minutes</li>
                                     <li><i class='bx bx-check'></i> 3 Steps</li>
@@ -216,7 +233,7 @@
                                 <img src="/Template/assets/images/recipe-img/recipe-side-img5.jpg" alt="Images">
                             </a>
                             <div class="content">
-                                <h3><a href="recipe-details.html">Vegetable Salad</a></h3>
+                                <h3><a href="https://www.youtube.com/watch?v=yz0r0huhKeI">Vegetable Salad</a></h3>
                                 <ul>
                                     <li><i class='bx bx-time-five'></i> 70 Minutes</li>
                                     <li><i class='bx bx-check'></i> 5 Steps</li>
@@ -231,7 +248,7 @@
                                 <img src="/Template/assets/images/recipe-img/recipe-side-img6.jpg" alt="Images">
                             </a>
                             <div class="content">
-                                <h3><a href="recipe-details.html">Vegetable Sauce</a></h3>
+                                <h3><a href="https://www.youtube.com/watch?v=yz0r0huhKeI">Vegetable Sauce</a></h3>
                                 <ul>
                                     <li><i class='bx bx-time-five'></i> 40 Minutes</li>
                                     <li><i class='bx bx-check'></i> 3 Steps</li>
@@ -246,7 +263,7 @@
                                 <img src="/Template/assets/images/recipe-img/recipe-side-img7.jpg" alt="Images">
                             </a>
                             <div class="content">
-                                <h3><a href="recipe-details.html">Vegan Food</a></h3>
+                                <h3><a href="https://www.youtube.com/watch?v=yz0r0huhKeI">Vegan Food</a></h3>
                                 <ul>
                                     <li><i class='bx bx-time-five'></i> 60 Minutes</li>
                                     <li><i class='bx bx-check'></i> 2 Steps</li>
@@ -261,7 +278,7 @@
                                 <img src="/Template/assets/images/recipe-img/recipe-side-img8.jpg" alt="Images">
                             </a>
                             <div class="content">
-                                <h3><a href="recipe-details.html">Strawberry Juice</a></h3>
+                                <h3><a href="https://www.youtube.com/watch?v=yz0r0huhKeI">Strawberry Juice</a></h3>
                                 <ul>
                                     <li><i class='bx bx-time-five'></i> 60 Minutes</li>
                                     <li><i class='bx bx-check'></i> 2 Steps</li>

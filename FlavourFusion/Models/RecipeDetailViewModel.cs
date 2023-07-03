@@ -8,6 +8,7 @@ namespace FlavourFusion.Models
     public class RecipeDetailViewModel
     {
         public Tbl_Recipe Recipe { get; set; }
+        public List<Tbl_Recipe> RecentRecipe { get; set; }
         public List<Tbl_Recipe_Category> Categories { get; set; }
         public string recipe_description { get; set; }
         public int recipe_duration { get; set; }

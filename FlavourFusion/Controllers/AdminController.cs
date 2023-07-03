@@ -193,7 +193,7 @@ namespace FlavourFusion.Controllers
         public void SendWinnerNotificationEmail(string recipientEmail)
         {
             string senderEmail = "khanmehroz245@gmail.com";
-            string apiKey = "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";
+            string apiKey = "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";
             string subject = "Congratulations! You're The Winner of FlavourFusion Contest!";
             string body = "Dear participant, congratulations! Your recipe has been selected as the winner of the contest.";
 

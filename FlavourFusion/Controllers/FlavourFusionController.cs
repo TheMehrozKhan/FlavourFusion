@@ -56,26 +56,29 @@ namespace FlavourFusion.Controllers
                 Tbl_Users user = db.Tbl_Users.Find(userId);
                 int membershipPlanId = user?.Tbl_Subscriptions.FirstOrDefault()?.Tbl_Membership_Plans?.plan_id ?? 0;
 
-                if (membershipPlanId == 1) 
+                if (membershipPlanId == 1)
                 {
                     recipes = db.Tbl_Recipe.Where(r => r.FK_Category_Recipe == id).OrderByDescending(x => x.recipe_id).Take(20).ToList();
                 }
-                else if (membershipPlanId == 2) 
+                else if (membershipPlanId == 2)
                 {
                     recipes = db.Tbl_Recipe.Where(r => r.FK_Category_Recipe == id).OrderByDescending(x => x.recipe_id).ToList();
                 }
-                else 
+                else
                 {
                     recipes = db.Tbl_Recipe.Where(r => r.FK_Category_Recipe == id).OrderByDescending(x => x.recipe_id).Take(3).ToList();
                 }
 
                 ViewBag.MembershipPlanId = membershipPlanId;
             }
-            else 
+            else
             {
                 recipes = db.Tbl_Recipe.Where(r => r.FK_Category_Recipe == id).OrderByDescending(x => x.recipe_id).Take(3).ToList();
-                ViewBag.MembershipPlanId = 0; 
+                ViewBag.MembershipPlanId = 0;
             }
+
+            int pageSize = 6;
+            int pageIndex = page ?? 1;
 
             var categoryName = string.Empty;
             if (id != null)
@@ -90,8 +93,12 @@ namespace FlavourFusion.Controllers
             ViewBag.CategoryName = categoryName;
             ViewBag.ShowLoginMessage = Session["u_id"] == null;
 
-            return View(recipes);
+            var pagedRecipes = recipes.ToPagedList(pageIndex, pageSize);
+
+            return View(pagedRecipes);
         }
+
+
 
         public ActionResult RecipeDetails(int? id)
         {
@@ -108,12 +115,18 @@ namespace FlavourFusion.Controllers
 
             var categories = db.Tbl_Recipe_Category.ToList();
 
+            var recentRecipes = db.Tbl_Recipe.OrderByDescending(r => r.recipe_publish_date)
+                                            .Take(5)
+                                            .ToList();
+
             var viewModel = new RecipeDetailViewModel
             {
                 Recipe = recipe,
                 Categories = categories,
+                RecentRecipe = recentRecipes,
                 recipe_tags = recipe.recipe_tags
             };
+
 
             ViewBag.CategoryName = recipe.Tbl_Recipe_Category.category_name;
             ViewBag.ShowLoginMessage = Session["u_id"] == null;
@@ -226,29 +239,51 @@ namespace FlavourFusion.Controllers
                 Tbl_Users user = db.Tbl_Users.Find(userId);
                 int membershipPlanId = user?.Tbl_Subscriptions.FirstOrDefault()?.Tbl_Membership_Plans?.plan_id ?? 0;
 
-                var query = db.Tbl_Recipe.Where(r => r.recipe_name.ToLower().Contains(searchTerm.ToLower()) || r.recipe_description.ToLower().Contains(searchTerm.ToLower()));
+                var query = db.Tbl_Recipe.AsQueryable();
+
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    string[] searchTerms = searchTerm.Split(' ');
+
+                    foreach (string term in searchTerms)
+                    {
+                        query = query.Where(r => r.recipe_name.ToLower().Contains(term.ToLower()) || r.recipe_description.ToLower().Contains(term.ToLower()) ||
+                                                 r.recipe_duration.ToString().Contains(term.ToLower()));
+                    }
+                }
 
                 if (id.HasValue)
                 {
                     query = query.Where(r => r.FK_Category_Recipe == id);
                 }
 
-                if (membershipPlanId == 1) 
+                if (membershipPlanId == 1)
                 {
                     productList = query.OrderByDescending(x => x.recipe_id).Take(20).ToList();
                 }
-                else if (membershipPlanId == 2) 
+                else if (membershipPlanId == 2)
                 {
                     productList = query.OrderByDescending(x => x.recipe_id).ToList();
                 }
-                else 
+                else
                 {
                     productList = query.OrderByDescending(x => x.recipe_id).Take(3).ToList();
                 }
             }
-            else 
+            else
             {
-                var query = db.Tbl_Recipe.Where(r => r.recipe_name.ToLower().Contains(searchTerm.ToLower()) || r.recipe_description.ToLower().Contains(searchTerm.ToLower()));
+                var query = db.Tbl_Recipe.AsQueryable();
+
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    string[] searchTerms = searchTerm.Split(' ');
+
+                    foreach (string term in searchTerms)
+                    {
+                        query = query.Where(r => r.recipe_name.ToLower().Contains(term.ToLower()) || r.recipe_description.ToLower().Contains(term.ToLower()) ||
+                                                 r.recipe_duration.ToString().Contains(term.ToLower()));
+                    }
+                }
 
                 if (id.HasValue)
                 {
@@ -267,6 +302,7 @@ namespace FlavourFusion.Controllers
 
             return View(pro);
         }
+
 
         [HttpGet]
         public ActionResult Login()
