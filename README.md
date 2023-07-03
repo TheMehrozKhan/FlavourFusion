@@ -5,7 +5,7 @@
   </h3>
   
   <h2>All Team Members There is the Database File for Implementation of This Project:</h2>
-  <a href="https://bit.ly/3NT6obr">https://bit.ly/3NT6obr</a>
+  <a href="https://cutt.ly/JwulXTxb">https://cutt.ly/JwulXTxb</a>
   <h2>There is the Tutorial Video of How You Can Import The Database into SQL Server:</h2>
 
 
