@@ -24,7 +24,7 @@
     }
 </style>
 <div style="display:flex;justify-content:center;align-items:center;height:100vh;">
-    @using (Html.BeginForm("Save_Category", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Save_Category", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "signupform" }))
     {
         @Html.HiddenFor(model => model.category_id)
         <br />
@@ -44,3 +44,19 @@
         <a href="@Url.Action("View_Category")" class="btn btn-default">Cancel</a>
     }
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+        document.getElementById('signupform').addEventListener('submit', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'success',
+                title: 'Congrats!',
+                text: 'Your Category is Updated!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("View_Category", "FlavourFusion")';
+                    this.submit();
+                }
+            });
+        });
+</script>

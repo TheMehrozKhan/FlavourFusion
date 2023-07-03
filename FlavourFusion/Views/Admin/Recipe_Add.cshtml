@@ -178,7 +178,7 @@
         });
     </script>
     <div class="d-flex justify-content-center align-items-center">
-        @using (Html.BeginForm("Recipe_Add", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", @class = "theform" }))
+        @using (Html.BeginForm("Recipe_Add", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", @class = "theform", id = "signupform" }))
         {
             <h3 class="text-center" style="margin-top:30px;margin-bottom:50px;">Add New Recipe!😃</h3>
 
@@ -243,6 +243,8 @@
 
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-QlVXO1++HQhCPtg63LOHm12RrLcRgtvP+/uFEC5G89bKmBCG02FDU1gJb+NKbxZX" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
         <script>
             flatpickr(".datepicker", {
@@ -257,6 +259,20 @@
                 plugins: 'advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen',
                 toolbar: 'undo redo | formatselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | link image | code'
             });
+
+            document.getElementById('signupform').addEventListener('submit', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'success',
+                title: 'Congrats!',
+                text: 'Your Recipe Has Been Uploaded!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("Recipe_Add", "FlavourFusion")';
+                    this.submit();
+                }
+            });
+        });
         </script>
     </div>
 </body>

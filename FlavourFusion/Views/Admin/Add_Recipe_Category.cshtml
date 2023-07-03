@@ -153,7 +153,7 @@
     });
 </script>
 <div class="d-flex justify-content-center align-items-center vh-100">
-    @using (Html.BeginForm("Add_Recipe_Category", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Add_Recipe_Category", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "signupform" }))
     {
         <form method="post">
             <div class="form-group">
@@ -171,3 +171,20 @@
         </form>
     }
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+        document.getElementById('signupform').addEventListener('submit', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'success',
+                title: 'Congrats!',
+                text: 'Your Recipe Category Are Uploaded!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("Add_Recipe_Category", "FlavourFusion")';
+                    this.submit();
+                }
+            });
+        });
+</script>

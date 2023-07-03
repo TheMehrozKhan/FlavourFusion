@@ -150,7 +150,7 @@
     });
 </script>
 <div class="d-flex justify-content-center align-items-center vh-100">
-    @using (Html.BeginForm("CreateContest", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("CreateContest", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "signupform" }))
     {
         <form method="post">
             <div class="form-group">
@@ -177,10 +177,24 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-QlVXO1++HQhCPtg63LOHm12RrLcRgtvP+/uFEC5G89bKmBCG02FDU1gJb+NKbxZX" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     flatpickr(".datepicker", {
         dateFormat: "Y-m-d",
         enableTime: false,
     });
+    document.getElementById('signupform').addEventListener('submit', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'success',
+                title: 'Congrats!',
+                text: 'Your Contest is Created!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("CreateContest", "FlavourFusion")';
+                    this.submit();
+                }
+            });
+        });
 </script>

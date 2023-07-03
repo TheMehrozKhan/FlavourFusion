@@ -66,7 +66,7 @@
     }
 </style>
 <div class="d-flex justify-content-center align-items-center vh-100" style="margin-bottom:180px;margin-top:80px;">
-    @using (Html.BeginForm("Save_Edit", "FlavourFusion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Save_Edit", "FlavourFusion", FormMethod.Post, new { enctype = "multipart/form-data", id = "signupform" }))
     {
         @Html.HiddenFor(model => model.user_id)
         <form method="post">
@@ -98,3 +98,20 @@
         </form>
     }
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+        document.getElementById('signupform').addEventListener('submit', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'success',
+                title: 'Congrats!',
+                text: 'Your Profile Has Been Updated!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("UserProfile", "FlavourFusion")';
+                    this.submit();
+                }
+            });
+        });
+</script>
