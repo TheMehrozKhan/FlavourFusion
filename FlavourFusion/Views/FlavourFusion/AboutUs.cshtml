@@ -1,69 +1,73 @@
-﻿<title>About Us - FlavourFusion</title>
-<style>
-    .subscribe {
-        background-image: url(../../Template/assets/images/calculate-bg.png);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: white;
-        width: 900px;
-        height: 450px;
-        border-radius: 20px;
-        box-shadow: rgba(17, 12, 46, 0.07) 0px 48px 100px 0px;
-        position: relative;
-        left: 160px;
-        margin-bottom: 150px;
-    }
-
-
-    .subscribe__title {
-        font-weight: bold;
-        font-size: 26px;
-        margin-bottom: 18px;
-    }
-
-    .subscribe__copy {
-        max-width: 450px;
-        text-align: center;
-        margin-bottom: 53px;
-        line-height: 1.5;
-    }
-
-    .form {
-        margin-bottom: 25px;
-    }
-
-    .form__email {
-        padding: 20px 25px;
-        border-radius: 5px;
-        border: 1px solid #CAD3DB;
-        width: 431px;
-        font-size: 18px;
-        color: #0F121F;
-    }
-
-        .form__email:focus {
-            outline: 1px solid black;
+﻿﻿@model FlavourFusion.Models.Tbl_Feedback
+<head>
+    <title>About Us - FlavourFusion</title>
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
+    <style>
+        .subscribe {
+            background-image: url(../../Template/assets/images/calculate-bg.png);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            width: 900px;
+            height: 450px;
+            border-radius: 20px;
+            box-shadow: rgba(17, 12, 46, 0.07) 0px 48px 100px 0px;
+            position: relative;
+            left: 160px;
+            margin-bottom: 150px;
         }
 
-    .form__button {
-        background: rgb(255, 132, 0);
-        padding: 10px;
-        border: none;
-        width: 244px;
-        height: 65px;
-        border-radius: 5px;
-        font-size: 18px;
-        color: white;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-        transition: 0.2s;
-    }
 
-        .form__button:hover {
-            box-shadow: none;
+        .subscribe__title {
+            font-weight: bold;
+            font-size: 26px;
+            margin-bottom: 18px;
         }
-</style>
+
+        .subscribe__copy {
+            max-width: 450px;
+            text-align: center;
+            margin-bottom: 53px;
+            line-height: 1.5;
+        }
+
+        .form {
+            margin-bottom: 25px;
+        }
+
+        .form__email {
+            padding: 20px 25px;
+            border-radius: 5px;
+            border: 1px solid #CAD3DB;
+            width: 431px;
+            font-size: 18px;
+            color: #0F121F;
+        }
+
+            .form__email:focus {
+                outline: 1px solid black;
+            }
+
+        .form__button {
+            background: rgb(255, 132, 0);
+            padding: 10px;
+            border: none;
+            width: 244px;
+            height: 65px;
+            border-radius: 5px;
+            font-size: 18px;
+            color: white;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+            transition: 0.2s;
+        }
+
+            .form__button:hover {
+                box-shadow: none;
+            }
+    </style>
+</head>
 <div class="about-area-two pt-100 pb-70">
     <div class="container">
         <div class="row align-items-center">
@@ -103,8 +107,6 @@
         </div>
     </div>
 </div>
-
-
 
 <div class="services-area pt-100 pb-70">
     <div class="container">
@@ -161,50 +163,47 @@
         </div>
     </div>
 </div>
-<div class="appointment-area pt-100 pb-70">
-    <div class="container">
-        <div class="appointment-form" style="border-radius:12px;">
-            <h2>Gives Us Your FeedBack</h2>
-            <form>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <input type="text" name="name" class="form-control" required="" data-error="Please Enter Your Name" placeholder="Name*" style="background-color: white; background-color: none; color: black; box-shadow: rgba(17, 12, 46, 0.06) 0px 48px 100px 0px;border-radius:8px;">
+@using (Html.BeginForm("AboutUs", "FlavourFusion", FormMethod.Post, new { enctype = "multipart/form-data", id = "signupform" }))
+{
+    <div class="appointment-area pt-100 pb-70">
+        <div class="container">
+            <div class="appointment-form" style="border-radius:12px;">
+                <h2>Gives Us Your FeedBack</h2>
+                <form>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.user_name, new { @class = "form-control", @id = "custom-input", @placeholder = "Enter Your Name", @style = "background-color: white; background-color: none; color: black; box-shadow: rgba(17, 12, 46, 0.06) 0px 48px 100px 0px;border-radius:8px;" })
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.user_email, new { @class = "form-control", @id = "custom-input", @placeholder = "Enter Email", @style = "background-color: white; background-color: none; color: black; box-shadow: rgba(17, 12, 46, 0.06) 0px 48px 100px 0px;border-radius:8px;" })
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <i class="flaticon-weekly-calendar-page-symbol"></i>
+                                <input class="form-control datepicker" type="text" id="datepicker" name="user_submission_date" placeholder="Submission Date" style="background-color: white; background-color: none; color: black; box-shadow: rgba(17, 12, 46, 0.06) 0px 48px 100px 0px; border-radius: 8px;" />
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                @Html.TextAreaFor(x => x.user_message, new { @class = "form-control", @id = "custom-input", @placeholder = "Enter Your Message", @style = "background-color: white; background-color: none; color: black; box-shadow: rgba(17, 12, 46, 0.06) 0px 48px 100px 0px;border-radius:8px;" })
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <button type="submit" class="default-btn">
+                                Submit Now
+                            </button>
                         </div>
                     </div>
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <input type="email" name="email" class="form-control" required="" data-error="Please Enter Your Email" placeholder="Email*" style="background-color: white; background-color: none; color: black; box-shadow: rgba(17, 12, 46, 0.06) 0px 48px 100px 0px;border-radius:8px;">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <input type="text" name="phone" class="form-control" required="" data-error="Please Enter Your Phone Number" placeholder="Phone*" style="background-color: white; background-color: none; color: black; box-shadow: rgba(17, 12, 46, 0.06) 0px 48px 100px 0px;border-radius:8px;">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <i class="flaticon-weekly-calendar-page-symbol"></i>
-                            <input type="text" id="datetimepicker" class="form-control date hasDatepicker" required="" data-error="Please Enter Date" placeholder="Date" style="background-color: white; background-color: none; color: black; box-shadow: rgba(17, 12, 46, 0.06) 0px 48px 100px 0px;border-radius:8px;">
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        <div class="form-group">
-                            <textarea name="message" class="form-control" id="message" cols="30" rows="5" required="" data-error="Write your message" placeholder="Your Message" style="background-color: white; background-color: none; color: black; box-shadow: rgba(17, 12, 46, 0.06) 0px 48px 100px 0px;border-radius:8px;"></textarea>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        <button type="submit" class="default-btn">
-                            Submit Now
-                        </button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-
+}
 
 
 <div class="subscribe" style="margin-top: 150px; background-image: url(../../Template/assets/images/THEBG.png); background-size: cover;">
@@ -215,3 +214,25 @@
         <button class="form__button" style="font-size:25px;">Send</button>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    flatpickr(".datepicker", {
+        dateFormat: "Y-m-d",
+        enableTime: false,
+    });
+    document.getElementById('signupform').addEventListener('submit', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'success',
+                title: 'Congrats!',
+                text: 'Your Feeback Count & We Work on It!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("Index", "FlavourFusion")';
+                    this.submit();
+                }
+            });
+        });
+</script>

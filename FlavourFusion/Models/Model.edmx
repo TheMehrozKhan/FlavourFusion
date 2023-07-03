@@ -43,6 +43,16 @@
           <Property Name="StartDate" Type="date" Nullable="false" />
           <Property Name="EndDate" Type="date" Nullable="false" />
         </EntityType>
+        <EntityType Name="Tbl_Feedback">
+          <Key>
+            <PropertyRef Name="feedback_id" />
+          </Key>
+          <Property Name="feedback_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_name" Type="varchar" MaxLength="255" />
+          <Property Name="user_email" Type="varchar" MaxLength="255" />
+          <Property Name="user_submission_date" Type="date" />
+          <Property Name="user_message" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="Tbl_Membership_Plans">
           <Key>
             <PropertyRef Name="plan_id" />
@@ -265,6 +275,7 @@
           <EntitySet Name="Tbl_Announcement" EntityType="Self.Tbl_Announcement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Comments" EntityType="Self.Tbl_Comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Contests" EntityType="Self.Tbl_Contests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Feedback" EntityType="Self.Tbl_Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Membership_Plans" EntityType="Self.Tbl_Membership_Plans" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Recipe" EntityType="Self.Tbl_Recipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Recipe_Category" EntityType="Self.Tbl_Recipe_Category" Schema="dbo" store:Type="Tables" />
@@ -654,7 +665,18 @@
             <End Role="Tbl_Users" EntitySet="Tbl_Users" />
             <End Role="Tbl_Subscriptions" EntitySet="Tbl_Subscriptions" />
           </AssociationSet>
+          <EntitySet Name="Tbl_Feedback" EntityType="FlavourFusionModel.Tbl_Feedback" />
         </EntityContainer>
+        <EntityType Name="Tbl_Feedback">
+          <Key>
+            <PropertyRef Name="feedback_id" />
+          </Key>
+          <Property Name="feedback_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="user_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="user_submission_date" Type="DateTime" Precision="0" />
+          <Property Name="user_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -792,6 +814,17 @@
                 <ScalarProperty Name="user_email" ColumnName="user_email" />
                 <ScalarProperty Name="user_img" ColumnName="user_img" />
                 <ScalarProperty Name="is_member" ColumnName="is_member" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Feedback">
+            <EntityTypeMapping TypeName="FlavourFusionModel.Tbl_Feedback">
+              <MappingFragment StoreEntitySet="Tbl_Feedback">
+                <ScalarProperty Name="user_message" ColumnName="user_message" />
+                <ScalarProperty Name="user_submission_date" ColumnName="user_submission_date" />
+                <ScalarProperty Name="user_email" ColumnName="user_email" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="feedback_id" ColumnName="feedback_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -229,6 +229,9 @@
     <Compile Include="Models\Tbl_Contests.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Tbl_Feedback.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Tbl_Membership_Plans.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

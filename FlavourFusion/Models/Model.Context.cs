@@ -36,5 +36,6 @@ namespace FlavourFusion.Models
         public virtual DbSet<Tbl_Submissions> Tbl_Submissions { get; set; }
         public virtual DbSet<Tbl_Subscriptions> Tbl_Subscriptions { get; set; }
         public virtual DbSet<Tbl_Users> Tbl_Users { get; set; }
+        public virtual DbSet<Tbl_Feedback> Tbl_Feedback { get; set; }
     }
 }

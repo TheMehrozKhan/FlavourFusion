@@ -169,7 +169,7 @@ namespace FlavourFusion.Controllers
                 reply_date = DateTime.Now
             };
 
-            
+
             Tbl_Comments comment = db.Tbl_Comments.Find(commentId);
             if (comment != null)
             {
@@ -180,7 +180,7 @@ namespace FlavourFusion.Controllers
                 return RedirectToAction("RecipeDetails", new { id = comment.recipe_id });
             }
 
-            
+
             return RedirectToAction("Index");
         }
 
@@ -200,7 +200,7 @@ namespace FlavourFusion.Controllers
             {
                 db.Tbl_Replies.Remove(reply);
             }
-            
+
             db.Tbl_Comments.Remove(ca);
             db.SaveChanges();
 
@@ -382,13 +382,13 @@ namespace FlavourFusion.Controllers
                 };
 
                 Tbl_Membership_Plans plan = db.Tbl_Membership_Plans.FirstOrDefault(p => p.plan_id == model.PlanId);
-                if (plan != null && (plan.plan_id == 1 || plan.plan_id == 2)) 
+                if (plan != null && (plan.plan_id == 1 || plan.plan_id == 2))
                 {
-                    user.is_member = true; 
+                    user.is_member = true;
                 }
                 else
                 {
-                    user.is_member = null; 
+                    user.is_member = null;
                 }
 
                 db.Tbl_Users.Add(user);
@@ -560,7 +560,7 @@ namespace FlavourFusion.Controllers
                     Recipe_tags = submission.Recipe_tags
                 },
                 Users = new Tbl_Users
-                { 
+                {
                     user_name = submission.Tbl_Users.user_name,
                     user_img = submission.Tbl_Users.user_img
                 },
@@ -592,12 +592,12 @@ namespace FlavourFusion.Controllers
             if (profileUser != null)
             {
                 bool? isMember = profileUser.is_member;
-                string membershipStatus = (isMember!=null) ? "Yes" : "No";
+                string membershipStatus = (isMember != null) ? "Yes" : "No";
 
                 Tbl_Membership_Plans plan = db.Tbl_Membership_Plans.FirstOrDefault(p => p.plan_id == p.plan_id);
                 if (plan != null && plan.plan_id == 1 && plan.plan_id == 0)
                 {
-                    membershipStatus = "Yes"; 
+                    membershipStatus = "Yes";
                 }
                 ViewBag.MembershipStatus = membershipStatus;
 
@@ -656,9 +656,23 @@ namespace FlavourFusion.Controllers
             return View(plans);
         }
 
+        [HttpGet]
         public ActionResult AboutUs()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AboutUs(Tbl_Feedback cat)
+        {
+            Tbl_Feedback ca = new Tbl_Feedback();
+            ca.user_name = cat.user_name;
+            ca.user_email = cat.user_email;
+            ca.user_submission_date = cat.user_submission_date;
+            ca.user_message = cat.user_message;
+            db.Tbl_Feedback.Add(ca);
+            db.SaveChanges();
+            return RedirectToAction("AboutUs");
         }
 
         public ActionResult Contact()
