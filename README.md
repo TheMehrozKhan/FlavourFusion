@@ -1,12 +1,6 @@
 
 <body style="font-family: 'Poppins', sans-serif;">
-  <h3>
-    We Had To Finish This Project At 1 July So Done All Your Work & Also Those Team Members Who Made the Documentation Should Start Working From Now!
-  </h3>
-  
-  <h2>All Team Members There is the Database File for Implementation of This Project:</h2>
-  <a href="https://cutt.ly/JwulXTxb">https://cutt.ly/JwulXTxb</a>
-  <h2>There is the Tutorial Video of How You Can Import The Database into SQL Server:</h2>
+ <h2>There is the Tutorial Video of How You Can Import The Database into SQL Server:</h2>
 
 
 https://github.com/TheMehrozKhan/FlavourFusion/assets/103773815/6f0b5df6-52a5-4be0-a44c-d730f8593a8b
